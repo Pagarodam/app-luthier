@@ -1,8 +1,6 @@
 import { useState } from "react";
-// import { StyleForm } from "../../styles/form";
 import Link from "next/link";
 import { AuthErrorCodes, createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../firebase";
 import { authentication } from "../../components/firebase/client";
 import { useRouter } from "next/router";
 

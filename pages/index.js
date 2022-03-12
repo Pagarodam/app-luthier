@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Login from './login';
+import LoginGoogle from './login';
 import Register from './register/index'
 import Link from "next/link";
 
@@ -25,7 +25,6 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to Made in Soul
         </h1>
-
       </main>
 
       <footer className={styles.footer}>

@@ -1,27 +1,16 @@
+import { LoginFacebook, LoginGoogle, LoginMail, Logout } from "../../components/login";
 import Button from "../../components/Button";
-import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+
 import { authentication } from "../../components/firebase/client";
-import { useRouter } from "next/router";
+import { useState } from "react/cjs/react.production.min";
+import { onAuthStateChanged } from "firebase/auth";
 
-
-//Google Login
-export default function Login() {
-
-  const { push } = useRouter();
-
-  const signInWithGoogle = ()=> {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(authentication, provider)
-    .then((res)=>{
-      console.log(res);
-      push("/about");
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-  }
-
-  return <Button style="" onClick={signInWithGoogle} label='Login with Google'/>;
+export default function Login(){
+  return (
+    <>
+      <LoginMail/>
+      <LoginGoogle/>
+      <LoginFacebook/>
+    </>
+  )
 }
-
-//Email Login
