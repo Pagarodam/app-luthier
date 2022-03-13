@@ -1,0 +1,37 @@
+### entry point for the script
+get http://localhost:3000/api/
+
+### get all users
+get http://localhost:3000/api/users
+
+### get user by id
+get http://localhost:3000/api/users/621d337bce4ba5e86ea9eafd
+
+### post a new user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Patrick Galan",
+  "email": "pagaro@gmail.com",
+  "password": "12345678",
+  "avatar": "https://avatars2.githubusercontent.com/u/1234?v=3&s=400",
+  "whatsapp": "09123456789",
+  "bio": "I am a software developer"
+}
+
+### update user
+PUT http://localhost:3001/users/621d3abd37b01d44ca43cafc
+Content-Type: application/json
+
+{
+  "name": "Juanfri Losa Marquez",
+  "email": "juanfril@gmail.com",
+  "password": "12345678",
+  "avatar": "https://avatars2.githubusercontent.com/u/1234?v=3&s=460",
+  "whatsapp": "666666666",
+  "bio": "I'm a software developer"
+}
+
+### delete a user
+delete http://localhost:3001/users/621d34009a747ce82c7e5a7a
