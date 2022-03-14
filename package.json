@@ -31,8 +31,6 @@
     "supertest": "^6.2.2"
   },
   "jest": {
-    "setupFilesAfterEnv": [
-      "./setup-tests.js"
-    ]
+    "verbose": true
   }
 }

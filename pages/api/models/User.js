@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { mongoose, Schema } from 'mongoose';
+mongoose.Promise = global.Promise;
 
-// schema
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
@@ -19,6 +19,7 @@ userSchema.set('toJSON', {
 });
 
 // model
-const User = mongoose.model('User', userSchema);
+/* const User = mongoose.model('User', userSchema);
 
-export default User;
+export default User; */
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);

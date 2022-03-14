@@ -1,10 +1,5 @@
 import mongoose from 'mongoose';
 
-/** 
-Source : 
-https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/utils/dbConnect.js 
-**/
-
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
@@ -13,11 +8,6 @@ if (!MONGODB_URI) {
   );
 }
 
-/**
- * Global is used here to maintain a cached connection across hot reloads
- * in development. This prevents connections growing exponentially
- * during API Route usage.
- */
 let cached = global.mongoose;
 
 if (!cached) {
@@ -34,11 +24,16 @@ async function dbConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       bufferCommands: false,
+      useFindAndModify: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
+    try {
+      cached.conn = await mongoose.connect(MONGODB_URI, opts);
+      cached.promise = cached.conn.connection;
+      console.log('Connected to MongoDB');
+    } catch (error) {
+      console.error(error);
+    }
   }
   cached.conn = await cached.promise;
   return cached.conn;
