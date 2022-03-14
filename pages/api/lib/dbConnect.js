@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI;
+const MONGOMS_DOWNLOAD_URL = process.env.MONGOMS_DOWNLOAD_URL;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -24,10 +25,11 @@ async function dbConnect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       bufferCommands: false,
-      useFindAndModify: false,
     };
 
     try {
+      if (process.env.NODE_ENV === 'test')
+        cached.conn = await mongoose.connect(MONGOMS_DOWNLOAD_URL);
       cached.conn = await mongoose.connect(MONGODB_URI, opts);
       cached.promise = cached.conn.connection;
       console.log('Connected to MongoDB');
