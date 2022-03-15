@@ -1,16 +1,16 @@
 import { LoginFacebook, LoginGoogle, LoginMail, Logout } from "../../components/login";
-import Button from "../../components/Button";
-
-import { authentication } from "../../components/firebase/client";
-import { useState } from "react/cjs/react.production.min";
-import { onAuthStateChanged } from "firebase/auth";
+import styles from '../../styles/Home.module.css'
+import Nav from "../../components/nav";
 
 export default function Login(){
   return (
     <>
-      <LoginMail/>
-      <LoginGoogle/>
-      <LoginFacebook/>
+      <div className={styles.container}>
+        <Nav></Nav>
+        <LoginMail/>
+        <LoginGoogle/>
+        <LoginFacebook/>
+      </div>
     </>
   )
 }

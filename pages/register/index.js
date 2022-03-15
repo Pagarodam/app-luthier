@@ -3,6 +3,8 @@ import Link from "next/link";
 import { AuthErrorCodes, createUserWithEmailAndPassword } from "firebase/auth";
 import { authentication } from "../../components/firebase/client";
 import { useRouter } from "next/router";
+import Nav from "../../components/nav";
+import styles from '../../styles/Home.module.css'
 
 export default function Register() {
   const [Credentials, setCredentials] = useState({
@@ -32,7 +34,8 @@ export default function Register() {
   };
   return (
     <>
-      <div>
+      <div className={styles.container}>
+        <Nav></Nav>
         <div className="form-signin">
           <h1 className="text-center text-login">Registra tu cuenta</h1>
           <div className="center">
@@ -42,7 +45,7 @@ export default function Register() {
               className="input-form"
               placeholder="Correo"
               onChange={changeUser}
-            />
+              />
           </div>
           <div className="center">
             <input
@@ -51,14 +54,14 @@ export default function Register() {
               className="input-form"
               placeholder="Contraseña"
               onChange={changeUser}
-            />
+              />
           </div>
           <br />
           <div className="center">
             <button
               className="button-signup fondo-color-signup"
               onClick={registerUser}
-            >
+              >
               Registrarse
             </button>
           </div>
