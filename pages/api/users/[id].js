@@ -39,7 +39,7 @@ export default async (req, res) => {
       }
     case 'DELETE':
       try {
-        await User.deleteOne({ _id: id });
+        await User.deleteOne(id);
 
         return res.status(200).json({
           success: true,

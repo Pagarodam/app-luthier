@@ -1,7 +1,7 @@
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
 
-export const replset = await MongoMemoryReplSet.create({
+export const replset = MongoMemoryReplSet.create({
   replSet: { count: 4 },
 });
 
-export const uri = replset.getUri();
+export const uri = await replset.getUri();
