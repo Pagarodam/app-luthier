@@ -1,15 +1,9 @@
-import Link from "next/link";
+import Nav from '../../components/nav';
 
 export default function About(){
   return (
     <main>
-      <nav>
-        <ul>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-        </ul>
-      </nav>
+      <Nav></Nav>
         <h1>
           Cositas de Guitarritas
         </h1>
