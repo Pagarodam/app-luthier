@@ -7,7 +7,8 @@
     "build": "next build",
     "start": " NODE_ENV=production next start",
     "lint": "next lint",
-    "test": "NODE_ENV=test jest --coverage --verbose"
+    "test": "NODE_ENV=test jest --coverage --verbose",
+    "test:react": "NODE_ENV=test test"
   },
   "dependencies": {
     "firebase": "^9.6.8",
@@ -21,6 +22,8 @@
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.4",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
     "babel-jest": "^27.5.1",
     "babel-plugin-styled-components": "^2.0.6",
@@ -30,8 +33,5 @@
     "jest": "^27.5.1",
     "mongodb-memory-server": "^8.4.0",
     "supertest": "^6.2.2"
-  },
-  "jest": {
-    "verbose": true
   }
 }
