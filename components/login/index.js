@@ -35,14 +35,12 @@ export function LoginMail(){
 
     const [ user, setUser ] = useState({});
 
+
     onAuthStateChanged(authentication, (currentUser) => {
         setUser(currentUser);
     })
 
-    const logout = async ()=> {
-        console.log("logout?");
-        await signOut(authentication);
-    };
+    
 
     const login = async ()=> {
         try{
@@ -52,7 +50,6 @@ export function LoginMail(){
                 loginPassword
             );
             push("/about");
-            console.log(user);
         }catch(error) {
             console.log(error.message);
         }
@@ -83,7 +80,7 @@ export function LoginMail(){
                 />
                 <Button 
                     style="" 
-                    OnClick={ logout } 
+                    onClick={ logout } 
                     label="Sign Out"
                 />
                 <h4>User Logged In: </h4>
@@ -93,6 +90,9 @@ export function LoginMail(){
     )
 }
 
+export const logout = async ()=> {
+  await signOut(authentication);
+};
 
 //Facebook Login
 export function LoginFacebook(){
