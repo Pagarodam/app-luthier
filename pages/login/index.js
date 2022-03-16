@@ -6,7 +6,7 @@ export default function Login(){
   return (
     <>
       <div className={styles.container}>
-        <Nav></Nav>
+        <Nav/>
         <LoginMail/>
         <LoginGoogle/>
         <LoginFacebook/>
