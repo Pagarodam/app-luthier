@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Nav from '../components/nav';
-import Images from '../components/gallery';
 
 export default function Home() {
   return (
@@ -15,7 +14,13 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Images></Images>
+      <Image
+              alt='logo'
+              src='/../public/Logo Llamas.jpeg'
+              title=''
+              height={400}
+              width={600}
+            />
         <h1 className={styles.title}>
           Made in Soul
         </h1>

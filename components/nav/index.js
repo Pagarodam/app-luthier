@@ -26,7 +26,7 @@ export default function Nav(){
                 <li className={router.pathname === '/gallery'? styles.active : ''}>
                     <Link href="/gallery"><a>Galeria</a></Link>
                 </li>
-                <a href='/'>
+                <a href='/' className={{floatRight}}>
                     <li >
                         <Button 
                             style="" 
