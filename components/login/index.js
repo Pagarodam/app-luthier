@@ -49,7 +49,7 @@ export function LoginMail(){
                 loginEmail,
                 loginPassword
             );
-            push("/about");
+            push('/');
         }catch(error) {
             console.log(error.message);
         }
@@ -78,13 +78,12 @@ export function LoginMail(){
                     onClick={ login }  
                     label='Login'
                 />
-                <Button 
+                {/* <Button 
                     style="" 
                     onClick={ logout } 
                     label="Sign Out"
-                />
-                <h4>User Logged In: </h4>
-                {user?.email}
+                /> */}
+                <h4>User Logged In: {user?.email} </h4>
             </div>
         </>
     )
