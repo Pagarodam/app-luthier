@@ -11,11 +11,14 @@
     "test:react": "NODE_ENV=test test"
   },
   "dependencies": {
+    "@next-auth/firebase-adapter": "^0.1.2-pr.183-76202b42.8",
     "firebase": "^9.6.8",
-    "mongoose": "^6.2.6",
     "next": "12.1.0",
+    "next-auth": "^4.3.1",
+    "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-icons": "^4.3.1",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
@@ -30,8 +33,6 @@
     "enzyme": "^3.11.0",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
-    "jest": "^27.5.1",
-    "mongodb-memory-server": "^8.4.0",
-    "supertest": "^6.2.2"
+    "jest": "^27.5.1"
   }
 }
