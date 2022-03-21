@@ -14,18 +14,31 @@ export default function Nav(){
     return (
         <nav className={styles.nav}>
             <ul className={styles.ul}>
+
                 <li className={router.pathname === '/'? styles.active : ''}>
                     <Link href="/"><a>Home</a></Link>
                 </li>
-                <li className={router.pathname === '/register'? styles.active : ''}>
-                    <Link href="/register"><a>Registrate</a></Link>
+
+                <li className={router.pathname === '/about'? styles.active : ''}>
+                    <Link href="/about"><a>About</a></Link>
                 </li>
-                <li className={router.pathname === '/login'? styles.active : ''}>
-                    <Link href="/login"><a>Login</a></Link>
-                </li>
+
                 <li className={router.pathname === '/gallery'? styles.active : ''}>
                     <Link href="/gallery"><a>Galeria</a></Link>
                 </li>
+
+                <li className={router.pathname === '/contact'? styles.active : ''}>
+                    <Link href='/contact'><a>Contacto</a></Link>
+                </li>
+
+                <li className={router.pathname === '/login'? styles.active : ''}>
+                    <Link href="/login"><a>Login</a></Link>
+                </li>
+
+                <li className={router.pathname === '/register'? styles.active : ''}>
+                    <Link href="/register"><a>Registrate</a></Link>
+                </li>
+
                 <a href='/' className={{floatRight}}>
                     <li >
                         <Button 
@@ -35,6 +48,7 @@ export default function Nav(){
                         />
                     </li>
                 </a>
+                
             </ul>
         </nav>
     )
