@@ -56,6 +56,16 @@ export default function Nav() {
             </li>
           </>
         )}
+        <li className={router.pathname === '/contact' ? styles.active : ''}>
+          <Link href='/contact'>
+            <a>Contacto</a>
+          </Link>
+        </li>
+        <li className={router.pathname === '/about' ? styles.active : ''}>
+          <Link href='/about'>
+            <a>Acerca de</a>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
