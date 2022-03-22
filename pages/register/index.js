@@ -1,15 +1,14 @@
-import { useState } from "react";
-import Link from "next/link";
-import { AuthErrorCodes, createUserWithEmailAndPassword } from "firebase/auth";
-import { authentication } from "../../components/firebase/client";
-import { useRouter } from "next/router";
-import Nav from "../../components/nav";
-import styles from '../../styles/Home.module.css'
+import { useState } from 'react';
+import Link from 'next/link';
+import { AuthErrorCodes, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getProviders, getSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import styles from '../../styles/Home.module.css';
 
 export default function Register() {
   const [Credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const { push } = useRouter();
@@ -27,7 +26,7 @@ export default function Register() {
         Credentials.email,
         Credentials.password
       );
-      push("/");
+      push('/');
     } catch (error) {
       console.log(error);
     }
@@ -35,40 +34,39 @@ export default function Register() {
   return (
     <>
       <div className={styles.container}>
-        <Nav></Nav>
-        <div className="form-signin">
-          <h1 className="text-center text-login">Registra tu cuenta</h1>
-          <div className="center">
+        <div className='form-signin'>
+          <h1 className='text-center text-login'>Registra tu cuenta</h1>
+          <div className='center'>
             <input
-              name="email"
-              type="text"
-              className="input-form"
-              placeholder="Correo"
+              name='email'
+              type='text'
+              className='input-form'
+              placeholder='Correo'
               onChange={changeUser}
-              />
+            />
           </div>
-          <div className="center">
+          <div className='center'>
             <input
-              name="password"
-              type="password"
-              className="input-form"
-              placeholder="Contraseña"
+              name='password'
+              type='password'
+              className='input-form'
+              placeholder='Contraseña'
               onChange={changeUser}
-              />
+            />
           </div>
           <br />
-          <div className="center">
+          <div className='center'>
             <button
-              className="button-signup fondo-color-signup"
+              className='button-signup fondo-color-signup'
               onClick={registerUser}
-              >
+            >
               Registrarse
             </button>
           </div>
-          <p className="text-center">O también</p>
+          <p className='text-center'>O también</p>
           <br />
-          <p className="text-center">
-            ¿Ya tienes cuenta? <Link href="/login">Inicia sesión</Link>
+          <p className='text-center'>
+            ¿Ya tienes cuenta? <Link href='/login'>Inicia sesión</Link>
           </p>
         </div>
       </div>
