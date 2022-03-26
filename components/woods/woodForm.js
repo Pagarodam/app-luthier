@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from '../../styles/Home.module.css';
 import { firestore } from '../firebase/client';
 import Button from '../Button';
+import capilalize from 'capitalize';
 
 export default function WoodForm() {
   const [wood, setWood] = useState({ nameWood: '', price: '' });
@@ -10,7 +11,7 @@ export default function WoodForm() {
     const woodsRef = collection(firestore, 'woods');
     const docRef = await addDoc(woodsRef, {
       ...wood,
-      nameWood: wood.nameWood,
+      nameWood: capilalize.words(wood.nameWood),
       price: Number(wood.price),
     }).catch((error) => {
       alert(error);

@@ -11,6 +11,7 @@
     "test:react": "NODE_ENV=test test"
   },
   "dependencies": {
+    "capitalize": "^2.0.4",
     "firebase": "^9.6.8",
     "next": "12.1.0",
     "prop-types": "^15.8.1",
