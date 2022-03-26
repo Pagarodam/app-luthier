@@ -2,20 +2,13 @@ import styles from '../../styles/Home.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../Button';
-import {
-  getProviders,
-  getSession,
-  signIn,
-  signOut,
-  useSession,
-} from 'next-auth/react';
+import { logout } from '../login';
 
 export default function Nav() {
   const floatRight = {
     float: 'right',
   };
 
-  const { data: session } = useSession();
   const router = useRouter();
 
   return (
@@ -26,7 +19,7 @@ export default function Nav() {
             <a>Home</a>
           </Link>
         </li>
-        {!session && (
+        {1 === 1 && (
           <>
             <li
               className={router.pathname === '/register' ? styles.active : ''}
@@ -48,11 +41,11 @@ export default function Nav() {
             <a>Galeria</a>
           </Link>
         </li>
-        {session && (
+        {1 === 1 && (
           <>
-            <li className={styles.active}>{session.user.name}</li>
+            <li className={styles.active}>Hola</li>
             <li>
-              <Button style='' onClick={signOut} label='Sign Out' />
+              <Button style='' onClick={logout} label='Sign Out' />
             </li>
           </>
         )}

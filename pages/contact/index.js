@@ -4,8 +4,8 @@ import styles from '../../styles/Home.module.css';
 export default function About() {
   return (
     <div className={styles.container}>
-      <div class='contact_form'>
-        <div class='formulario'>
+      <div className='contact_form'>
+        <div className='formulario'>
           <h1>Formulario de contacto</h1>
           <h3>Escríbenos y en breve nos pondremos en contacto contigo</h3>
 

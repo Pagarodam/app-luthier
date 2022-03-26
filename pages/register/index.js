@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { AuthErrorCodes, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getProviders, getSession, signIn } from 'next-auth/react';
+import { authentication } from '../../components/firebase/client';
 import { useRouter } from 'next/router';
 import styles from '../../styles/Home.module.css';
 
