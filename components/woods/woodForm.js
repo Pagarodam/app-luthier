@@ -5,6 +5,8 @@ import { firestore } from '../firebase/client';
 import Button from '../Button';
 import capilalize from 'capitalize';
 
+
+
 export default function WoodForm() {
   const [wood, setWood] = useState({ nameWood: '', price: '' });
   const onSubmit = async () => {
