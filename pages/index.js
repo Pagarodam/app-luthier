@@ -6,9 +6,9 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <Image
-          alt='logo'
-          src='/../public/Logo Llamas.jpeg'
-          title=''
+          alt="logo"
+          src="/../public/Logo Llamas.jpeg"
+          title=""
           height={400}
           width={600}
         />
@@ -17,13 +17,13 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <a
-          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src='/vercel.svg' alt='Vercel Logo' width={72} height={16} />
+            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
