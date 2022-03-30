@@ -15,7 +15,7 @@ const WoodsList = () => {
         querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-        }))
+        })),
       );
       return unsubscribe;
     });
@@ -23,9 +23,14 @@ const WoodsList = () => {
   return (
     <>
       <WoodForm />
-      <div className='wood'>
+      <div className="wood">
         {woods.map((wood) => (
-          <Woods key={wood.id} nameWood={wood.nameWood} price={wood.price} />
+          <Woods
+            key={wood.id}
+            id={wood.id}
+            nameWood={wood.nameWood}
+            price={wood.price}
+          />
         ))}
       </div>
     </>
