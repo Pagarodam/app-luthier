@@ -30,7 +30,7 @@ export function LoginGoogle() {
   };
 
   return (
-    <Button style='' onClick={signInWithGoogle} label='Login with Google' />
+    <Button style="" onClick={signInWithGoogle} label="Login with Google" />
   );
 }
 
@@ -52,7 +52,7 @@ export function LoginMail() {
       const user = await signInWithEmailAndPassword(
         authentication,
         loginEmail,
-        loginPassword
+        loginPassword,
       );
       push('/about');
     } catch (error) {
@@ -65,21 +65,20 @@ export function LoginMail() {
       <div className={styles.signin}>
         <h1>LOGIN</h1>
         <input
-          type='email'
-          placeholder='Email...'
+          type="email"
+          placeholder="Email..."
           onChange={(e) => {
             setLoginEmail(e.target.value);
           }}
         ></input>
         <input
-          type='password'
-          placeholder='Password'
+          type="password"
+          placeholder="Password"
           onChange={(e) => {
             setLoginPassword(e.target.value);
           }}
         ></input>
-        <Button style='' onClick={login} label='Login' />
-        <Button style='' onClick={logout} label='Sign Out' />
+        <Button style="" onClick={login} label="Login" />
         <h4>User Logged In: </h4>
         {user?.email}
       </div>
@@ -125,9 +124,9 @@ export function LoginFacebook() {
   };
   return (
     <Button
-      style=''
+      style=""
       onClick={singnInWithFacebook}
-      label='Login with Facebook'
+      label="Login with Facebook"
     />
   );
 }

@@ -3,8 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../Button';
 import { logout } from '../login';
+import { useAuth } from '../Auth';
 
 export default function Nav() {
+  const { currentUser } = useAuth();
+  console.log('current', currentUser);
+
   const floatRight = {
     float: 'right',
   };
@@ -15,7 +19,7 @@ export default function Nav() {
     <nav className={styles.nav}>
       <ul className={styles.ul}>
         <li className={router.pathname === '/' ? styles.active : ''}>
-          <Link href='/'>
+          <Link href="/">
             <a>Home</a>
           </Link>
         </li>
@@ -24,12 +28,12 @@ export default function Nav() {
             <li
               className={router.pathname === '/register' ? styles.active : ''}
             >
-              <Link href='/register'>
+              <Link href="/register">
                 <a>Registrate</a>
               </Link>
             </li>
             <li className={router.pathname === '/login' ? styles.active : ''}>
-              <Link href='/login'>
+              <Link href="/login">
                 <a>Login</a>
               </Link>
             </li>
@@ -37,25 +41,25 @@ export default function Nav() {
         )}
 
         <li className={router.pathname === '/gallery' ? styles.active : ''}>
-          <Link href='/gallery'>
+          <Link href="/gallery">
             <a>Galeria</a>
           </Link>
         </li>
         {1 === 1 && (
           <>
-            <li className={styles.active}>Hola</li>
+            <li className={styles.active}>{currentUser}</li>
             <li>
-              <Button style='' onClick={logout} label='Sign Out' />
+              <Button style="" onClick={logout} label="Sign Out" />
             </li>
           </>
         )}
         <li className={router.pathname === '/contact' ? styles.active : ''}>
-          <Link href='/contact'>
+          <Link href="/contact">
             <a>Contacto</a>
           </Link>
         </li>
         <li className={router.pathname === '/about' ? styles.active : ''}>
-          <Link href='/about'>
+          <Link href="/about">
             <a>Acerca de</a>
           </Link>
         </li>

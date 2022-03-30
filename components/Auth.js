@@ -1,24 +1,35 @@
 import { getAuth } from 'firebase/auth';
-import { createContext, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import Loading from './loading';
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+  const [CurrentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(false); //loading state
   useEffect(() => {
     const auth = getAuth();
     return () =>
       auth.onIdTokenChanged(async (user) => {
         if (!user) {
-          console.log('No user');
+          setCurrentUser(null);
+          setLoading(false);
           return;
         }
         const token = await user.getIdToken();
-        console.log(`Token: ${token}`);
-        console.log(`User: ${user}`);
+        setCurrentUser(user);
+        setLoading(false);
       });
   }, []);
+  if (loading) {
+    return <Loading type="spin" color="#fff" />;
+  }
 
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ CurrentUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);
