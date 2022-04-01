@@ -11,7 +11,7 @@ const Woods = ({ id, nameWood, quality, price }) => {
     });
     alert(`Wood deleted: ${id}`);
   };
-  //TODO Comprobar por que no pinta calidad
+
   return (
     <table key={id}>
       <tbody>
@@ -26,6 +26,7 @@ const Woods = ({ id, nameWood, quality, price }) => {
           <td>{quality}</td>
           <td>{price}</td>
         </tr>
+        
         <tr>
           <td>
             <Button onClick={(e) => deleteWood(id, e)} label="Eliminar" />
