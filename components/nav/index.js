@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '../Auth';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const { user } = useAuth();
+  const { logOut } = useAuth();
 
   return (
     <header className="flex items-center p-3 flex-wrap text-white bg-blue-900">
@@ -53,6 +56,38 @@ const Navbar = () => {
               Contact Us
             </a>
           </Link>
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <label tabindex="0" class="btn m-1">
+                {user.email}
+              </label>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <Link href="/profile">
+                    <a>Profile</a>
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900"
+                    onClick={logOut}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link href="/login">
+              <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+                LogIn
+              </a>
+            </Link>
+          )}
         </div>
       </div>
     </header>
