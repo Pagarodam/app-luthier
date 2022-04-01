@@ -45,6 +45,12 @@ export default function Nav() {
             <a>Galeria</a>
           </Link>
         </li>
+
+        <li className={router.pathname === '/gallery/woods' ? styles.active : ''}>
+          <Link href="/gallery/woods">
+            <a>Maderas</a>
+          </Link>
+        </li>
         {1 === 1 && (
           <>
             <li className={styles.active}>{currentUser}</li>

@@ -8,18 +8,20 @@ import capilalize from 'capitalize';
 
 
 export default function WoodForm() {
-  const [wood, setWood] = useState({ nameWood: '', price: '' });
+  const [wood, setWood] = useState({ nameWood: '', quality:'', price: '' });
   const onSubmit = async () => {
     const woodsRef = collection(firestore, 'woods');
     const docRef = await addDoc(woodsRef, {
       ...wood,
       nameWood: capilalize.words(wood.nameWood),
+      quality: capilalize.words(wood.quality),
       price: Number(wood.price),
     }).catch((error) => {
       alert(error);
     });
-    setWood({ nameWood: '', price: '' });
-    alert(`Wood added: ${docRef.id}`);
+    setWood({ nameWood: '', quality:'', price: '' });
+    //TODO Comprobar por que no pinta la calidad
+    alert(`Wood added: ${docRef.id} ${docRef.quality}`);
   };
   return (
     <div className={styles.container}>
@@ -37,6 +39,40 @@ export default function WoodForm() {
               required
               placeholder='Escribe el nombre de la madera'
             />
+          </label>
+        </p>
+
+        <p>
+          <label>
+            Calidad
+            <span>*</span><br></br>
+
+            <input 
+              type="radio" id="quality" name="woodQuality" value="especial"
+              checked = {wood.quality === "especial" ? true : false}
+              onChange={ e => setWood({ ...wood, quality: e.target.value })}
+              />
+            <label for="especial">Especial</label>
+
+            <input 
+              type="radio" 
+              id="quality" 
+              name="woodQuality" 
+              value="primera" 
+              checked = {wood.quality === "primera" ? true : false}
+              onChange={ e => setWood({ ...wood, quality: e.target.value })}
+              />
+            <label for="primera">Primera</label>
+
+            <input 
+              type="radio" 
+              id="quality" 
+              name="woodQuality" 
+              value="tercera"
+              checked = {wood.quality === "tercera" ? true : false}  
+              onChange={ e => setWood({ ...wood, quality: e.target.value })}
+            />
+            <label for="tercera">Tercera</label>
           </label>
         </p>
         <p>
