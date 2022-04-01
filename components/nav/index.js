@@ -2,12 +2,12 @@ import styles from '../../styles/Home.module.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../Button';
-import { logout } from '../login';
 import { useAuth } from '../Auth';
 
 export default function Nav() {
-  const { currentUser } = useAuth();
-  console.log('current', currentUser);
+  const { user } = useAuth();
+  const { logOut } = useAuth();
+  console.log('current nav', user);
 
   const floatRight = {
     float: 'right',
@@ -47,9 +47,9 @@ export default function Nav() {
         </li>
         {1 === 1 && (
           <>
-            <li className={styles.active}>{currentUser}</li>
+            <li className={styles.active}>{user ? user.email : 'logeate'}</li>
             <li>
-              <Button style="" onClick={logout} label="Sign Out" />
+              <Button style="" onClick={logOut} label="Sign Out" />
             </li>
           </>
         )}
