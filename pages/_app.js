@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import Head from 'next/head';
-import Nav from '../components/nav';
 import { AuthProvider } from '../components/Auth';
+import Navbar from '../components/nav';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,9 +12,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthProvider>
-        <header>
-          <Nav />
-        </header>
+        <Navbar />
         <Component {...pageProps} />
       </AuthProvider>
     </>
