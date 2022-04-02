@@ -14,7 +14,7 @@ const Navbar = () => {
         className="lg:text-xl p-2 mr-4 inline-flex items-center font-serif font-bold"
       >
         <Link href="/">
-          <a>NextJS with Tailwind</a>
+          <a>Luthier</a>
         </Link>
       </div>
       <button
