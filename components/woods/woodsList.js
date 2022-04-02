@@ -6,6 +6,7 @@ import Woods from './woods';
 
 const WoodsList = () => {
   const [woods, setWoods] = useState([]);
+
   useEffect(() => {
     const woodsRef = collection(firestore, 'woods');
     const q = query(woodsRef, orderBy('nameWood', 'asc'));
@@ -17,7 +18,7 @@ const WoodsList = () => {
           id: doc.id,
         })),
       );
-      
+
       return unsubscribe;
     });
   });
@@ -25,16 +26,24 @@ const WoodsList = () => {
   return (
     <>
       <WoodForm />
-      <div className="wood">
-        {woods.map((wood) => (
-          <Woods
-            key={wood.id}
-            id={wood.id}
-            nameWood={wood.nameWood}
-            quality={wood.quality}
-            price={wood.price}
-          />
-        ))}
+      <div class="overflow-x-auto">
+        <table class="table w-full">
+          <tr>
+            <th>Nombre</th>
+            <th>Calidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+          {woods.map((wood) => (
+            <Woods
+              key={wood.id}
+              id={wood.id}
+              nameWood={wood.nameWood}
+              quality={wood.quality}
+              price={wood.price}
+            />
+          ))}
+        </table>
       </div>
     </>
   );
