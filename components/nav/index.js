@@ -45,6 +45,11 @@ const Navbar = () => {
               Maderas
             </a>
           </Link>
+          <Link href="/gallery">
+            <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+              Galeria
+            </a>
+          </Link>
 
           <Link href="/about">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded  hover:bg-gray-900">

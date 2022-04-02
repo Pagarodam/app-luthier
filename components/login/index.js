@@ -1,4 +1,7 @@
 import Button from '../../components/Button';
+import { FcGoogle } from 'react-icons/fc';
+import { FaFacebookF } from 'react-icons/fa';
+
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -30,7 +33,12 @@ export function LoginGoogle() {
   };
 
   return (
-    <Button style="" onClick={signInWithGoogle} label="Login with Google" />
+    <>
+      <button onClick={signInWithGoogle} className="btn btn-outline m-2">
+        <FcGoogle />
+        oogle
+      </button>
+    </>
   );
 }
 
@@ -62,33 +70,35 @@ export function LoginMail() {
 
   return (
     <>
-      <div className={styles.signin}>
-        <h1>LOGIN</h1>
-        <input
-          type="email"
-          placeholder="Email..."
-          onChange={(e) => {
-            setLoginEmail(e.target.value);
-          }}
-        ></input>
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => {
-            setLoginPassword(e.target.value);
-          }}
-        ></input>
-        <Button style="" onClick={login} label="Login" />
-        <h4>User Logged In: </h4>
-        {user?.email}
+      <h1 className="text-center m-4 underline decoration-sky-500 mt-4 antialiased text-3xl">
+        LOGIN
+      </h1>
+      <div className="flex justify-center items-center">
+        <div className="form-control">
+          <input
+            type="email"
+            placeholder="Email"
+            className="input input-bordered mb-2"
+            onChange={(e) => {
+              setLoginEmail(e.target.value);
+            }}
+          ></input>
+          <input
+            type="password"
+            placeholder="Password"
+            className="input input-bordered mb-2"
+            onChange={(e) => {
+              setLoginPassword(e.target.value);
+            }}
+          ></input>
+          <button onClick={login} className="btn btn-outline">
+            login
+          </button>
+        </div>
       </div>
     </>
   );
 }
-
-export const logout = async () => {
-  await signOut(authentication);
-};
 
 //Facebook Login
 export function LoginFacebook() {
@@ -123,10 +133,9 @@ export function LoginFacebook() {
       });
   };
   return (
-    <Button
-      style=""
-      onClick={singnInWithFacebook}
-      label="Login with Facebook"
-    />
+    <button className="btn btn-outline m-2" onClick={singnInWithFacebook}>
+      <FaFacebookF />
+      acebook
+    </button>
   );
 }
