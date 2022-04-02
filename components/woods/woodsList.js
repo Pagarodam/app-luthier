@@ -17,9 +17,11 @@ const WoodsList = () => {
           id: doc.id,
         })),
       );
+      
       return unsubscribe;
     });
   });
+
   return (
     <>
       <WoodForm />
@@ -29,6 +31,7 @@ const WoodsList = () => {
             key={wood.id}
             id={wood.id}
             nameWood={wood.nameWood}
+            quality={wood.quality}
             price={wood.price}
           />
         ))}
