@@ -2,7 +2,7 @@ import { deleteDoc, doc } from 'firebase/firestore';
 import Button from '../Button';
 import { firestore } from '../firebase/client';
 
-const Woods = ({ id, nameWood, price }) => {
+const Woods = ({ id, nameWood, quality, price }) => {
   const deleteWood = async (id, e) => {
     e.stopPropagation();
     const docRef = doc(firestore, 'woods', id);
@@ -17,13 +17,16 @@ const Woods = ({ id, nameWood, price }) => {
       <tbody>
         <tr>
           <th>Nombre</th>
+          <th>Calidad</th>
           <th>Precio</th>
         </tr>
 
         <tr>
           <td>{nameWood}</td>
+          <td>{quality}</td>
           <td>{price}</td>
         </tr>
+        
         <tr>
           <td>
             <Button onClick={(e) => deleteWood(id, e)} label="Eliminar" />
