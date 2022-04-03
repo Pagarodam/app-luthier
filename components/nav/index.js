@@ -45,6 +45,11 @@ const Navbar = () => {
               Maderas
             </a>
           </Link>
+          <Link href="/gallery/guitars">
+            <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+              Guitarras
+            </a>
+          </Link>
           <Link href="/gallery">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
               Galeria
@@ -63,12 +68,12 @@ const Navbar = () => {
           </Link>
           {user ? (
             <div className="dropdown dropdown-end">
-              <label tabindex="0" class="btn m-1">
+              <label tabIndex="0" className="btn m-1">
                 {user.email}
               </label>
               <ul
-                tabindex="0"
-                class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                tabIndex="0"
+                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
                   <Link href="/profile">
