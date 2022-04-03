@@ -24,7 +24,7 @@ export const GuitarGallery = () => {
 
   return (
     <>
-      <div className="overflow-x-auto">
+      <div className="flex">
         {guitars.map((guitar) => (
           <GuitarCard
             key={guitar.id}
