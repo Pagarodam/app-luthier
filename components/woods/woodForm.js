@@ -1,8 +1,6 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
-import styles from '../../styles/Home.module.css';
 import { firestore } from '../firebase/client';
-import Button from '../Button';
 import capilalize from 'capitalize';
 
 export default function WoodForm() {
