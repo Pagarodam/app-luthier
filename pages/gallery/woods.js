@@ -1,4 +1,3 @@
-import WoodForm from '../../components/woods/woodForm';
 import WoodsList from '../../components/woods/woodsList';
 import styles from '../../styles/Home.module.css';
 

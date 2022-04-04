@@ -47,6 +47,7 @@ export default function Images() {
             alt={photos.alt}
             height={400}
             width={600}
+            objectFit="contain"
             className="w-full"
           />
         </div>
