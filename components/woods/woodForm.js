@@ -1,24 +1,28 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, ref, uploadBytes, getDownloadURL } from 'firebase/firestore';
 import { useState } from 'react';
 import { firestore } from '../firebase/client';
 import capilalize from 'capitalize';
+import { fileHandler } from '../firebase/utils';
 
 export default function WoodForm() {
   const [fetching, setFetching] = useState(false);
-  const [wood, setWood] = useState({ nameWood: '', quality: '', price: '' });
+  const [wood, setWood] = useState({});
 
   const onSubmit = async () => {
     setFetching(true);
     const woodsRef = collection(firestore, 'woods');
+    const woodUrl = await fileHandler(wood.image, 'woods');
     const docRef = await addDoc(woodsRef, {
       ...wood,
       nameWood: capilalize.words(wood.nameWood),
       quality: capilalize.words(wood.quality),
       price: Number(wood.price),
+      image: woodUrl
     }).catch((error) => {
       alert(error);
     });
-    setWood({ nameWood: '', quality: '', price: '' });
+    setWood({ nameWood: '', quality: '', price: '' , image:''});
+
     setFetching(false);
     alert(`Wood added: ${docRef.id}`);
   };
@@ -89,6 +93,16 @@ export default function WoodForm() {
               className="input input-bordered"
             />
             <span>€</span>
+          </label>
+          <label className="input-group m-2">
+            <span className="mr-2">Imagen</span>
+            <input
+              onChange={e => setWood({ ...wood, image: e.target.files[0] })}
+              type="file"
+              required
+              placeholder="Imagen de la madera"
+              className="input input-bordered"
+            />
           </label>
           <button onClick={onSubmit} disabled={fetching} className="btn">
             {fetching ? 'Procesando' : 'Enviar'}
