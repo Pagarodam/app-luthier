@@ -1,12 +1,24 @@
-import { addDoc, collection, ref, uploadBytes, getDownloadURL } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from 'firebase/firestore';
 import { useState } from 'react';
 import { firestore } from '../firebase/client';
 import capilalize from 'capitalize';
 import { fileHandler } from '../firebase/utils';
+import Input from '../UI/Input';
+import { CONSTANTS } from '@firebase/util';
 
 export default function WoodForm() {
   const [fetching, setFetching] = useState(false);
-  const [wood, setWood] = useState({});
+  const [wood, setWood] = useState({
+    nameWood: '',
+    quality: '',
+    price: '',
+  });
 
   const onSubmit = async () => {
     setFetching(true);
@@ -17,93 +29,102 @@ export default function WoodForm() {
       nameWood: capilalize.words(wood.nameWood),
       quality: capilalize.words(wood.quality),
       price: Number(wood.price),
-      image: woodUrl
+      image: woodUrl,
     }).catch((error) => {
       alert(error);
     });
-    setWood({ nameWood: '', quality: '', price: '' , image:''});
+    setWood({ nameWood: '', quality: '', price: '', image: '' });
 
     setFetching(false);
     alert(`Wood added: ${docRef.id}`);
   };
 
+  const woodNameChangeHandler = (event) => {
+    setWood({ ...wood, nameWood: event.target.value });
+  };
+
+  const woodQualityChangeHandler = (event) => {
+    setWood({ ...wood, quality: event.target.value });
+  };
+
+  const woodPriceChangeHandler = (event) => {
+    setWood({ ...wood, price: event.target.value });
+  };
+
+  const woodImageChangeHandler = (event) => {
+    setWood({ ...wood, image: event.target.files[0] });
+  };
+
   return (
     <>
-      <h1 className=" underline decoration-sky-500 mt-4 antialiased text-3xl">
+      <h1 className="underline decoration-sky-500 mt-4 antialiased text-3xl">
         Formulario Maderas
       </h1>
       <div className="flex justify-start items-center">
         <div className="form-control mt-2">
-          <label className="input-group m-2">
-            <span>Nombre</span>
-            <input
-              value={wood.nameWood}
-              onChange={(e) => setWood({ ...wood, nameWood: e.target.value })}
+          <div className="input-group m-2">
+            <Input
+              id="nameWood"
+              label="Nombre"
               type="text"
-              required
-              placeholder="Nombre de la madera"
-              className="input input-bordered"
+              value={wood.nameWood}
+              onChange={woodNameChangeHandler}
             />
-          </label>
-          <label className="input-group m-2">
-            <span className="mr-2">Calidad</span>
-            <input
-              type="radio"
+          </div>
+          <div className="input-group m-2">
+            <span>Calidad</span>
+            <Input
               id="quality"
-              name="woodQuality"
+              label="Calidad"
+              type="radio"
               value="especial"
-              checked={wood.quality === 'especial' ? true : false}
-              onChange={(e) => setWood({ ...wood, quality: e.target.value })}
+              onChange={woodQualityChangeHandler}
               className="radio mr-2"
+              checked={wood.quality === 'especial' ? true : false}
             />
             <label htmlFor="especial" className="mr-2">
               Especial
             </label>
-            <input
-              type="radio"
+            <Input
               id="quality"
-              name="woodQuality"
+              type="radio"
               value="primera"
-              checked={wood.quality === 'primera' ? true : false}
-              onChange={(e) => setWood({ ...wood, quality: e.target.value })}
+              onChange={woodQualityChangeHandler}
               className="radio mr-2"
+              checked={wood.quality === 'primera' ? true : false}
             />
             <label htmlFor="primera" className="mr-2">
               Primera
             </label>
-            <input
-              type="radio"
+            <Input
               id="quality"
-              name="woodQuality"
+              type="radio"
               value="tercera"
-              checked={wood.quality === 'tercera' ? true : false}
-              onChange={(e) => setWood({ ...wood, quality: e.target.value })}
+              onChange={woodQualityChangeHandler}
               className="radio mr-2"
+              checked={wood.quality === 'tercera' ? true : false}
             />
             <label htmlFor="tercera">Tercera</label>
-          </label>
-          <label className="input-group m-2">
-            <span>Price</span>
-            <input
-              value={wood.price}
-              onChange={(e) => setWood({ ...wood, price: e.target.value })}
+          </div>
+          <div className="input-group m-2">
+            <Input
+              id="price"
+              label="Precio"
               type="number"
-              required
+              value={wood.price}
               placeholder="Escriba el precio"
-              className="input input-bordered"
+              onChange={woodPriceChangeHandler}
             />
             <span>€</span>
-          </label>
-          <label className="input-group m-2">
-            <span className="mr-2">Imagen</span>
+          </div>
+          <div className="input-group m-2">
             <input
-              onChange={e => setWood({ ...wood, image: e.target.files[0] })}
+              onChange={woodImageChangeHandler}
               type="file"
               required
-              placeholder="Imagen de la madera"
               className="input input-bordered"
             />
-          </label>
+          </div>
           <button onClick={onSubmit} disabled={fetching} className="btn">
             {fetching ? 'Procesando' : 'Enviar'}
           </button>

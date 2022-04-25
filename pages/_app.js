@@ -1,7 +1,8 @@
 import '../styles/globals.css';
 import Head from 'next/head';
-import { AuthProvider } from '../components/Auth';
+import { AuthProvider } from '../components/store/Auth';
 import Navbar from '../components/nav';
+
 
 function MyApp({ Component, pageProps }) {
   return (
