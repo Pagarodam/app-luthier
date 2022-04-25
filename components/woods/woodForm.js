@@ -1,16 +1,9 @@
-import {
-  addDoc,
-  collection,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
 import { firestore } from '../firebase/client';
 import capilalize from 'capitalize';
 import { fileHandler } from '../firebase/utils';
 import Input from '../UI/Input';
-import { CONSTANTS } from '@firebase/util';
 
 export default function WoodForm() {
   const [fetching, setFetching] = useState(false);
@@ -18,6 +11,7 @@ export default function WoodForm() {
     nameWood: '',
     quality: '',
     price: '',
+    component: '',
   });
 
   const onSubmit = async () => {
@@ -30,10 +24,11 @@ export default function WoodForm() {
       quality: capilalize.words(wood.quality),
       price: Number(wood.price),
       image: woodUrl,
+      component: wood.component,
     }).catch((error) => {
       alert(error);
     });
-    setWood({ nameWood: '', quality: '', price: '', image: '' });
+    setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
 
     setFetching(false);
     alert(`Wood added: ${docRef.id}`);
@@ -53,6 +48,10 @@ export default function WoodForm() {
 
   const woodImageChangeHandler = (event) => {
     setWood({ ...wood, image: event.target.files[0] });
+  };
+
+  const componentChangeHandler = (event) => {
+    setWood({ ...wood, component: event.target.value });
   };
 
   return (
@@ -106,6 +105,53 @@ export default function WoodForm() {
             />
             <label htmlFor="tercera">Tercera</label>
           </div>
+
+          <div className="input-group m-2">
+            <span>Componentes</span>
+            <Input
+              id="component"
+              label="Tapa"
+              type="radio"
+              value="tapa"
+              onChange={componentChangeHandler}
+              className="radio mr-2"
+              checked={wood.component === 'tapa' ? true : false}
+            />
+            <label htmlFor="tapa" className="mr-2">
+              Tapa
+            </label>
+            <Input
+              id="component"
+              type="radio"
+              value="aro"
+              onChange={componentChangeHandler}
+              className="radio mr-2"
+              checked={wood.component === 'aro' ? true : false}
+            />
+            <label htmlFor="aro" className="mr-2">
+              Aro
+            </label>
+            <Input
+              id="component"
+              type="radio"
+              value="fondo"
+              onChange={componentChangeHandler}
+              className="radio mr-2"
+              checked={wood.component === 'fondo' ? true : false}
+            />
+            <label htmlFor="fondo">Fondo</label>
+
+            <Input
+              id="component"
+              type="radio"
+              value="diapason"
+              onChange={componentChangeHandler}
+              className="radio mr-2"
+              checked={wood.component === 'diapason' ? true : false}
+            />
+            <label htmlFor="fondo">Diapasón</label>
+          </div>
+
           <div className="input-group m-2">
             <Input
               id="price"
