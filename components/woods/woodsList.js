@@ -52,6 +52,7 @@ const WoodsList = () => {
           price={wood.price}
           image={wood.image}
           component={wood.component}
+          style={wood.style}
           buttonLabel="Borrar"
           buttonColor="primary"
           onClick={(e) => deleteWood(wood.id, e)}
