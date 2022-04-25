@@ -3,6 +3,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import { useState } from 'react';
 import { firestore, storage } from '../firebase/client';
 import capilalize from 'capitalize';
+import { fileHandler } from '../firebase/utils';
 
 export const GuitarForm = () => {
   let downloadURL = '';
@@ -17,12 +18,13 @@ export const GuitarForm = () => {
   const onSubmit = async () => {
     setFetching(true);
     const guitarsRef = collection(firestore, 'guitars');
+    const guitarUrl = await fileHandler(guitar.image, 'guitars');
     const docRef = await addDoc(guitarsRef, {
       ...guitar,
       nameGuitar: capilalize.words(guitar.nameGuitar),
       details: guitar.details,
       price: Number(guitar.price),
-      image: downloadURL,
+      image: guitarUrl,
     }).catch((error) => {
       alert(error);
     });
@@ -31,12 +33,21 @@ export const GuitarForm = () => {
     alert(`Guitar added: ${docRef.nameGuitar}`);
   };
 
-  const fileHandler = async (e) => {
-    const file = e.target.files[0];
-    const fileRef = ref(storage, `guitars/${file.name}`);
-    const uploadTask = await uploadBytes(fileRef, file);
-    downloadURL = await getDownloadURL(fileRef);
+  const guitarNameChangeHandler = (event) => {
+    setGuitar({ ...guitar, nameGuitar: event.target.value })
   };
+  
+  const guitarImageChangeHandler = (event) => {
+    setGuitar({ ...guitar, image: event.target.files[0] });
+  };
+  
+  const guitarDetailsChangeHandler = (event) => {
+    setGuitar({...guitar, details: event.target.value});
+  };
+
+  const guitarPriceChangeHandler = (event) => {
+    setGuitar({...guitar, price: event.target.value});
+  }
 
   return (
     <>
@@ -49,9 +60,7 @@ export const GuitarForm = () => {
             <span>Nombre</span>
             <input
               value={guitar.nameGuitar}
-              onChange={(e) =>
-                setGuitar({ ...guitar, nameGuitar: e.target.value })
-              }
+              onChange={guitarNameChangeHandler}
               type="text"
               required
               placeholder="Nombre de la guitarra"
@@ -62,9 +71,7 @@ export const GuitarForm = () => {
             <span className="mr-2">Descripción</span>
             <textarea
               value={guitar.details}
-              onChange={(e) =>
-                setGuitar({ ...guitar, details: e.target.value })
-              }
+              onChange={guitarDetailsChangeHandler}
               type="text"
               required
               placeholder="Descripción de la guitarra"
@@ -75,7 +82,7 @@ export const GuitarForm = () => {
             <span className="mr-2">Precio</span>
             <input
               value={guitar.price}
-              onChange={(e) => setGuitar({ ...guitar, price: e.target.value })}
+              onChange={guitarPriceChangeHandler}
               type="number"
               required
               placeholder="Precio de la guitarra"
@@ -85,7 +92,7 @@ export const GuitarForm = () => {
           <label className="input-group m-2">
             <span className="mr-2">Imagen</span>
             <input
-              onChange={fileHandler}
+              onChange={guitarImageChangeHandler}
               type="file"
               required
               placeholder="Imagen de la guitarra"
