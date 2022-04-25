@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button';
 import { firestore } from '../firebase/client';
 
-const Woods = ({ id, nameWood, quality, price }) => {
+const Woods = ({ id, nameWood, quality, price, component }) => {
   const [fetching, setFetching] = useState(false);
 
   const deleteWood = async (id, e) => {
@@ -23,6 +23,7 @@ const Woods = ({ id, nameWood, quality, price }) => {
         <td>{nameWood}</td>
         <td>{quality}</td>
         <td>{price}</td>
+        <td>{component}</td>
         <td>
           {fetching ? (
             <button className="btn btn-square loading"></button>
