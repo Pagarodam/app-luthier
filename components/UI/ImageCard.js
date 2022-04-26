@@ -7,9 +7,10 @@ export const Card = ({
   price,
   image,
   component,
+  style,
   onClick,
   buttonLabel,
-  buttonColor
+  buttonColor,
 }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
@@ -25,10 +26,13 @@ export const Card = ({
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
         <p>{details}</p>
+        <p>{style}</p>
         <p>Precio: {price} €</p>
         <p>Componente: {component} </p>
         <div className="card-actions justify-end">
-          <button onClick={onClick} className={`btn btn-${buttonColor}`}>{buttonLabel}</button>
+          <button onClick={onClick} className={`btn btn-${buttonColor}`}>
+            {buttonLabel}
+          </button>
         </div>
       </div>
     </div>

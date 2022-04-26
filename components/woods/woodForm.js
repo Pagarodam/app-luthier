@@ -12,6 +12,7 @@ export default function WoodForm() {
     quality: '',
     price: '',
     component: '',
+    style: ''
   });
 
   const onSubmit = async () => {
@@ -22,6 +23,7 @@ export default function WoodForm() {
       ...wood,
       nameWood: capilalize.words(wood.nameWood),
       quality: capilalize.words(wood.quality),
+      style: capilalize.words(wood.style),
       price: Number(wood.price),
       image: woodUrl,
       component: wood.component,
@@ -29,7 +31,6 @@ export default function WoodForm() {
       alert(error);
     });
     setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
-
     setFetching(false);
     alert(`Wood added: ${docRef.id}`);
   };
@@ -40,6 +41,10 @@ export default function WoodForm() {
 
   const woodQualityChangeHandler = (event) => {
     setWood({ ...wood, quality: event.target.value });
+  };
+
+  const woodStyleChangeHandler = (event) => {
+    setWood({ ...wood, style: event.target.value });
   };
 
   const woodPriceChangeHandler = (event) => {
@@ -150,6 +155,44 @@ export default function WoodForm() {
               checked={wood.component === 'diapason' ? true : false}
             />
             <label htmlFor="fondo">Diapasón</label>
+          </div>
+
+          <div className="input-group m-2">
+            <span>Estilo</span>
+            <Input
+              id="flamenco"
+              label="Flamenco"
+              type="radio"
+              value="flamenco"
+              onChange={woodStyleChangeHandler}
+              className="radio mr-2"
+              checked={wood.style === 'flamenco' ? true : false}
+            />
+            <label htmlFor="flamenco" className="mr-2">
+              Flamenco
+            </label>
+
+            <Input
+              id="Clasico"
+              type="radio"
+              value="clasico"
+              onChange={woodStyleChangeHandler}
+              className="radio mr-2"
+              checked={wood.style === 'clasico' ? true : false}
+            />
+            <label htmlFor="clasico" className="mr-2">
+              Clasico
+            </label>
+
+            <Input
+              id="custom"
+              type="radio"
+              value="custom"
+              onChange={woodStyleChangeHandler}
+              className="radio mr-2"
+              checked={wood.style === 'custom' ? true : false}
+            />
+            <label htmlFor="custom">Custom</label>
           </div>
 
           <div className="input-group m-2">
