@@ -4,6 +4,7 @@ import { firestore } from '../firebase/client';
 import capilalize from 'capitalize';
 import { fileHandler } from '../firebase/utils';
 import Input from '../UI/Input';
+import Modal from '../UI/Modal';
 
 export default function WoodForm() {
   const [fetching, setFetching] = useState(false);
@@ -28,11 +29,21 @@ export default function WoodForm() {
       image: woodUrl,
       component: wood.component,
     }).catch((error) => {
-      alert(error);
+      setMessage("Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)");
+      // alert(error);
     });
     setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
     setFetching(false);
-    alert(`Wood added: ${docRef.id}`);
+    setMessage("Añadida correctamente");
+
+    // alert(`Wood added: ${docRef.id}`);
+    
+  };
+
+  const [message, setMessage] = useState("");
+
+  const closeMessageHandler = ()=>{
+    setMessage("");
   };
 
   const woodNameChangeHandler = (event) => {
@@ -61,6 +72,14 @@ export default function WoodForm() {
 
   return (
     <>
+    {message && (
+        <Modal onClose={closeMessageHandler} >
+          <div>{message}</div>
+          <button className="btn btn-primary" onClick={closeMessageHandler}>
+            Cerrar
+          </button>
+        </Modal>
+      )}
       <h1 className="underline decoration-sky-500 mt-4 antialiased text-3xl">
         Formulario Maderas
       </h1>
