@@ -8,7 +8,7 @@ const Navbar = () => {
   const { logOut } = useAuth();
 
   return (
-    <header className="flex items-center p-3 flex-wrap text-white bg-blue-900 sticky top-0">
+    <header className="flex items-center p-3 flex-wrap text-white bg-blue-900 sticky top-0 z-10">
       <div
         id="logo"
         className="lg:text-xl p-2 mr-4 inline-flex items-center font-serif font-bold"

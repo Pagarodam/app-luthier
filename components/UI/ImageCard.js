@@ -13,7 +13,7 @@ export const Card = ({
   buttonColor,
 }) => {
   return (
-    <div className="card card-side bg-base-100 shadow-xl glass m-5">
+    <div className="card card-side bg-base-100 shadow-xl glass m-5 w-1/4 items-center">
       <figure>
         <Image
           src={image}
