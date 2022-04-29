@@ -1,12 +1,9 @@
-import { addDoc, collection } from 'firebase/firestore';
-import { useState } from 'react';
-import { firestore } from '../firebase/client';
+import { useState, useRef } from 'react';
 import capilalize from 'capitalize';
-import { fileHandler } from '../firebase/utils';
 import Input from '../UI/Input';
 import Modal from '../UI/Modal';
 
-export default function WoodForm() {
+export default function WoodForm({onWoodAdded}) {
   const [fetching, setFetching] = useState(false);
   const [wood, setWood] = useState({
     nameWood: '',
@@ -15,29 +12,37 @@ export default function WoodForm() {
     component: '',
     style: ''
   });
-
+  const fileInput = useRef(null);
+  console.log('fileInput', fileInput);
   const onSubmit = async () => {
     setFetching(true);
-    const woodsRef = collection(firestore, 'woods');
-    const woodUrl = await fileHandler(wood.image, 'woods');
-    const docRef = await addDoc(woodsRef, {
-      ...wood,
-      nameWood: capilalize.words(wood.nameWood),
-      quality: capilalize.words(wood.quality),
-      style: capilalize.words(wood.style),
-      price: Number(wood.price),
-      image: woodUrl,
-      component: wood.component,
-    }).catch((error) => {
-      setMessage("Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)");
-      // alert(error);
-    });
-    setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
-    setFetching(false);
-    setMessage("Añadida correctamente");
 
-    // alert(`Wood added: ${docRef.id}`);
-    
+    fetch("http://localhost:3001/woods", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...wood,
+        nameWood: capilalize.words(wood.nameWood),
+        quality: capilalize.words(wood.quality),
+        style: capilalize.words(wood.style),
+        price: Number(wood.price),
+        image: "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
+        component: wood.component,
+      })
+    }).then(
+      res => {
+        console.log('res', res);
+        fileInput.current.value = "";
+        setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
+        setFetching(false);
+        setMessage("Añadida correctamente");
+        onWoodAdded();
+      }
+    ).catch(
+      err => setMessage("Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)", err)
+    )
   };
 
   const [message, setMessage] = useState("");
@@ -231,6 +236,7 @@ export default function WoodForm() {
               type="file"
               required
               className="input input-bordered"
+              ref={fileInput}
             />
           </div>
           <button onClick={onSubmit} disabled={fetching} className="btn">
