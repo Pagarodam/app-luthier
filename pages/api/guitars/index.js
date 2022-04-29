@@ -1,5 +1,6 @@
 import dbConnect from '../../../lib/dbConnect';
 import Guitar from '../../../lib/models/Guitars';
+import Wood from '../../../lib/models/Woods';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -9,7 +10,23 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const guitars = await Guitar.find({});
+        const guitars = await Guitar.find({})
+          .populate({
+            path: 'tapa',
+            model: Wood,
+          })
+          .populate({
+            path: 'aro',
+            model: Wood,
+          })
+          .populate({
+            path: 'fondo',
+            model: Wood,
+          })
+          .populate({
+            path: 'diapason',
+            model: Wood,
+          });
         res.status(200).json({ success: true, data: guitars });
       } catch (error) {
         res.status(418).json({ success: false });
@@ -18,14 +35,27 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        const { name, description, price, image, style, component } = req.body;
+        const {
+          name,
+          description,
+          price,
+          image,
+          style,
+          tapa,
+          aro,
+          fondo,
+          diapason,
+        } = req.body;
         const guitar = await Guitar.create({
           name,
           description,
           price,
           image,
           style,
-          component,
+          tapa,
+          aro,
+          fondo,
+          diapason,
         });
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {

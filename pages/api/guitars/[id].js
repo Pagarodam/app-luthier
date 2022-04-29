@@ -16,21 +16,52 @@ export default async function handler(req, res) {
         if (!guitar) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: guitar });
+        res
+          .status(200)
+          .json({ success: true, data: guitar })
+          .populate({
+            path: 'tapa',
+            model: Wood,
+          })
+          .populate({
+            path: 'aro',
+            model: Wood,
+          })
+          .populate({
+            path: 'fondo',
+            model: Wood,
+          })
+          .populate({
+            path: 'diapason',
+            model: Wood,
+          });
       } catch (error) {
         res.status(400).json({ success: false });
       }
       break;
     case 'PUT':
       try {
-        const { name, description, price, image, style, component } = req.body;
+        const {
+          name,
+          description,
+          price,
+          image,
+          style,
+          tapa,
+          aro,
+          fondo,
+          diapason,
+        } = req.body;
         const guitar = await Guitar.findByIdAndUpdate(id, {
           name,
           description,
           price,
           image,
           style,
-          component,
+          tapa,
+          aro,
+          fondo,
+          diapason,
         });
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {
