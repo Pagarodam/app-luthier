@@ -1,4 +1,3 @@
-import Button from '../../components/Button';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 
@@ -6,7 +5,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
-  signOut,
   getAuth,
   FacebookAuthProvider,
   onAuthStateChanged,

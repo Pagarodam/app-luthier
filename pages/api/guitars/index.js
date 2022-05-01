@@ -35,23 +35,13 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        const {
-          name,
-          description,
-          price,
-          image,
-          style,
-          tapa,
-          aro,
-          fondo,
-          diapason,
-        } = req.body;
+        const { name, description, price, image, tapa, aro, fondo, diapason } =
+          req.body;
         const guitar = await Guitar.create({
           name,
           description,
           price,
           image,
-          style,
           tapa,
           aro,
           fondo,
