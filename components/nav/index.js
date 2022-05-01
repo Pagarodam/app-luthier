@@ -4,7 +4,7 @@ import { useAuth } from '../store/Auth';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
-  const { user } = useAuth();
+  const { userAuth } = useAuth();
   const { logOut } = useAuth();
 
   return (
@@ -66,10 +66,10 @@ const Navbar = () => {
               Contact Us
             </a>
           </Link>
-          {user ? (
+          {userAuth ? (
             <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn m-1">
-                {user.email}
+                {userAuth.email}
               </label>
               <ul
                 tabIndex="0"

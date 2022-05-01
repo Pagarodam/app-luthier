@@ -1,4 +1,3 @@
-import Button from '../../components/Button';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
 
@@ -6,7 +5,6 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
-  signOut,
   getAuth,
   FacebookAuthProvider,
   onAuthStateChanged,
@@ -14,7 +12,6 @@ import {
 import { authentication } from '../../components/firebase/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import styles from '../../styles/Home.module.css';
 
 //Google Login
 export function LoginGoogle() {
@@ -62,6 +59,7 @@ export function LoginMail() {
         loginEmail,
         loginPassword,
       );
+      console.log(user);
       push('/about');
     } catch (error) {
       console.log(error.message);
