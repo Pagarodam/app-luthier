@@ -5,7 +5,6 @@ import styles from '../../styles/Home.module.css';
 
 export default function Gallery() {
   const [woods, setWoods] = useState([]);
-  const [fetching, setFetching] = useState(false);
   const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
@@ -15,7 +14,6 @@ export default function Gallery() {
         .then((woods) => setWoods(woods))
         .finally(() => setRefetch(false));
     }
-
   }, [refetch]);
 
   const handleWoodAdded = () => {
@@ -25,12 +23,12 @@ export default function Gallery() {
 
   const handleWoodDeleted = (woodId) => {
     setWoods([...woods.filter((wood) => wood.id !== woodId)]);
-  }
+  };
 
   return (
     <div className={styles.container}>
       <div>
-        <WoodForm onWoodAdded={handleWoodAdded}/>
+        <WoodForm onWoodAdded={handleWoodAdded} />
         <WoodsList woods={woods} onWoodDeleted={handleWoodDeleted} />
       </div>
     </div>
