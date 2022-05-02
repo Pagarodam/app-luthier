@@ -13,11 +13,10 @@ export default function WoodForm({onWoodAdded}) {
     style: ''
   });
   const fileInput = useRef(null);
-  // console.log('fileInput', fileInput);
   const onSubmit = async () => {
     setFetching(true);
 
-    fetch("http://localhost:3001/woods", {
+    fetch("/api/woods", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +27,6 @@ export default function WoodForm({onWoodAdded}) {
         quality: capilalize.words(wood.quality),
         style: capilalize.words(wood.style),
         price: Number(wood.price),
-        image: "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
         component: wood.component,
       })
     }).then(
@@ -68,7 +66,15 @@ export default function WoodForm({onWoodAdded}) {
   };
 
   const woodImageChangeHandler = (event) => {
-    setWood({ ...wood, image: event.target.files[0] });
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setWood({ ...wood, image: reader.result });
+      };
+    }
   };
 
   const componentChangeHandler = (event) => {

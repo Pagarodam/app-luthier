@@ -9,8 +9,8 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const guitars = await Wood.find({});
-        res.status(200).json({ success: true, data: guitars });
+        const woods = await Wood.find({});
+        res.status(200).json({ success: true, data: woods });
       } catch (error) {
         res.status(418).json({ success: false });
       }
@@ -18,8 +18,9 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
+        console.log('req.body', req.body);
         const { nameWood, quality, price, image, style, component } = req.body;
-        const guitar = await Wood.create({
+        const wood = await Wood.create({
           nameWood,
           quality,
           price,
@@ -27,8 +28,9 @@ export default async function handler(req, res) {
           style,
           component,
         });
-        res.status(200).json({ success: true, data: guitar });
+        res.status(200).json({ success: true, data: wood });
       } catch (error) {
+        console.log('error', error);
         res.status(418).json({ success: false });
       }
       break;

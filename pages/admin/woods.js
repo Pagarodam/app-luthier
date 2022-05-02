@@ -11,9 +11,9 @@ const Woods = () => {
 
   useEffect(() => {
     if (refetch) {
-      fetch('http://localhost:3001/woods')
+      fetch('http://localhost:3000/api/woods')
         .then((res) => res.json())
-        .then((woods) => setWoods(woods))
+        .then((res) => setWoods(res.data))
         .finally(() => setRefetch(false));
     }
   }, [refetch]);
@@ -23,7 +23,7 @@ const Woods = () => {
   };
 
   const deleteWood = async (id) => {
-    await fetch(`http://localhost:3001/woods/${id}`, {
+    await fetch(`http://localhost:3000/api/woods/${id}`, {
       method: 'DELETE',
     }).catch(() => {
       setMessage(

@@ -5,6 +5,7 @@ function Guitars(props) {
   return (
     <>
       <GuitarForm />
+
       <div className="flex flex-wrap">
         {props.guitars.data.map((guitar) => (
           <GuitarCard
