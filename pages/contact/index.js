@@ -1,10 +1,10 @@
-import styles from '../../styles/Home.module.css';
+import styles from 'styles/Home.module.css';
 
 export default function About() {
   return (
     <div className={styles.container}>
-      <div className='contact_form'>
-        <div className='formulario'>
+      <div className="contact_form">
+        <div className="formulario">
           <h1>Formulario de contacto</h1>
           <h3>Escríbenos y en breve nos pondremos en contacto contigo</h3>
 
@@ -14,11 +14,11 @@ export default function About() {
                 Nombre
                 <span>*</span>
                 <input
-                  type='text'
-                  name='name'
-                  id='nombre'
-                  required='obligatorio'
-                  placeholder='Escribe tu nombre'
+                  type="text"
+                  name="name"
+                  id="nombre"
+                  required="obligatorio"
+                  placeholder="Escribe tu nombre"
                 />
               </label>
             </p>
@@ -28,11 +28,11 @@ export default function About() {
                 Email
                 <span>*</span>
                 <input
-                  type='email'
-                  name='email'
-                  id='email'
-                  required='obligatorio'
-                  placeholder='Escribe tu Email'
+                  type="email"
+                  name="email"
+                  id="email"
+                  required="obligatorio"
+                  placeholder="Escribe tu Email"
                 />
               </label>
             </p>
@@ -41,10 +41,10 @@ export default function About() {
               <label>
                 Teléfono
                 <input
-                  type='tel'
-                  name='telefono'
-                  id='telefono'
-                  placeholder='Escribe tu teléfono'
+                  type="tel"
+                  name="telefono"
+                  id="telefono"
+                  placeholder="Escribe tu teléfono"
                 />
               </label>
             </p>
@@ -54,11 +54,11 @@ export default function About() {
                 Asunto
                 <span>*</span>
                 <input
-                  type='text'
-                  name='asunto'
-                  id='assunto'
-                  required='obligatorio'
-                  placeholder='Escribe un asunto'
+                  type="text"
+                  name="asunto"
+                  id="assunto"
+                  required="obligatorio"
+                  placeholder="Escribe un asunto"
                 />
               </label>
             </p>
@@ -68,15 +68,15 @@ export default function About() {
                 Mensaje
                 <span>*</span>
                 <textarea
-                  name='mensaje'
-                  id='mensaje'
-                  required='obligatorio'
-                  placeholder='Deja aquí tu comentario...'
+                  name="mensaje"
+                  id="mensaje"
+                  required="obligatorio"
+                  placeholder="Deja aquí tu comentario..."
                 ></textarea>
               </label>
             </p>
 
-            <button type='submit' name='enviar' id='enviar'>
+            <button type="submit" name="enviar" id="enviar">
               <p>Enviar</p>
             </button>
 

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export const GuitarCard = ({ id, name, details, price, image }) => {
+export const GuitarCard = ({ name, details, price, image }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
       <figure>

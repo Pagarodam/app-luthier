@@ -1,20 +1,15 @@
-import {
-  LoginFacebook,
-  LoginGoogle,
-  LoginMail,
-  Logout,
-} from '../../components/login';
-import styles from '../../styles/Home.module.css';
+import { signIn } from 'next-auth/react';
 
-export default function Login({ providers }) {
+export default function Login({ providers, session }) {
   return (
     <>
-      <LoginMail />
+      <button onClick={() => signIn('google')}>google</button>
+      {/* <LoginMail />
       <div className="flex flex-col justify-center items-center content-center justify-items-center m-20 w-200">
         <h3 className="text-center mb-10">También puedes loguearte con:</h3>
         <LoginGoogle />
         <LoginFacebook />
-      </div>
+      </div> */}
     </>
   );
 }

@@ -1,11 +1,10 @@
-import { GuitarCard } from '../../components/guitars/GuitarCard';
-import { GuitarForm } from '../../components/guitars/GuitarForm';
+import { GuitarCard } from 'components/guitars/GuitarCard';
+import { GuitarForm } from 'components/guitars/GuitarForm';
 
 function Guitars(props) {
   return (
     <>
-      <GuitarForm />
-
+      {/* <GuitarForm />
       <div className="flex flex-wrap">
         {props.guitars.data.map((guitar) => (
           <GuitarCard
@@ -17,16 +16,17 @@ function Guitars(props) {
             image={guitar.image}
           />
         ))}
-      </div>
+      </div> */}
+      <p>guitars</p>
     </>
   );
 }
 
-export async function getStaticProps() {
-  const response = await fetch('http://localhost:3000/api/guitars');
-  const guitars = await response.json();
+// export async function getStaticProps() {
+//   const response = await fetch('http://localhost:3000/api/guitars');
+//   const guitars = await response.json();
 
-  return { props: { guitars }, revalidate: 3600 };
-}
+//   return { props: { guitars }, revalidate: 3600 };
+// }
 
 export default Guitars;
