@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import capilalize from 'capitalize';
-import Image from 'next/image';
 
 export const GuitarForm = () => {
   const initialValues = {
