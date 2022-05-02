@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/dbConnect';
-import Wood from '../../../lib/models/Woods';
+import dbConnect from 'lib/dbConnect';
+import Wood from 'lib/models/Woods';
 
 export default async function handler(req, res) {
   const {

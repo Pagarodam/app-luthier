@@ -3,24 +3,23 @@ import capilalize from 'capitalize';
 import Input from '../UI/Input';
 import Modal from '../UI/Modal';
 
-export default function WoodForm({onWoodAdded}) {
+export default function WoodForm({ onWoodAdded }) {
   const [fetching, setFetching] = useState(false);
   const [wood, setWood] = useState({
     nameWood: '',
     quality: '',
     price: '',
     component: '',
-    style: ''
+    style: '',
   });
   const fileInput = useRef(null);
-  console.log('fileInput', fileInput);
   const onSubmit = async () => {
     setFetching(true);
 
-    fetch("http://localhost:3001/woods", {
-      method: "POST",
+    fetch('http://localhost:3001/woods', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...wood,
@@ -28,27 +27,36 @@ export default function WoodForm({onWoodAdded}) {
         quality: capilalize.words(wood.quality),
         style: capilalize.words(wood.style),
         price: Number(wood.price),
-        image: "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
+        image:
+          'http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg',
         component: wood.component,
-      })
-    }).then(
-      res => {
-        console.log('res', res);
-        fileInput.current.value = "";
-        setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
+      }),
+    })
+      .then((res) => {
+        fileInput.current.value = '';
+        setWood({
+          nameWood: '',
+          quality: '',
+          price: '',
+          image: '',
+          component: '',
+        });
         setFetching(false);
-        setMessage("Añadida correctamente");
+        setMessage('Añadida correctamente');
         onWoodAdded();
-      }
-    ).catch(
-      err => setMessage("Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)", err)
-    )
+      })
+      .catch((err) =>
+        setMessage(
+          'Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)',
+          err,
+        ),
+      );
   };
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
-  const closeMessageHandler = ()=>{
-    setMessage("");
+  const closeMessageHandler = () => {
+    setMessage('');
   };
 
   const woodNameChangeHandler = (event) => {
@@ -77,8 +85,8 @@ export default function WoodForm({onWoodAdded}) {
 
   return (
     <>
-    {message && (
-        <Modal onClose={closeMessageHandler} >
+      {message && (
+        <Modal onClose={closeMessageHandler}>
           <div>{message}</div>
           <button className="btn btn-primary" onClick={closeMessageHandler}>
             Cerrar

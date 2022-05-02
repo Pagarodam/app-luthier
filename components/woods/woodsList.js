@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../UI/ImageCard';
-import { firestore } from '../firebase/client';
 import Modal from '../UI/Modal';
 
-const WoodsList = ({woods, onWoodDeleted}) => {
+const WoodsList = ({ woods, onWoodDeleted }) => {
   const deleteWood = async (id, e) => {
     e.stopPropagation();
 
     await fetch(`http://localhost:3001/woods/${id}`, {
       method: 'DELETE',
-    }).catch( () => {
+    }).catch(() => {
       setMessage(
         'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)',
       );

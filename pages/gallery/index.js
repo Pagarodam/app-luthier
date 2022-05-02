@@ -1,4 +1,4 @@
-import Images from '../../components/gallery';
+import Images from 'components/gallery';
 
 export default function Gallery() {
   return (

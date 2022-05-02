@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import WoodForm from '../../components/woods/woodForm';
-import WoodsList from '../../components/woods/woodsList';
-import styles from '../../styles/Home.module.css';
+import WoodForm from 'components/woods/woodForm';
+import WoodsList from 'components/woods/woodsList';
+import styles from 'styles/Home.module.css';
 
 export default function Gallery() {
   const [woods, setWoods] = useState([]);
@@ -9,7 +9,7 @@ export default function Gallery() {
 
   useEffect(() => {
     if (refetch) {
-      fetch('http://localhost:3001/woods')
+      fetch('http://localhost:3000/woods')
         .then((res) => res.json())
         .then((woods) => setWoods(woods))
         .finally(() => setRefetch(false));

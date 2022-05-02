@@ -4,7 +4,7 @@ import EmailProvider from 'next-auth/providers/email';
 import FacebookProvider from 'next-auth/providers/facebook';
 
 export default NextAuth({
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     jwt: true,
   },
@@ -18,12 +18,5 @@ export default NextAuth({
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
-    EmailProvider({
-      server: process.env.MAIL_SERVER,
-      from: '<no-reply@example.com>',
-    }),
   ],
-  pages: {
-    signin: '/login',
-  },
 });

@@ -1,15 +1,5 @@
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebookF } from 'react-icons/fa';
-
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  getAuth,
-  FacebookAuthProvider,
-  onAuthStateChanged,
-} from 'firebase/auth';
-import { authentication } from '../../components/firebase/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 

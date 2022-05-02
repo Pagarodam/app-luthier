@@ -1,4 +1,3 @@
-import autoprefixer from 'autoprefixer';
 import Image from 'next/image';
 
 export default function Images() {
