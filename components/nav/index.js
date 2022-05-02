@@ -50,6 +50,11 @@ const Navbar = () => {
               Guitarras
             </a>
           </Link>
+          <Link href="/shop/guitars-configurator">
+            <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+              Compra
+            </a>
+          </Link>
           <Link href="/gallery">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
               Galeria

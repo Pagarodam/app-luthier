@@ -13,7 +13,7 @@ export default function WoodForm({onWoodAdded}) {
     style: ''
   });
   const fileInput = useRef(null);
-  console.log('fileInput', fileInput);
+  // console.log('fileInput', fileInput);
   const onSubmit = async () => {
     setFetching(true);
 
