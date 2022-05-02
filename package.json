@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently -n Server,Client \"npm:dev:server\" \"npm:dev:client\"",
-    "dev:server": "json-server --watch db.json --port 3001",
+    "dev:server": "echo 'miau'",
     "dev:client": "NODE_ENV=development next dev",
     "build": "next build",
     "start": "next start",

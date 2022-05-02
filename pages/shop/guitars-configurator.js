@@ -7,9 +7,9 @@ export default function GuitarsConfigurator() {
   const [woods, setWoods] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/woods')
-      .then((res) => res.json())
-      .then((woods) => setWoods(woods));
+    fetch('http://localhost:3000/api/woods')
+    .then((res) => res.json())
+    .then((res) => setWoods(res.data))
   }, []);
 
   const onAddWood = () => {

@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     case 'PUT':
       try {
         const { nameWood, quality, price, image, style, component } = req.body;
-        const guitar = await Wood.findByIdAndUpdate(id, {
+        const wood = await Wood.findByIdAndUpdate(id, {
           nameWood,
           quality,
           price,
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
           style,
           component,
         });
-        res.status(200).json({ success: true, data: guitar });
+        res.status(200).json({ success: true, data: wood });
       } catch (error) {
         res.status(418).json({ message: "Yes I'm a teapot" });
       }
