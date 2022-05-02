@@ -1,40 +1,11 @@
-import { useEffect, useState } from 'react';
 import { Card } from '../UI/ImageCard';
-import { firestore } from '../firebase/client';
-import Modal from '../UI/Modal';
 
-const WoodsList = ({woods, onWoodDeleted}) => {
-  const deleteWood = async (id, e) => {
-    e.stopPropagation();
-
-    await fetch(`http://localhost:3001/woods/${id}`, {
-      method: 'DELETE',
-    }).catch( () => {
-      setMessage(
-        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)',
-      );
-    });
-
-    setMessage('Borrado correctamente');
-    onWoodDeleted(id);
-  };
-
-  const [message, setMessage] = useState('');
-
-  const closeMessageHandler = () => {
-    setMessage('');
-  };
-
+const WoodsList = ({ woods, onWoodDeleted, component, ...props }) => {
   return (
     <>
-      {message && (
-        <Modal onClose={closeMessageHandler}>
-          <div>{message}</div>
-          <button className="btn btn-primary" onClick={closeMessageHandler}>
-            Cerrar
-          </button>
-        </Modal>
-      )}
+      <h1 className="text-2xl rounded-l-lg mt-24 p-8 bg-blue-700 text-center font-bold leading-7 text-white-900  sm:text-3xl sm:truncate">
+        {component}
+      </h1>
       <div className="flex flex-wrap justify-around">
         {woods.map((wood) => (
           <Card
@@ -46,9 +17,9 @@ const WoodsList = ({woods, onWoodDeleted}) => {
             image={wood.image}
             component={wood.component}
             style={wood.style}
-            buttonLabel="Borrar"
-            buttonColor="primary"
-            onClick={(e) => deleteWood(wood.id, e)}
+            buttonLabel={props.label}
+            buttonColor={props.buttonColor}
+            onButtonClick={onWoodDeleted}
           />
         ))}
       </div>

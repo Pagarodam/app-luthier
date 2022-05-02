@@ -5,7 +5,7 @@
       "nameWood": "Bubinga",
       "quality": "Especial",
       "price": 12,
-      "component": "Aro",
+      "component": "aro",
       "style": "Custom",
       "image": "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg"
     },
@@ -14,7 +14,7 @@
       "nameWood": "Ebano Africa",
       "quality": "Tercera",
       "price": 50,
-      "component": "Aro",
+      "component": "aro",
       "style": "Clasica",
       "image": "http://localhost:3000/assets/Maderas/Aros/aro-ebano-africa-2ª-800x110x35-50€-mmx2.jpg"
     },
@@ -23,7 +23,7 @@
       "nameWood": "Nogal Americano",
       "quality": "Primera",
       "price": 17.2,
-      "component": "Aro",
+      "component": "aro",
       "style": "Clasica",
       "image": "http://localhost:3000/assets/Maderas/Aros/aros-nogal-americano-guitarra-clasica-17,20€.jpg"
     },
@@ -32,7 +32,7 @@
       "nameWood": "Palo Rojo Bariole",
       "quality": "Primera",
       "price": 25,
-      "component": "Aro",
+      "component": "aro",
       "style": "Custom",
       "image": "http://localhost:3000/assets/Maderas/Aros/hoja-suelta-de-aro-palo-rojo-bariole-guitarra-custom-25€.jpg"
     },
@@ -41,7 +41,7 @@
       "nameWood": "Palosanto India",
       "quality": "primera",
       "price": 21,
-      "component": "Aro",
+      "component": "aro",
       "style": "Clasica",
       "image": "http://localhost:3000/assets/Maderas/Aros/palosanto india 2ª clasica 21€.jpg"
     },
@@ -50,7 +50,7 @@
       "nameWood": "Samanguila",
       "quality": "tercera",
       "price": 6,
-      "component": "Aro",
+      "component": "aro",
       "style": "Clasica",
       "image": "http://localhost:3000/assets/Maderas/Aros/samanguila 3ª clasica 6€.jpg"
     },
@@ -104,7 +104,7 @@
       "nameWood": "Cedro Rojo",
       "quality": "especial",
       "price": 63,
-      "component": "tapas",
+      "component": "tapa",
       "style": "clasica",
       "image": "http://localhost:3000/assets/Maderas/Tapas/tapas-cedro-rojo-especial-63€.jpg"
     },
@@ -127,15 +127,6 @@
       "id": 14
     },
     {
-      "nameWood": "Fweqf",
-      "quality": "Primera",
-      "price": 232,
-      "component": "aro",
-      "style": "Flamenco",
-      "image": "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
-      "id": 15
-    },
-    {
       "nameWood": "Bubinga",
       "quality": "Primera",
       "price": 1234,
@@ -145,15 +136,6 @@
       "id": 16
     },
     {
-      "nameWood": "Mala",
-      "quality": "Primera",
-      "price": 2,
-      "component": "aro",
-      "style": "Clasico",
-      "image": "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
-      "id": 17
-    },
-    {
       "nameWood": "Test100021dsf",
       "quality": "Especial",
       "price": 444,
@@ -161,6 +143,15 @@
       "style": "Custom",
       "image": "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
       "id": 18
+    },
+    {
+      "nameWood": "Cocobolo",
+      "quality": "Primera",
+      "price": 21.85,
+      "component": "diapason",
+      "style": "Custom",
+      "image": "http://localhost:3000/assets/Maderas/Aros/aro-bubinga-fsc-100-guitarra-custom-12€.jpg",
+      "id": 19
     }
   ],
   "guitars": []

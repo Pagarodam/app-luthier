@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+
+import GuitarComponentsList from '../../components/guitars/GuitarComponentsList';
+import Modal from '../../components/UI/Modal';
 import WoodForm from '../../components/woods/woodForm';
-import WoodsList from '../../components/woods/woodsList';
 import styles from '../../styles/Home.module.css';
 
-export default function Gallery() {
+const Woods = () => {
   const [woods, setWoods] = useState([]);
-  const [fetching, setFetching] = useState(false);
   const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
@@ -15,24 +16,52 @@ export default function Gallery() {
         .then((woods) => setWoods(woods))
         .finally(() => setRefetch(false));
     }
-
   }, [refetch]);
 
   const handleWoodAdded = () => {
-    // setWoods([...woods, newWood]);
     setRefetch(true);
   };
 
-  const handleWoodDeleted = (woodId) => {
-    setWoods([...woods.filter((wood) => wood.id !== woodId)]);
-  }
+  const deleteWood = async (id) => {
+    await fetch(`http://localhost:3001/woods/${id}`, {
+      method: 'DELETE',
+    }).catch(() => {
+      setMessage(
+        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)',
+      );
+    });
+
+    setWoods(woods.filter((wood) => wood.id !== id));
+    setMessage('Borrado correctamente');
+  };
+
+  const [message, setMessage] = useState('');
+
+  const closeMessageHandler = () => {
+    setMessage('');
+  };
 
   return (
-    <div className={styles.container}>
-      <div>
-        <WoodForm onWoodAdded={handleWoodAdded}/>
-        <WoodsList woods={woods} onWoodDeleted={handleWoodDeleted} />
+    <>
+      {message && (
+        <Modal onClose={closeMessageHandler}>
+          <div>{message}</div>
+          <button className="btn btn-primary" onClick={closeMessageHandler}>
+            Cerrar
+          </button>
+        </Modal>
+      )}
+      <div className={styles.container}>
+        <WoodForm onWoodAdded={handleWoodAdded} />
+        <GuitarComponentsList
+          woods={woods}
+          label={'Borrar'}
+          onWoodDeleted={deleteWood}
+          buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+        />
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default Woods;

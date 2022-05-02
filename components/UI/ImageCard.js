@@ -1,5 +1,9 @@
 import Image from 'next/image';
 
+const BUTTON_TYPE = Object.freeze({
+  'BORRAR': 'Borrar'
+});
+
 export const Card = ({
   id,
   name,
@@ -8,10 +12,11 @@ export const Card = ({
   image,
   component,
   style,
-  onClick,
   buttonLabel,
   buttonColor,
+  ...props
 }) => {
+  const color = buttonLabel === BUTTON_TYPE.BORRAR ? 'red' : 'green';
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5 w-1/4 items-center">
       <figure>
@@ -30,7 +35,10 @@ export const Card = ({
         <p>Precio: {price} €</p>
         <p>Componente: {component} </p>
         <div className="card-actions justify-end">
-          <button onClick={onClick} className={`btn btn-${buttonColor}`}>
+          <button
+            onClick={() => props.onButtonClick(id)}
+            className={buttonColor} 
+          >
             {buttonLabel}
           </button>
         </div>
