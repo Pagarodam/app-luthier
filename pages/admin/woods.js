@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import WoodForm from 'components/woods/woodForm';
 import Modal from 'components/UI/Modal';
 import styles from 'styles/Home.module.css';
-import GuitarComponentsList from 'components/woods/guitarComponentsList';
+import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 const Woods = () => {
   const [woods, setWoods] = useState([]);
   const [refetch, setRefetch] = useState(true);
