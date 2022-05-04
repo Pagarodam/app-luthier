@@ -18,11 +18,11 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        const { email, rol, avatar } = req.body;
+        const { email, role, image } = req.body;
         const user = await User.create({
           email,
-          rol,
-          avatar,
+          role,
+          image,
         });
         res.status(200).json(user);
       } catch (error) {
