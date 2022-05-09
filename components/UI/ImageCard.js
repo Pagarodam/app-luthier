@@ -42,6 +42,20 @@ export const Card = ({
             {buttonLabel}
           </button>
         </div>
+        
+        
+        
+        <div className="card-actions justify-end">
+          <button
+            onClick={() => props.onEditWood(id)}
+            className={`bg-yellow-700 hover:bg-yellow-900 text-white font-bold py-2 px-4 rounded`} 
+          >
+            {"Edit"}
+          </button>
+        </div>
+
+
+
       </div>
     </div>
   );

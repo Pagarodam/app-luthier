@@ -19,6 +19,7 @@ const WoodsList = ({ woods, onWoodDeleted, component, ...props }) => {
             style={wood.style}
             buttonLabel={props.label}
             buttonColor={props.buttonColor}
+            onEditWood={props.onEditWood}
             onButtonClick={onWoodDeleted}
           />
         ))}

@@ -5,7 +5,9 @@ import styles from 'styles/Home.module.css';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 const Woods = () => {
   const [woods, setWoods] = useState([]);
+  const [woodToEdit, setWoodToEdit] = useState({});
   const [refetch, setRefetch] = useState(true);
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     if (refetch) {
@@ -33,6 +35,13 @@ const Woods = () => {
     setMessage('Borrado correctamente');
   };
 
+  const selectWood = async (id) => {
+    setWoods(woods.filter((wood) => wood.id === id));
+    setWoodToEdit(woods.find((wood) => wood.id === id));
+    setEdit(true);
+    setMessage('Menu editar');
+  };
+
   const [message, setMessage] = useState('');
 
   const closeMessageHandler = () => {
@@ -50,10 +59,20 @@ const Woods = () => {
         </Modal>
       )}
       <div className={styles.container}>
-        <WoodForm onWoodAdded={handleWoodAdded} />
+        <WoodForm
+          edit={edit}
+          onEdit={() => {
+            setEdit(false);
+            setWoodToEdit({});
+            handleWoodAdded();
+          }}
+          woodToEdit={woodToEdit}
+          onWoodAdded={handleWoodAdded}
+        />
         <GuitarComponentsList
           woods={woods}
           label={'Borrar'}
+          onEditWood={selectWood}
           onWoodDeleted={deleteWood}
           buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
         />
