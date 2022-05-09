@@ -17,6 +17,7 @@ const GuitarComponentsList = (props) => {
           component={'Tapas'}
           label={props.label}
           onWoodDeleted={props.onWoodDeleted}
+          onEditWood={props.onEditWood}
           buttonColor={props.buttonColor}
         />
       )}
@@ -26,6 +27,7 @@ const GuitarComponentsList = (props) => {
           component={'Aros'}
           label={props.label}
           onWoodDeleted={props.onWoodDeleted}
+          onEditWood={props.onEditWood}
           buttonColor={props.buttonColor}
         />
       )}
@@ -35,6 +37,7 @@ const GuitarComponentsList = (props) => {
           component={'Fondo'}
           label={props.label}
           onWoodDeleted={props.onWoodDeleted}
+          onEditWood={props.onEditWood}
           buttonColor={props.buttonColor}
         />
       )}
@@ -44,6 +47,7 @@ const GuitarComponentsList = (props) => {
           component={'Diapason'}
           label={props.label}
           onWoodDeleted={props.onWoodDeleted}
+          onEditWood={props.onEditWood}
           buttonColor={props.buttonColor}
         />
       )}

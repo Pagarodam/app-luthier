@@ -1,25 +1,38 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import capilalize from 'capitalize';
 import Input from '../UI/Input';
 import Modal from '../UI/Modal';
 
-export default function WoodForm({onWoodAdded}) {
+const EMPTY_WOOD = {
+  nameWood: '',
+  quality: '',
+  price: '',
+  component: '',
+  style: '',
+  image: '',
+};
+
+export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
   const [fetching, setFetching] = useState(false);
-  const [wood, setWood] = useState({
-    nameWood: '',
-    quality: '',
-    price: '',
-    component: '',
-    style: ''
-  });
+  const [wood, setWood] = useState({ ...EMPTY_WOOD });
+
+  useEffect(() => {
+    setWood({
+      ...EMPTY_WOOD,
+      ...woodToEdit,
+    });
+  }, [woodToEdit]);
+
+  console.log(woodToEdit);
+
   const fileInput = useRef(null);
   const onSubmit = async () => {
     setFetching(true);
 
-    fetch("/api/woods", {
-      method: "POST",
+    fetch(`/api/woods${props.edit ? '/' + wood.id : ''}`, {
+      method: props.edit ? 'PUT' : 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         ...wood,
@@ -28,25 +41,29 @@ export default function WoodForm({onWoodAdded}) {
         style: capilalize.words(wood.style),
         price: Number(wood.price),
         component: wood.component,
-      })
-    }).then(
-      res => {
+      }),
+    })
+      .then((res) => {
         console.log('res', res);
-        fileInput.current.value = "";
-        setWood({ nameWood: '', quality: '', price: '', image: '', component: '' });
+        props.onEdit();
+        fileInput.current.value = '';
+        setWood({ ...EMPTY_WOOD });
         setFetching(false);
-        setMessage("Añadida correctamente");
+        setMessage('Añadida correctamente');
         onWoodAdded();
-      }
-    ).catch(
-      err => setMessage("Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)", err)
-    )
+      })
+      .catch((err) =>
+        setMessage(
+          'Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)',
+          err,
+        ),
+      );
   };
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
-  const closeMessageHandler = ()=>{
-    setMessage("");
+  const closeMessageHandler = () => {
+    setMessage('');
   };
 
   const woodNameChangeHandler = (event) => {
@@ -67,6 +84,7 @@ export default function WoodForm({onWoodAdded}) {
 
   const woodImageChangeHandler = (event) => {
     const file = event.target.files[0];
+    console.log('woodImageChangeHandler' + file);
     const reader = new FileReader();
 
     if (file) {
@@ -83,8 +101,8 @@ export default function WoodForm({onWoodAdded}) {
 
   return (
     <>
-    {message && (
-        <Modal onClose={closeMessageHandler} >
+      {message && (
+        <Modal onClose={closeMessageHandler}>
           <div>{message}</div>
           <button className="btn btn-primary" onClick={closeMessageHandler}>
             Cerrar
@@ -114,7 +132,9 @@ export default function WoodForm({onWoodAdded}) {
               value="especial"
               onChange={woodQualityChangeHandler}
               className="radio mr-2"
-              checked={wood.quality === 'especial' ? true : false}
+              checked={
+                wood.quality.toLocaleLowerCase() === 'especial' ? true : false
+              }
             />
             <label htmlFor="especial" className="mr-2">
               Especial
@@ -125,7 +145,9 @@ export default function WoodForm({onWoodAdded}) {
               value="primera"
               onChange={woodQualityChangeHandler}
               className="radio mr-2"
-              checked={wood.quality === 'primera' ? true : false}
+              checked={
+                wood.quality.toLocaleLowerCase() === 'primera' ? true : false
+              }
             />
             <label htmlFor="primera" className="mr-2">
               Primera
@@ -136,7 +158,9 @@ export default function WoodForm({onWoodAdded}) {
               value="tercera"
               onChange={woodQualityChangeHandler}
               className="radio mr-2"
-              checked={wood.quality === 'tercera' ? true : false}
+              checked={
+                wood.quality.toLocaleLowerCase() === 'tercera' ? true : false
+              }
             />
             <label htmlFor="tercera">Tercera</label>
           </div>
@@ -196,7 +220,9 @@ export default function WoodForm({onWoodAdded}) {
               value="flamenco"
               onChange={woodStyleChangeHandler}
               className="radio mr-2"
-              checked={wood.style === 'flamenco' ? true : false}
+              checked={
+                wood.style.toLocaleLowerCase() === 'flamenco' ? true : false
+              }
             />
             <label htmlFor="flamenco" className="mr-2">
               Flamenco
@@ -208,7 +234,9 @@ export default function WoodForm({onWoodAdded}) {
               value="clasico"
               onChange={woodStyleChangeHandler}
               className="radio mr-2"
-              checked={wood.style === 'clasico' ? true : false}
+              checked={
+                wood.style.toLocaleLowerCase() === 'clasico' ? true : false
+              }
             />
             <label htmlFor="clasico" className="mr-2">
               Clasico
@@ -220,7 +248,9 @@ export default function WoodForm({onWoodAdded}) {
               value="custom"
               onChange={woodStyleChangeHandler}
               className="radio mr-2"
-              checked={wood.style === 'custom' ? true : false}
+              checked={
+                wood.style.toLocaleLowerCase() === 'custom' ? true : false
+              }
             />
             <label htmlFor="custom">Custom</label>
           </div>
@@ -245,9 +275,28 @@ export default function WoodForm({onWoodAdded}) {
               ref={fileInput}
             />
           </div>
-          <button onClick={onSubmit} disabled={fetching} className="btn">
-            {fetching ? 'Procesando' : 'Enviar'}
-          </button>
+          {props.edit ? (
+            <>
+              <button
+                onClick={onSubmit}
+                disabled={fetching}
+                className="btn btn-primary"
+              >
+                {'Editar'}
+              </button>
+              <button onClick={props.onEdit} className="btn btn-secondary">
+                {'Cancelar'}
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={onSubmit}
+              disabled={fetching}
+              className="btn btn-primary"
+            >
+              {fetching ? 'Procesando' : 'Enviar'}
+            </button>
+          )}
         </div>
       </div>
       <div className="divider"></div>
