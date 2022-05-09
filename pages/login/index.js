@@ -1,20 +1,32 @@
-import {
-  LoginFacebook,
-  LoginGoogle,
-  LoginMail,
-  Logout,
-} from '../../components/login';
-import styles from '../../styles/Home.module.css';
+import { useSession, getSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
-export default function Login({ providers }) {
+export default function Login() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (typeof window === 'undefined') return null;
+  if (session) {
+    router.push('/');
+    return null;
+  }
+
   return (
     <>
-      <LoginMail />
-      <div className="flex flex-col justify-center items-center content-center justify-items-center m-20 w-200">
-        <h3 className="text-center mb-10">También puedes loguearte con:</h3>
-        <LoginGoogle />
-        <LoginFacebook />
-      </div>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={() => signIn('google')}
+      >
+        Login
+      </button>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
 }

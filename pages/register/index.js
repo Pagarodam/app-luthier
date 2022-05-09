@@ -1,75 +1,59 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { AuthErrorCodes, createUserWithEmailAndPassword } from 'firebase/auth';
-import { authentication } from '../../components/firebase/client';
-import { useRouter } from 'next/router';
-import styles from '../../styles/Home.module.css';
-
 export default function Register() {
-  const [Credentials, setCredentials] = useState({
-    email: '',
-    password: '',
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const { push } = useRouter();
+    console.log(e.target.password.value);
+  };
 
-  const changeUser = (e) => {
-    setCredentials({
-      ...Credentials,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const registerUser = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        authentication,
-        Credentials.email,
-        Credentials.password
-      );
-      push('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
-    <>
-      <div className={styles.container}>
-        <div className='form-signin'>
-          <h1 className='text-center text-login'>Registra tu cuenta</h1>
-          <div className='center'>
-            <input
-              name='email'
-              type='text'
-              className='input-form'
-              placeholder='Correo'
-              onChange={changeUser}
-            />
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <form
+          className="mt-8 space-y-6"
+          noValidate
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="email-address" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="email-address"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Email"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+              />
+            </div>
           </div>
-          <div className='center'>
-            <input
-              name='password'
-              type='password'
-              className='input-form'
-              placeholder='Contraseña'
-              onChange={changeUser}
-            />
-          </div>
-          <br />
-          <div className='center'>
+
+          <div>
             <button
-              className='button-signup fondo-color-signup'
-              onClick={registerUser}
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Registrarse
+              Registro
             </button>
           </div>
-          <p className='text-center'>O también</p>
-          <br />
-          <p className='text-center'>
-            ¿Ya tienes cuenta? <Link href='/login'>Inicia sesión</Link>
-          </p>
-        </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 }

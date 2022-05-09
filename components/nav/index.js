@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '../store/Auth';
+import { useSession, signOut, signIn } from 'next-auth/react';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
-  const { userAuth } = useAuth();
-  const { logOut } = useAuth();
+  const { data: session, status } = useSession();
 
   return (
     <header className="flex items-center p-3 flex-wrap text-white bg-blue-900 sticky top-0 z-10">
@@ -40,16 +39,23 @@ const Navbar = () => {
             (showNav ? '' : 'hidden')
           }
         >
-          <Link href="/admin/woods">
-            <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
-              Maderas
-            </a>
-          </Link>
-          <Link href="/admin/guitars">
-            <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
-              Guitarras
-            </a>
-          </Link>
+          {session && session.user.role === 'admin' ? (
+            <>
+              <Link href="/admin/woods">
+                <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+                  Maderas
+                </a>
+              </Link>
+              <Link href="/admin/guitars">
+                <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
+                  Guitarras
+                </a>
+              </Link>
+            </>
+          ) : (
+            <a className="d-none"></a>
+          )}
+
           <Link href="/shop/guitars-configurator">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
               Compra
@@ -71,10 +77,10 @@ const Navbar = () => {
               Contact Us
             </a>
           </Link>
-          {userAuth ? (
+          {session ? (
             <div className="dropdown dropdown-end">
               <label tabIndex="0" className="btn m-1">
-                {userAuth.email}
+                {session.user.email}
               </label>
               <ul
                 tabIndex="0"
@@ -89,7 +95,7 @@ const Navbar = () => {
                   <button
                     type="button"
                     className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900"
-                    onClick={logOut}
+                    onClick={() => signOut()}
                   >
                     Logout
                   </button>

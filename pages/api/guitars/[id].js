@@ -1,5 +1,5 @@
-import dbConnect from '../../../lib/dbConnect';
-import Guitar from '../../../lib/models/Guitars';
+import dbConnect from 'lib/dbConnect';
+import Guitar from 'lib/models/Guitars';
 
 export default async function handler(req, res) {
   const {

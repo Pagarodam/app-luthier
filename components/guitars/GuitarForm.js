@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import capilalize from 'capitalize';
-import Image from 'next/image';
-import GuitarComponentsList from './GuitarComponentsList';
 
 export const GuitarForm = () => {
   const initialValues = {
@@ -131,7 +129,7 @@ export const GuitarForm = () => {
               className="input input-bordered"
             />
           </label>
-      {/* <GuitarComponentsList woods={props.woods.data} label={"Añadir"} buttonColor={"bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"} /> */}
+          {/* <GuitarComponentsList woods={props.woods.data} label={"Añadir"} buttonColor={"bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"} /> */}
 
           <button className="btn btn-outline m-2">Subir</button>
         </form>

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-
-import GuitarComponentsList from '../../components/guitars/GuitarComponentsList';
-import Modal from '../../components/UI/Modal';
-import WoodForm from '../../components/woods/woodForm';
-import styles from '../../styles/Home.module.css';
-
+import WoodForm from 'components/woods/woodForm';
+import Modal from 'components/UI/Modal';
+import styles from 'styles/Home.module.css';
+import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 const Woods = () => {
   const [woods, setWoods] = useState([]);
   const [woodToEdit, setWoodToEdit] = useState({});

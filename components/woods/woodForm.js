@@ -23,8 +23,6 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
     });
   }, [woodToEdit]);
 
-  console.log(woodToEdit);
-
   const fileInput = useRef(null);
   const onSubmit = async () => {
     setFetching(true);
@@ -44,10 +42,10 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
       }),
     })
       .then((res) => {
-        console.log('res', res);
         props.onEdit();
         fileInput.current.value = '';
         setWood({ ...EMPTY_WOOD });
+
         setFetching(false);
         setMessage('Añadida correctamente');
         onWoodAdded();
