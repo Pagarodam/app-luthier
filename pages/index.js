@@ -7,7 +7,7 @@ export default function Home() {
       <main className={styles.main}>
         <Image
           alt="logo"
-          src="/../public/Logo Llamas.jpeg"
+          src="/public/assets/Logo-Llamas.jpeg"
           title=""
           height={400}
           width={600}
