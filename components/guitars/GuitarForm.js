@@ -53,9 +53,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
           aro: guitar.aro.id,
           fondo: guitar.fondo.id,
           diapason: guitar.diapason.id,
-          // description: guitar.description,
           price: Number(guitar.price),
-          // style: guitar.style,
         }),
         headers: {
           Accept: 'application/json',
