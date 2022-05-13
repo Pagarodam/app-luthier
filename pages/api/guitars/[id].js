@@ -41,12 +41,22 @@ export default async function handler(req, res) {
       break;
     case 'PUT':
       try {
-        const { name, description, price, image, tapa, aro, fondo, diapason } =
-          req.body;
+        const {
+          name,
+          description,
+          price,
+          style,
+          image,
+          tapa,
+          aro,
+          fondo,
+          diapason,
+        } = req.body;
         const guitar = await Guitar.findByIdAndUpdate(id, {
           name,
           description,
           price,
+          style,
           image,
           tapa,
           aro,

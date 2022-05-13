@@ -12,9 +12,10 @@ const EMPTY_WOOD = {
   image: '',
 };
 
-export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
+const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
   const [fetching, setFetching] = useState(false);
   const [wood, setWood] = useState({ ...EMPTY_WOOD });
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     setWood({
@@ -24,6 +25,7 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
   }, [woodToEdit]);
 
   const fileInput = useRef(null);
+
   const onSubmit = async () => {
     setFetching(true);
 
@@ -57,8 +59,6 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
         ),
       );
   };
-
-  const [message, setMessage] = useState('');
 
   const closeMessageHandler = () => {
     setMessage('');
@@ -111,7 +111,7 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
         Formulario Maderas
       </h1>
       <div className="flex justify-start items-center">
-        <div className="form-control mt-2">
+        <form className="form-control mt-2">
           <div className="input-group m-2">
             <Input
               id="nameWood"
@@ -295,9 +295,11 @@ export default function WoodForm({ onWoodAdded, woodToEdit, ...props }) {
               {fetching ? 'Procesando' : 'Enviar'}
             </button>
           )}
-        </div>
+        </form>
       </div>
       <div className="divider"></div>
     </>
   );
-}
+};
+
+export default WoodForm;

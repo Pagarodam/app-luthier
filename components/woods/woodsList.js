@@ -7,7 +7,7 @@ const WoodsList = ({ woods, onWoodDeleted, component, ...props }) => {
         {component}
       </h1>
       <div className="flex flex-wrap justify-around">
-        {woods.map((wood) => (
+        {woods?.map((wood) => (
           <Card
             key={wood.id}
             id={wood.id}
@@ -20,7 +20,7 @@ const WoodsList = ({ woods, onWoodDeleted, component, ...props }) => {
             buttonLabel={props.label}
             buttonColor={props.buttonColor}
             onEditWood={props.onEditWood}
-            onButtonClick={onWoodDeleted}
+            onButtonClick={props.onButtonClick}
           />
         ))}
       </div>
