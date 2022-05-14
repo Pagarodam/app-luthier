@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import capilalize from 'capitalize';
 import Input from '../UI/Input';
 import Button from 'components/UI/Button';
@@ -8,23 +8,24 @@ const sumWithoutUndefineds = (...data) => {
   return data.reduce((prev, curr) => (curr ? prev + curr : prev), 0);
 };
 
+const INITIAL_VALUES = {
+  name: '',
+  description: '',
+  price: 0,
+  handJob: 300,
+  shippingCosts: 250,
+  image: '',
+  tapa: '',
+  aro: '',
+  fondo: '',
+  diapason: '',
+  style: '',
+};
+
 const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
   const [message, setMessage] = useState('');
-  const initialValues = {
-    name: '',
-    description: '',
-    price: 0,
-    handJob: 300,
-    shippingCosts: 250,
-    image: '',
-    tapa: '',
-    aro: '',
-    fondo: '',
-    diapason: '',
-    style: '',
-  };
   const [guitar, setGuitar] = useState({
-    ...initialValues,
+    ...INITIAL_VALUES,
   });
 
   useEffect(() => {
@@ -42,8 +43,13 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
     });
   }, [guitarComponents]);
 
+  const fileInput = useRef(null);
+
   const handlerOnSubmit = async (event) => {
     event.preventDefault();
+    // Esto funciona pero es una mierda es el numero de input que corresponde a la imagen
+    event.target[5].value = null;
+
     try {
       const res = await fetch('/api/guitars', {
         method: 'POST',
@@ -61,12 +67,15 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
         },
       }).then((res) => res.json());
 
-      setMessage(`${guitar.name} fué añadida`);
-
+      setGuitar({ ...INITIAL_VALUES });
+      console.log(guitarComponents);
+      // guitarComponents.tapa = '';
+      // guitarComponents.aro = '';
+      // guitarComponents.fondo = '';
+      // guitarComponents.diapason = '';
       onGuitarCreated({ ...res.data, ...guitar });
-      console.log('preInitial', initialValues);
-      setGuitar(initialValues);
-      console.log('postInitial', initialValues);
+      setMessage(`${guitar.name} fué añadida`);
+      console.log(guitarComponents);
     } catch (error) {
       setMessage(error);
     }
@@ -86,6 +95,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
 
   const guitarImageChangeHandler = (event) => {
     const file = event.target.files[0];
+    // event.target.value = null;
     const reader = new FileReader();
 
     if (file) {
@@ -192,6 +202,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
                 label="Imagen"
                 onChange={guitarImageChangeHandler}
                 type="file"
+                ref={fileInput}
                 placeholder="Imagen de la guitarra"
                 className="input input-bordered"
               />
