@@ -29,35 +29,15 @@ export default async function handler(req, res) {
           });
         res.status(200).json({ success: true, data: guitars });
       } catch (error) {
-        res.status(418).json({ success: false });
+        res.status(418).json({ success: false, error });
       }
       break;
 
     case 'POST':
       try {
-        const {
-          name,
-          description,
-          price,
-          image,
-          style,
-          tapa,
-          aro,
-          fondo,
-          diapason,
-        } = req.body;
-        console.log('request', req.body);
-        const guitar = await Guitar.create({
-          name,
-          description,
-          price,
-          image,
-          style,
-          tapa,
-          aro,
-          fondo,
-          diapason,
-        });
+        const guitar = new Guitar(req.body);
+        await guitar.save();
+
         console.log('res', guitar);
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {
@@ -66,7 +46,7 @@ export default async function handler(req, res) {
       break;
 
     default:
-      res.status(405).json({ message: 'Method not allowed' });
+      res.status(405).json({ success: false, message: 'Method not allowed' });
       break;
   }
 }
