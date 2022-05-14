@@ -8,6 +8,7 @@ const Woods = () => {
   const [woodToEdit, setWoodToEdit] = useState({});
   const [refetch, setRefetch] = useState(true);
   const [edit, setEdit] = useState(false);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (refetch) {
@@ -42,8 +43,6 @@ const Woods = () => {
     setMessage('Menu editar');
   };
 
-  const [message, setMessage] = useState('');
-
   const closeMessageHandler = () => {
     setMessage('');
   };
@@ -73,7 +72,7 @@ const Woods = () => {
           woods={woods}
           label={'Borrar'}
           onEditWood={selectWood}
-          onWoodDeleted={deleteWood}
+          onButtonClick={deleteWood}
           buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
         />
       </div>

@@ -35,21 +35,33 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        const { name, description, price, image, tapa, aro, fondo, diapason } =
-          req.body;
+        const {
+          name,
+          description,
+          price,
+          image,
+          style,
+          tapa,
+          aro,
+          fondo,
+          diapason,
+        } = req.body;
+        console.log('request', req.body);
         const guitar = await Guitar.create({
           name,
           description,
           price,
           image,
+          style,
           tapa,
           aro,
           fondo,
           diapason,
         });
+        console.log('res', guitar);
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {
-        res.status(418).json({ success: false });
+        res.status(418).json({ success: false, error });
       }
       break;
 

@@ -2,8 +2,8 @@ const Input = ({
   id = '',
   label = '',
   type = 'text',
-  value ,
-  onChange = '',
+  value,
+  onChange = () => null,
   placeholder = '',
   required = true,
   className = 'input input-bordered',
@@ -11,7 +11,7 @@ const Input = ({
 }) => {
   return (
     <>
-      {type != "radio" && <span>{label}</span>}
+      {type != 'radio' && <span>{label}</span>}
       <input
         id={id}
         type={type}
