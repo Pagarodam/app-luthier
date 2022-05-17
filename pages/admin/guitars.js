@@ -4,12 +4,21 @@ import Modal from 'components/UI/Modal';
 import { GuitarCard } from 'components/guitars/GuitarCard';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import Titles from 'components/UI/Titles';
+import GuitarList from 'components/guitars/GuitarList';
 
 const EMPTY_GUITAR_COMPONENTS = {
-  tapa: '',
-  aro: '',
-  fondo: '',
-  diapason: '',
+  tapa: {
+    nameWood: '',
+  },
+  aro: {
+    nameWood: '',
+  },
+  fondo: {
+    nameWood: '',
+  },
+  diapason: {
+    nameWood: '',
+  },
 };
 
 const Guitars = (props) => {
@@ -72,8 +81,8 @@ const Guitars = (props) => {
       <GuitarForm
         guitarComponents={guitarComponents}
         onGuitarCreated={(newGuitar) => {
-          setGuitars([...guitars, newGuitar]);
           setGuitarComponents({ ...EMPTY_GUITAR_COMPONENTS });
+          setGuitars([...guitars, newGuitar]);
         }}
       />
       <GuitarComponentsList
@@ -82,35 +91,9 @@ const Guitars = (props) => {
         onButtonClick={addToGuitar}
         buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
       />
-
-      {guitars.length && <Titles label={'Guitarras'} />}
-      <div className="flex flex-wrap justify-around">
-        {guitars?.map((guitar) => (
-          <GuitarCard
-            key={guitar.id}
-            id={guitar.id}
-            name={guitar.name}
-            deleteGuitar={deleteGuitar}
-            description={guitar.description}
-            price={guitar.price}
-            style={guitar.style}
-            image={guitar.image}
-            tapa={guitar.tapa}
-            aro={guitar.aro}
-            fondo={guitar.fondo}
-            diapason={guitar.diapason}
-          />
-        ))}
-      </div>
+      <GuitarList deleteGuitar={deleteGuitar} guitars={guitars} />
     </>
   );
 };
-
-// export async function getStaticProps() {
-//   const response = await fetch('http://localhost:3000/api/guitars');
-//   const guitars = await response.json();
-
-//   return { props: { guitars }, revalidate: 3600 };
-// }
 
 export default Guitars;

@@ -15,10 +15,18 @@ const INITIAL_VALUES = {
   handJob: 300,
   shippingCosts: 250,
   image: '',
-  tapa: '',
-  aro: '',
-  fondo: '',
-  diapason: '',
+  tapa: {
+    nameWood: '',
+  },
+  aro: {
+    nameWood: '',
+  },
+  fondo: {
+    nameWood: '',
+  },
+  diapason: {
+    nameWood: '',
+  },
   style: '',
 };
 

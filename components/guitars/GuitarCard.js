@@ -13,6 +13,8 @@ export const GuitarCard = ({
   fondo,
   diapason,
   deleteGuitar,
+  editGuitar,
+  addToCart,
 }) => {
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
@@ -35,16 +37,27 @@ export const GuitarCard = ({
         <p>Fondo: {fondo.nameWood}</p>
         <p>Diapasón: {diapason.nameWood}</p>
         <div className="card-actions justify-end">
-          <Button
-            onClick={() => deleteGuitar(id)}
-            label={'Borrar'}
-            className={'btn btn-primary'}
-          />
-          <Button
-            onClick={() => props.editGuitar(id)}
-            label={'Editar'}
-            className={'btn btn-secondary'}
-          />
+          {addToCart && (
+            <Button
+              onClick={() => addToCart(id)}
+              label={'Añadir al carro'}
+              className={'btn btn-primary'}
+            />
+          )}
+          {deleteGuitar && (
+            <Button
+              onClick={() => deleteGuitar(id)}
+              label={'Borrar'}
+              className={'btn btn-primary'}
+            />
+          )}
+          {editGuitar && (
+            <Button
+              onClick={() => props.editGuitar(id)}
+              label={'Editar'}
+              className={'btn btn-secondary'}
+            />
+          )}
         </div>
       </div>
     </div>
