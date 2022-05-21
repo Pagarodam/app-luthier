@@ -1,29 +1,25 @@
-const Input = ({
-  id = '',
-  label = '',
-  type = 'text',
-  value,
-  onChange = () => null,
-  placeholder = '',
-  required = true,
-  className = 'input input-bordered',
-  ...props
-}) => {
+import React from 'react';
+
+// eslint-disable-next-line react/display-name
+const Input = React.forwardRef((props, ref) => {
   return (
     <>
-      {type != 'radio' && <span>{label}</span>}
-      <input
-        id={id}
-        type={type}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={placeholder}
-        className={className}
-        {...props}
-      />
+      {props.input.type != 'radio' && <span>{props.input.label}</span>}
+      <input ref={ref} {...props.input}></input>
+
+      {/* <input
+        ref={ref}
+        id={props.id}
+        type={props.type}
+        value={props.value}
+        onChange={props.onChange}
+        required={props.required}
+        placeholder={props.placeholder}
+        className={props.className}
+        defaultValue={props.defaultValue}
+      /> */}
     </>
   );
-};
+});
 
 export default Input;

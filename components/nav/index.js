@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useSession, signOut, signIn } from 'next-auth/react';
+import HeaderCartButton from 'components/layout/HeaderCartButton';
 
-const Navbar = () => {
+const Navbar = ({ onShowCart }) => {
   const [showNav, setShowNav] = useState(false);
   const { data: session, status } = useSession();
 
@@ -111,6 +112,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <HeaderCartButton onClick={onShowCart} />
     </header>
   );
 };
