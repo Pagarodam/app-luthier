@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react';
+import { useState } from 'react';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import Titles from 'components/UI/Titles';
 import GuitarList from 'components/guitars/GuitarList';
@@ -6,27 +6,16 @@ import Image from 'next/image';
 import clasic from 'public/assets/Guitarras/Clasica.png';
 import flamenca from 'public/assets/Guitarras/Flamenca.jpg';
 import custom from 'public/assets/Guitarras/Custom.jpg';
-import CartContext from 'components/store/cart-context';
 
 export default function GuitarsConfigurator({ guitars, woods, id }) {
   const [showComponents, setShowComponents] = useState(false);
   const [showGuitars, setShowGuitars] = useState(false);
-  const amountInputRef = useRef();
-
-  // const cartCtx = useContext(CartContext);
+  // const amountInputRef = useRef();
 
   const onAddWood = () => {
     console.log(' Added to somewhere');
     // TODO Add to cart or a guitar
   };
-
-  // const addToCart = (amount) => {
-  //   cartCtx.addItem({
-  //     id: id,
-  //     amount: amount,
-  //   });
-  //   console.log('Purchased');
-  // };
 
   const showGuitarsHandler = () => {
     showGuitars ? setShowGuitars(false) : setShowGuitars(true);
@@ -110,13 +99,7 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
           }
         />
       )}
-      {showGuitars && (
-        <GuitarList
-          // ref={amountInputRef}
-          // addToCart={addToCart}
-          guitars={guitars}
-        />
-      )}
+      {showGuitars && <GuitarList guitars={guitars} />}
     </>
   );
 }

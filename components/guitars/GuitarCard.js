@@ -1,7 +1,8 @@
-import { useRef, useState } from 'react';
 import Button from 'components/UI/Button';
-import Input from 'components/UI/Input';
 import Image from 'next/image';
+import { useContext } from 'react';
+import CartContext from 'components/store/cart-context';
+import GuitarCardForm from './GuitarCardForm';
 
 export const GuitarCard = ({
   id,
@@ -18,26 +19,15 @@ export const GuitarCard = ({
   editGuitar,
   addToCart,
 }) => {
-  const [amountIsValid, setAmountIsValid] = useState(true);
+  const cartCtx = useContext(CartContext);
 
-  const amountInputRef = useRef();
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-
-    const enteredAmount = amountInputRef.current.value;
-    const enteredAmountNumber = +enteredAmount;
-
-    if (
-      enteredAmount.trim().length === 0 ||
-      enteredAmountNumber < 1 ||
-      enteredAmountNumber > 5
-    ) {
-      setAmountIsValid(false);
-      return;
-    }
-
-    addToCart(enteredAmountNumber);
+  const addToCartHandler = (amount) => {
+    cartCtx.addItem({
+      id: id,
+      name: name,
+      amount: amount,
+      price: price,
+    });
   };
 
   return (
@@ -82,23 +72,7 @@ export const GuitarCard = ({
               className={'btn btn-secondary'}
             />
           )}
-          <form onSubmit={submitHandler}>
-            <Input
-              ref={amountInputRef}
-              input={{
-                id: 'amount_' + id,
-                type: 'number',
-                min: '1',
-                max: '5',
-                step: '1',
-                defaultValue: '1',
-              }}
-            />
-            <button>+ Add</button>
-            {!amountIsValid && (
-              <p>Por favor introduce una cantidad valida (1-5)</p>
-            )}
-          </form>
+          <GuitarCardForm onAddToCart={addToCartHandler} />
         </div>
       </div>
     </div>

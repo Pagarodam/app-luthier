@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import Button from 'components/UI/Button';
 import Modal from 'components/UI/Modal';
 import CartContext from 'components/store/cart-context';
+import CartItem from './CartItem';
 
 const Cart = ({ onClose }) => {
   const cartCtx = useContext(CartContext);
@@ -10,25 +11,36 @@ const Cart = ({ onClose }) => {
   const totalAmount = cartCtx.totalAmount;
 
   const hasItems = cartCtx.items.length > 0;
-  console.log(cartCtx.items, 'cartContext');
+
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
 
   const cartItems = (
-    <ul className="overflow-hidden max-h-80">
+    <ul className="overflow-scroll max-h-80">
       {cartCtx.items.map((item) => (
-        <li key={item.id}>{item.tapa}</li>
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
+        />
       ))}
     </ul>
   );
-
-  console.log(cartItems.props, 'cartItems');
 
   return (
     <Modal onClose={onClose}>
       {cartItems}
       <div className="flex justify-between items-center font-bold text-2xl my-2">
-        <span>Total Amount</span>
-        {console.log(totalAmount)}
-        <span>{totalAmount}</span>
+        <span>Precio Total</span>
+        <span>{totalAmount.toFixed(2)}€</span>
       </div>
       <div>
         <Button

@@ -4,10 +4,10 @@ import React from 'react';
 const Input = React.forwardRef((props, ref) => {
   return (
     <>
-      {props.input.type != 'radio' && <span>{props.input.label}</span>}
-      <input ref={ref} {...props.input}></input>
+      {props.type != 'radio' && <span>{props.label}</span>}
+      {/* {ref && <input ref={ref} {...props.input}></input>} */}
 
-      {/* <input
+      <input
         ref={ref}
         id={props.id}
         type={props.type}
@@ -17,7 +17,8 @@ const Input = React.forwardRef((props, ref) => {
         placeholder={props.placeholder}
         className={props.className}
         defaultValue={props.defaultValue}
-      /> */}
+        {...props.input}
+      />
     </>
   );
 });
