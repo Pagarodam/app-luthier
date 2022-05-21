@@ -1,5 +1,8 @@
 import Button from 'components/UI/Button';
 import Image from 'next/image';
+import { useContext } from 'react';
+import CartContext from 'components/store/cart-context';
+import GuitarCardForm from './GuitarCardForm';
 
 export const GuitarCard = ({
   id,
@@ -16,6 +19,17 @@ export const GuitarCard = ({
   editGuitar,
   addToCart,
 }) => {
+  const cartCtx = useContext(CartContext);
+
+  const addToCartHandler = (amount) => {
+    cartCtx.addItem({
+      id: id,
+      name: name,
+      amount: amount,
+      price: price,
+    });
+  };
+
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
       <figure>
@@ -58,6 +72,7 @@ export const GuitarCard = ({
               className={'btn btn-secondary'}
             />
           )}
+          <GuitarCardForm onAddToCart={addToCartHandler} />
         </div>
       </div>
     </div>

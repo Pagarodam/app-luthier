@@ -1,12 +1,13 @@
 import Titles from 'components/UI/Titles';
 import { GuitarCard } from './GuitarCard';
 
-const GuitarList = ({ guitars, deleteGuitar, addToCart }) => {
+const GuitarList = ({ guitars, deleteGuitar }) => {
   const getGuitarsByStyle = (guitars, guitarStyle) =>
     guitars.filter((guitar) => guitar.style === guitarStyle);
 
   const clasic = getGuitarsByStyle(guitars, 'clasico');
   const flamenco = getGuitarsByStyle(guitars, 'flamenco');
+
   return (
     <>
       {guitars.length && <Titles label={'Guitarras'} />}
@@ -18,7 +19,6 @@ const GuitarList = ({ guitars, deleteGuitar, addToCart }) => {
             id={guitar.id}
             name={guitar.name}
             deleteGuitar={deleteGuitar}
-            addToCart={addToCart}
             description={guitar.description}
             price={guitar.price}
             style={guitar.style}
@@ -38,7 +38,6 @@ const GuitarList = ({ guitars, deleteGuitar, addToCart }) => {
             id={guitar.id}
             name={guitar.name}
             deleteGuitar={deleteGuitar}
-            addToCart={addToCart}
             description={guitar.description}
             price={guitar.price}
             style={guitar.style}

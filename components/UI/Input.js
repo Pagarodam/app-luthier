@@ -1,17 +1,21 @@
+import React from 'react';
+
 const Input = ({
-  id = '',
-  label = '',
-  type = 'text',
+  id,
+  type,
   value,
-  onChange = () => null,
-  placeholder = '',
-  required = true,
-  className = 'input input-bordered',
+  onChange,
+  required,
+  placeholder,
+  label,
+  className,
+  defaultValue,
   ...props
 }) => {
   return (
     <>
       {type != 'radio' && <span>{label}</span>}
+
       <input
         id={id}
         type={type}
@@ -20,6 +24,7 @@ const Input = ({
         required={required}
         placeholder={placeholder}
         className={className}
+        defaultValue={defaultValue}
         {...props}
       />
     </>

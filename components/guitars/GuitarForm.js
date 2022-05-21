@@ -77,10 +77,6 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
 
       setGuitar({ ...INITIAL_VALUES });
       console.log(guitarComponents);
-      // guitarComponents.tapa = '';
-      // guitarComponents.aro = '';
-      // guitarComponents.fondo = '';
-      // guitarComponents.diapason = '';
       onGuitarCreated({ ...res.data, ...guitar });
       setMessage(`${guitar.name} fué añadida`);
       console.log(guitarComponents);
