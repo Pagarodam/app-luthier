@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import Input from 'components/UI/Input';
 import Button from 'components/UI/Button';
+import CartInput from 'components/UI/CartInput';
 
 const GuitarCardForm = (props) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
@@ -27,7 +27,7 @@ const GuitarCardForm = (props) => {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <Input
+        <CartInput
           ref={amountInputRef}
           input={{
             id: 'amount_' + props.id,
@@ -39,7 +39,6 @@ const GuitarCardForm = (props) => {
           }}
         />
         <Button label={'+ Añadir'} className={'btn btn-primary'} />
-        {/* <button>+ Add</button> */}
         {!amountIsValid && <p>Por favor introduce una cantidad valida (1-5)</p>}
       </form>
     </>
