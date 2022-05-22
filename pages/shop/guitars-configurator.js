@@ -3,26 +3,46 @@ import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import Titles from 'components/UI/Titles';
 import GuitarList from 'components/guitars/GuitarList';
 import Image from 'next/image';
-import clasic from 'public/assets/Guitarras/Clasica.png';
+import clasica from 'public/assets/Guitarras/Clasica.png';
 import flamenca from 'public/assets/Guitarras/Flamenca.jpg';
 import custom from 'public/assets/Guitarras/Custom.jpg';
 
 export default function GuitarsConfigurator({ guitars, woods, id }) {
   const [showComponents, setShowComponents] = useState(false);
-  const [showGuitars, setShowGuitars] = useState(false);
-  // const amountInputRef = useRef();
+  const [showClassicGuitars, setShowClassicGuitars] = useState(false);
+  const [showFlamencoGuitars, setShowFlamencoGuitars] = useState(false);
 
   const onAddWood = () => {
     console.log(' Added to somewhere');
     // TODO Add to cart or a guitar
   };
 
-  const showGuitarsHandler = () => {
-    showGuitars ? setShowGuitars(false) : setShowGuitars(true);
+  const getGuitarsByStyle = (guitars, guitarStyle) =>
+    guitars.filter((guitar) => guitar.style === guitarStyle);
+
+  const clasic = getGuitarsByStyle(guitars, 'clasico');
+  const flamenco = getGuitarsByStyle(guitars, 'flamenco');
+
+  const showClassicGuitarsHandler = () => {
+    showClassicGuitars
+      ? setShowClassicGuitars(false)
+      : setShowClassicGuitars(true);
+    setShowComponents(false);
+    setShowFlamencoGuitars(false);
+  };
+
+  const showFlamencoGuitarsHandler = () => {
+    showFlamencoGuitars
+      ? setShowFlamencoGuitars(false)
+      : setShowFlamencoGuitars(true);
+    setShowComponents(false);
+    setShowClassicGuitars(false);
   };
 
   const showComponentsHandler = () => {
     showComponents ? setShowComponents(false) : setShowComponents(true);
+    setShowClassicGuitars(false);
+    setShowFlamencoGuitars(false);
   };
 
   return (
@@ -35,8 +55,8 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
         <div className="p-4 m-4 hover:cursor-pointer hover:scale-110 ">
           <Image
             className="rounded-lg"
-            onClick={showGuitarsHandler}
-            src={clasic}
+            onClick={showClassicGuitarsHandler}
+            src={clasica}
             alt="Landscape picture"
             width={300}
             height={500}
@@ -54,7 +74,7 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
         <div className="p-4 m-4 hover:cursor-pointer hover:scale-110">
           <Image
             className="rounded-lg"
-            onClick={showGuitarsHandler}
+            onClick={showFlamencoGuitarsHandler}
             src={flamenca}
             alt="Landscape picture"
             width={300}
@@ -88,22 +108,32 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
           </div>
         </div>
       </div>
-
       {showComponents && (
-        <GuitarComponentsList
-          woods={woods}
-          label={'Añadir'}
-          onWoodDeleted={onAddWood}
-          buttonColor={
-            'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
-          }
-        />
+        <>
+          <Titles label={'Componentes'} />
+
+          <GuitarComponentsList
+            woods={woods}
+            label={'Añadir'}
+            onWoodDeleted={onAddWood}
+            buttonColor={
+              'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
+            }
+          />
+        </>
       )}
-      {showGuitars && <GuitarList guitars={guitars} />}
+
+      {showClassicGuitars && (
+        <>
+          <GuitarList guitars={clasic} label={'Guitarras Clasicas'} />
+        </>
+      )}
+      {showFlamencoGuitars && (
+        <GuitarList guitars={flamenco} label={'Guitarras Flamencas'} />
+      )}
     </>
   );
 }
-
 export async function getStaticProps() {
   try {
     const guitarRes = await fetch('http://localhost:3000/api/guitars');
