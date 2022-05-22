@@ -65,10 +65,6 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
         method: 'POST',
         body,
       });
-      console.log(
-        '🚀 ~ file: GuitarForm.js ~ line 68 ~ handlerOnSubmit ~ response',
-        response,
-      );
 
       const res = await fetch('/api/guitars', {
         method: 'POST',
