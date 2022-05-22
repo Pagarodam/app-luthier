@@ -29,6 +29,13 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
   const onSubmit = async () => {
     setFetching(true);
 
+    const body = new FormData();
+    body.append('file', wood.image);
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body,
+    });
+
     fetch(`/api/woods${props.edit ? '/' + wood.id : ''}`, {
       method: props.edit ? 'PUT' : 'POST',
       headers: {
@@ -41,6 +48,7 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
         style: capilalize.words(wood.style),
         price: Number(wood.price),
         component: wood.component,
+        image: `/uploads/${wood.image.name}`,
       }),
     })
       .then((res) => {
@@ -81,15 +89,10 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
   };
 
   const woodImageChangeHandler = (event) => {
-    const file = event.target.files[0];
-    console.log('woodImageChangeHandler' + file);
-    const reader = new FileReader();
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
 
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setWood({ ...wood, image: reader.result });
-      };
+      setWood({ ...wood, image: i });
     }
   };
 

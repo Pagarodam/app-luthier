@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import GuitarForm from 'components/guitars/GuitarForm';
 import Modal from 'components/UI/Modal';
-import { GuitarCard } from 'components/guitars/GuitarCard';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
-import Titles from 'components/UI/Titles';
 import GuitarList from 'components/guitars/GuitarList';
 
 const EMPTY_GUITAR_COMPONENTS = {
@@ -34,19 +32,19 @@ const Guitars = (props) => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/woods')
+    fetch('/api/woods')
       .then((res) => res.json())
       .then((res) => setWoods(res.data));
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/guitars')
+    fetch('/api/guitars')
       .then((res) => res.json())
       .then((res) => setGuitars(res.data));
   }, []);
 
   const deleteGuitar = async (id) => {
-    await fetch(`http://localhost:3000/api/guitars/${id}`, {
+    await fetch(`/api/guitars/${id}`, {
       method: 'DELETE',
     }).catch(() => {
       setMessage(
@@ -66,7 +64,6 @@ const Guitars = (props) => {
       [selectedComponent.component]: selectedComponent,
     });
   };
-  console.log('guitars', guitars);
 
   return (
     <>
