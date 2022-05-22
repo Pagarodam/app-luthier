@@ -99,7 +99,6 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
 
   const guitarImageChangeHandler = (event) => {
     const file = event.target.files[0];
-    // event.target.value = null;
     const reader = new FileReader();
 
     if (file) {
