@@ -58,7 +58,18 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
     // Esto funciona pero es una mierda es el numero de input que corresponde a la imagen
     event.target[5].value = null;
 
+    const body = new FormData();
+    body.append('file', guitar.image);
     try {
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body,
+      });
+      console.log(
+        '🚀 ~ file: GuitarForm.js ~ line 68 ~ handlerOnSubmit ~ response',
+        response,
+      );
+
       const res = await fetch('/api/guitars', {
         method: 'POST',
         body: JSON.stringify({
@@ -68,6 +79,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
           fondo: guitar.fondo.id,
           diapason: guitar.diapason.id,
           price: Number(guitar.price),
+          image: `/uploads/${guitar.image.name}`,
         }),
         headers: {
           Accept: 'application/json',
@@ -76,14 +88,8 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
       }).then((res) => res.json());
 
       setGuitar({ ...INITIAL_VALUES });
-      console.log(guitarComponents);
-      // guitarComponents.tapa = '';
-      // guitarComponents.aro = '';
-      // guitarComponents.fondo = '';
-      // guitarComponents.diapason = '';
       onGuitarCreated({ ...res.data, ...guitar });
       setMessage(`${guitar.name} fué añadida`);
-      console.log(guitarComponents);
     } catch (error) {
       setMessage(error);
     }
@@ -102,15 +108,10 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
   };
 
   const guitarImageChangeHandler = (event) => {
-    const file = event.target.files[0];
-    // event.target.value = null;
-    const reader = new FileReader();
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
 
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setGuitar({ ...guitar, image: reader.result });
-      };
+      setGuitar({ ...guitar, image: i });
     }
   };
 

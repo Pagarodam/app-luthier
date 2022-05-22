@@ -38,7 +38,6 @@ export default async function handler(req, res) {
         const guitar = new Guitar(req.body);
         await guitar.save();
 
-        console.log('res', guitar);
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {
         res.status(418).json({ success: false, error });

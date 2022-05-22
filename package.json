@@ -15,6 +15,7 @@
     "@next-auth/mongodb-adapter": "^1.0.3",
     "capitalize": "^2.0.4",
     "daisyui": "^2.13.5",
+    "formidable": "^2.0.1",
     "mongodb": "^4.5.0",
     "mongoose": "^6.3.1",
     "next": "12.1.0",
