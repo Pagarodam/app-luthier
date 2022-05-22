@@ -61,7 +61,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
     const body = new FormData();
     body.append('file', guitar.image);
     try {
-      const response = await fetch('/api/upload', {
+      await fetch('/api/upload', {
         method: 'POST',
         body,
       });
