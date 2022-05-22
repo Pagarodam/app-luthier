@@ -66,7 +66,6 @@ const Guitars = (props) => {
       [selectedComponent.component]: selectedComponent,
     });
   };
-  console.log('guitars', guitars);
 
   return (
     <>
