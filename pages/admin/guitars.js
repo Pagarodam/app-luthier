@@ -3,6 +3,7 @@ import GuitarForm from 'components/guitars/GuitarForm';
 import Modal from 'components/UI/Modal';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import GuitarList from 'components/guitars/GuitarList';
+import Titles from 'components/UI/Titles';
 
 const EMPTY_GUITAR_COMPONENTS = {
   tapa: {
@@ -82,13 +83,52 @@ const Guitars = (props) => {
           setGuitars([...guitars, newGuitar]);
         }}
       />
+      <Titles label={'Componentes'} />
       <GuitarComponentsList
         woods={woods}
+        woodType={'tapa'}
+        component={'Tapas'}
         label={'Añadir'}
         onButtonClick={addToGuitar}
         buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
       />
-      <GuitarList deleteGuitar={deleteGuitar} guitars={guitars} />
+      <GuitarComponentsList
+        woods={woods}
+        woodType={'aro'}
+        component={'Aros'}
+        label={'Añadir'}
+        onButtonClick={addToGuitar}
+        buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+      />
+      <GuitarComponentsList
+        woods={woods}
+        woodType={'fondo'}
+        component={'Fondos'}
+        label={'Añadir'}
+        onButtonClick={addToGuitar}
+        buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+      />
+      <GuitarComponentsList
+        woods={woods}
+        woodType={'diapason'}
+        component={'Diapasón'}
+        label={'Añadir'}
+        onButtonClick={addToGuitar}
+        buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+      />
+      <Titles label={'Guitarras'} />
+      <GuitarList
+        style={'clasico'}
+        deleteGuitar={deleteGuitar}
+        guitars={guitars}
+        label={'Guitarras clasicas'}
+      />
+      <GuitarList
+        style={'flamenco'}
+        deleteGuitar={deleteGuitar}
+        guitars={guitars}
+        label={'Guitarras flamencas'}
+      />
     </>
   );
 };

@@ -7,6 +7,18 @@ const CartItem = (props) => {
     <li className={classes['cart-item']}>
       <div>
         <h2>{props.name}</h2>
+        <h3>
+          <b>Tapa:</b> {props.tapa}
+        </h3>
+        <h3>
+          <b>Aro:</b> {props.aro}
+        </h3>
+        <h3>
+          <b>Fondo:</b> {props.fondo}
+        </h3>
+        <h3>
+          <b>Diapasón: </b> {props.diapason}
+        </h3>
         <div className={classes.summary}>
           <span className={classes.price}>{props.price}</span>
           <span className={classes.amount}>x {props.amount}</span>

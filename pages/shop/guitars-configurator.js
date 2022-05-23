@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import Titles from 'components/UI/Titles';
 import GuitarList from 'components/guitars/GuitarList';
@@ -6,22 +6,81 @@ import Image from 'next/image';
 import clasica from 'public/assets/Guitarras/Clasica.png';
 import flamenca from 'public/assets/Guitarras/Flamenca.jpg';
 import custom from 'public/assets/Guitarras/Custom.jpg';
+import GuitarComponentsInput from 'components/guitars/GuitarComponentsInputs';
+
+const INITIAL_VALUES = {
+  name: 'Custom',
+  description:
+    'GuitarraCustom donde tu eliges las piezas que quieres que te montemos',
+  price: 0,
+  handJob: 300,
+  shippingCosts: 250,
+  image:
+    'https://maderasbarber.com/tonewood/5204-large_default/kit-acabado-guitarra-flamenca.jpg',
+  tapa: {
+    nameWood: '',
+  },
+  aro: {
+    nameWood: '',
+  },
+  fondo: {
+    nameWood: '',
+  },
+  diapason: {
+    nameWood: '',
+  },
+  style: 'flamenco',
+};
+
+const EMPTY_GUITAR_COMPONENTS = {
+  tapa: {
+    nameWood: '',
+  },
+  aro: {
+    nameWood: '',
+  },
+  fondo: {
+    nameWood: '',
+  },
+  diapason: {
+    nameWood: '',
+  },
+};
+
+const sumWithoutUndefineds = (...data) => {
+  return data.reduce((prev, curr) => (curr ? prev + curr : prev), 0);
+};
 
 export default function GuitarsConfigurator({ guitars, woods, id }) {
   const [showComponents, setShowComponents] = useState(false);
   const [showClassicGuitars, setShowClassicGuitars] = useState(false);
   const [showFlamencoGuitars, setShowFlamencoGuitars] = useState(false);
+  const [guitarComponents, setGuitarComponents] = useState({
+    ...EMPTY_GUITAR_COMPONENTS,
+  });
+  const [guitar, setGuitar] = useState({
+    ...INITIAL_VALUES,
+  });
+
+  useEffect(() => {
+    setGuitar({
+      ...guitar,
+      ...guitarComponents,
+      price: sumWithoutUndefineds(
+        guitar.shippingCosts,
+        guitar.handJob,
+        guitarComponents.tapa?.price,
+        guitarComponents.aro?.price,
+        guitarComponents.fondo?.price,
+        guitarComponents.diapason?.price,
+      ),
+    });
+  }, [guitarComponents]);
 
   const onAddWood = () => {
     console.log(' Added to somewhere');
     // TODO Add to cart or a guitar
   };
-
-  const getGuitarsByStyle = (guitars, guitarStyle) =>
-    guitars.filter((guitar) => guitar.style === guitarStyle);
-
-  const clasic = getGuitarsByStyle(guitars, 'clasico');
-  const flamenco = getGuitarsByStyle(guitars, 'flamenco');
 
   const showClassicGuitarsHandler = () => {
     showClassicGuitars
@@ -45,8 +104,27 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
     setShowFlamencoGuitars(false);
   };
 
+  const addToGuitar = async (id) => {
+    const selectedComponent = woods.find((woods) => woods.id === id);
+
+    setGuitarComponents({
+      ...guitarComponents,
+      [selectedComponent.component]: selectedComponent,
+    });
+  };
+
   return (
     <>
+      <GuitarComponentsInput
+        tapa={guitar.tapa}
+        aro={guitar.aro}
+        fondo={guitar.fondo}
+        diapason={guitar.diapason}
+        name={guitar.name}
+        guitarComponents={guitarComponents}
+        price={guitar.price}
+        label={'Añadir'}
+      />
       <Titles
         label="Configurador de guitarras a medida ¡Elige los componentes de tu Guitarra
         a la carta!"
@@ -114,8 +192,44 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
 
           <GuitarComponentsList
             woods={woods}
+            woodType={'tapa'}
             label={'Añadir'}
+            component={'Tapas'}
             onWoodDeleted={onAddWood}
+            onButtonClick={addToGuitar}
+            buttonColor={
+              'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
+            }
+          />
+          <GuitarComponentsList
+            woods={woods}
+            woodType={'aro'}
+            label={'Añadir'}
+            component={'Aros'}
+            onWoodDeleted={onAddWood}
+            onButtonClick={addToGuitar}
+            buttonColor={
+              'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
+            }
+          />
+          <GuitarComponentsList
+            woods={woods}
+            woodType={'fondo'}
+            label={'Añadir'}
+            component={'Fondos'}
+            onWoodDeleted={onAddWood}
+            onButtonClick={addToGuitar}
+            buttonColor={
+              'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
+            }
+          />
+          <GuitarComponentsList
+            woods={woods}
+            woodType={'diapason'}
+            label={'Añadir'}
+            component={'Diapasón'}
+            onWoodDeleted={onAddWood}
+            onButtonClick={addToGuitar}
             buttonColor={
               'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
             }
@@ -125,11 +239,19 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
 
       {showClassicGuitars && (
         <>
-          <GuitarList guitars={clasic} label={'Guitarras Clasicas'} />
+          <GuitarList
+            guitars={guitars}
+            style={'clasico'}
+            label={'Guitarras Clasicas'}
+          />
         </>
       )}
       {showFlamencoGuitars && (
-        <GuitarList guitars={flamenco} label={'Guitarras Flamencas'} />
+        <GuitarList
+          guitars={guitars}
+          style={'flamenco'}
+          label={'Guitarras Flamencas'}
+        />
       )}
     </>
   );

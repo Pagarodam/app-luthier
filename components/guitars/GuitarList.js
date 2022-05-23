@@ -1,12 +1,16 @@
 import Titles from 'components/UI/Titles';
 import { GuitarCard } from './GuitarCard';
 
-const GuitarList = ({ guitars, deleteGuitar, label }) => {
+const GuitarList = ({ guitars, deleteGuitar, label, style }) => {
+  const getGuitarsByStyle = (guitars, guitarStyle) =>
+    guitars?.filter((guitar) => guitar.style === guitarStyle);
+
+  const filteredGuitars = getGuitarsByStyle(guitars, style);
   return (
     <>
-      {guitars?.length && <Titles label={label} />}
+      {filteredGuitars?.length && <Titles label={label} />}
       <div className="flex flex-wrap justify-around">
-        {guitars?.map((guitar) => (
+        {filteredGuitars?.map((guitar) => (
           <GuitarCard
             key={guitar.id}
             id={guitar.id}

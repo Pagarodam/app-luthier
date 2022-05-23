@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import capilalize from 'capitalize';
 import Input from '../UI/Input';
-import Button from 'components/UI/Button';
 import Modal from 'components/UI/Modal';
+import GuitarComponentsInput from './GuitarComponentsInputs';
 
 const sumWithoutUndefineds = (...data) => {
   return data.reduce((prev, curr) => (curr ? prev + curr : prev), 0);
@@ -82,7 +82,6 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
-
       setGuitar({ ...INITIAL_VALUES });
       onGuitarCreated({ ...res.data, ...guitar });
       setMessage(`${guitar.name} fué añadida`);
@@ -104,7 +103,6 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
   };
 
   const guitarImageChangeHandler = (event) => {
-
     if (event.target.files && event.target.files[0]) {
       const i = event.target.files[0];
 
@@ -214,58 +212,10 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
               />
             </div>
           </div>
-          <div>
-            <div className="input-group m-2">
-              <Input
-                id="tapa"
-                label="Tapa"
-                type="text"
-                readOnly
-                required
-                value={guitarComponents.tapa?.nameWood}
-              />
-            </div>
-            <div className="input-group m-2">
-              <Input
-                id="aro"
-                label="Aro"
-                type="text"
-                readOnly
-                required
-                value={guitarComponents.aro?.nameWood}
-              />
-            </div>
-            <div className="input-group m-2">
-              <Input
-                id="fondo"
-                label="Fondo"
-                type="text"
-                readOnly
-                required
-                value={guitarComponents.fondo?.nameWood}
-              />
-            </div>
-            <div className="input-group m-2">
-              <Input
-                id="diapason"
-                label="Diapason"
-                type="text"
-                readOnly
-                required
-                value={guitarComponents.diapason?.nameWood}
-              />
-            </div>
-          </div>
-          <div>
-            <Button
-              className={
-                'bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded'
-              }
-              type="submit"
-              label={'Subir'}
-              disabled={false}
-            />
-          </div>
+          <GuitarComponentsInput
+            tapa={'tapita tapera'}
+            guitarComponents={guitarComponents}
+          />
         </form>
       </div>
       <div className="divider"></div>

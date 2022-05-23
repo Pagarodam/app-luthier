@@ -26,6 +26,10 @@ const Cart = ({ onClose }) => {
         <CartItem
           key={item.id}
           name={item.name}
+          tapa={item.tapa?.nameWood}
+          aro={item.aro?.nameWood}
+          fondo={item.fondo?.nameWood}
+          diapason={item.diapason?.nameWood}
           amount={item.amount}
           price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
