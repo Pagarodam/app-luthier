@@ -1,12 +1,16 @@
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
 
 import Button from 'components/UI/Button';
 import Modal from 'components/UI/Modal';
 import CartContext from 'components/store/cart-context';
 import CartItem from './CartItem';
+// import { useSearchParams } from 'react-router-dom';
 
 const Cart = ({ onClose }) => {
   const cartCtx = useContext(CartContext);
+  // const [params, setParams] = useSearchParams();
+  const router = useRouter();
 
   const totalAmount = cartCtx.totalAmount;
 
@@ -21,10 +25,11 @@ const Cart = ({ onClose }) => {
   };
 
   const cartItems = (
-    <ul className="overflow-scroll max-h-80">
+    <ul className="overflow-scroll max-h-80 ">
       {cartCtx.items.map((item) => (
         <CartItem
           key={item.id}
+          id={item.id}
           name={item.name}
           tapa={item.tapa?.nameWood}
           aro={item.aro?.nameWood}
@@ -55,12 +60,14 @@ const Cart = ({ onClose }) => {
           label={'Cerrar'}
         />
         {hasItems && (
-          <Button
-            className={
-              'bg-blue-500 hover:bg-blue-700 text-white cursor-pointer border-black border-2 m-2 py-1 px-3 rounded-xl'
-            }
-            label={'Comprar'}
-          />
+          <>
+            <Button
+              className={
+                'bg-blue-500 hover:bg-blue-700 text-white cursor-pointer border-black border-2 m-2 py-1 px-3 rounded-xl'
+              }
+              label={'Comprar'}
+            />
+          </>
         )}
       </div>
     </Modal>

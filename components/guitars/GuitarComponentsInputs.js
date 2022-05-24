@@ -25,7 +25,7 @@ const GuitarComponentsInput = ({
   const addToCartHandler = (amount) => {
     cartCtx.addItem({
       id: id,
-      name: name + id,
+      name: name,
       amount: amount,
       price: price,
       aro: aro,

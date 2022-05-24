@@ -27,6 +27,10 @@ export const GuitarCard = ({
       name: name,
       amount: amount,
       price: price,
+      tapa: tapa,
+      aro: aro,
+      fondo: fondo,
+      diapason: diapason,
     });
   };
 
@@ -67,12 +71,12 @@ export const GuitarCard = ({
           )}
           {editGuitar && (
             <Button
-              onClick={() => props.editGuitar(id)}
+              onClick={() => editGuitar(id)}
               label={'Editar'}
               className={'btn btn-secondary'}
             />
           )}
-          <GuitarCardForm onAddToCart={addToCartHandler} />
+          {!deleteGuitar && <GuitarCardForm onAddToCart={addToCartHandler} />}
         </div>
       </div>
     </div>

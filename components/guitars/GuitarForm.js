@@ -212,10 +212,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
               />
             </div>
           </div>
-          <GuitarComponentsInput
-            tapa={'tapita tapera'}
-            guitarComponents={guitarComponents}
-          />
+          <GuitarComponentsInput guitarComponents={guitarComponents} />
         </form>
       </div>
       <div className="divider"></div>

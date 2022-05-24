@@ -115,16 +115,6 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
 
   return (
     <>
-      <GuitarComponentsInput
-        tapa={guitar.tapa}
-        aro={guitar.aro}
-        fondo={guitar.fondo}
-        diapason={guitar.diapason}
-        name={guitar.name}
-        guitarComponents={guitarComponents}
-        price={guitar.price}
-        label={'Añadir'}
-      />
       <Titles
         label="Configurador de guitarras a medida ¡Elige los componentes de tu Guitarra
         a la carta!"
@@ -189,7 +179,16 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
       {showComponents && (
         <>
           <Titles label={'Componentes'} />
-
+          <GuitarComponentsInput
+            tapa={guitar.tapa}
+            aro={guitar.aro}
+            fondo={guitar.fondo}
+            diapason={guitar.diapason}
+            name={guitar.name}
+            guitarComponents={guitarComponents}
+            price={guitar.price}
+            label={'Añadir'}
+          />
           <GuitarComponentsList
             woods={woods}
             woodType={'tapa'}
