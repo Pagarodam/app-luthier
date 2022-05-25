@@ -27,6 +27,7 @@ const Guitars = (props) => {
   const [guitarComponents, setGuitarComponents] = useState({
     ...EMPTY_GUITAR_COMPONENTS,
   });
+  const [adminGuitars, setAdminGuitars] = useState(true);
 
   const closeMessageHandler = () => {
     setMessage('');
@@ -77,6 +78,7 @@ const Guitars = (props) => {
         </Modal>
       )}
       <GuitarForm
+        onAdminGuitars={adminGuitars}
         guitarComponents={guitarComponents}
         onGuitarCreated={(newGuitar) => {
           setGuitarComponents({ ...EMPTY_GUITAR_COMPONENTS });

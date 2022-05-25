@@ -3,6 +3,7 @@ import capilalize from 'capitalize';
 import Input from '../UI/Input';
 import Modal from 'components/UI/Modal';
 import GuitarComponentsInput from './GuitarComponentsInputs';
+import Button from 'components/UI/Button';
 
 const sumWithoutUndefineds = (...data) => {
   return data.reduce((prev, curr) => (curr ? prev + curr : prev), 0);
@@ -30,7 +31,7 @@ const INITIAL_VALUES = {
   style: '',
 };
 
-const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
+const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
   const [message, setMessage] = useState('');
   const [guitar, setGuitar] = useState({
     ...INITIAL_VALUES,
@@ -212,7 +213,22 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated }) => {
               />
             </div>
           </div>
-          <GuitarComponentsInput guitarComponents={guitarComponents} />
+          <div>
+            <GuitarComponentsInput
+              guitarComponents={guitarComponents}
+              onAdminGuitars={onAdminGuitars}
+            />
+            {onAdminGuitars && (
+              <Button
+                className={
+                  'bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded'
+                }
+                type="submit"
+                label={'Subir'}
+                disabled={false}
+              />
+            )}
+          </div>
         </form>
       </div>
       <div className="divider"></div>
