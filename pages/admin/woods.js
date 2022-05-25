@@ -70,7 +70,36 @@ const Woods = () => {
         />
         <GuitarComponentsList
           woods={woods}
+          woodType={'tapa'}
           label={'Borrar'}
+          component={'Tapas'}
+          onEditWood={selectWood}
+          onButtonClick={deleteWood}
+          buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+        />
+        <GuitarComponentsList
+          woods={woods}
+          woodType={'aro'}
+          label={'Borrar'}
+          component={'Aros'}
+          onEditWood={selectWood}
+          onButtonClick={deleteWood}
+          buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+        />
+        <GuitarComponentsList
+          woods={woods}
+          woodType={'fondo'}
+          label={'Borrar'}
+          component={'Fondos'}
+          onEditWood={selectWood}
+          onButtonClick={deleteWood}
+          buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}
+        />
+        <GuitarComponentsList
+          woods={woods}
+          woodType={'diapason'}
+          label={'Borrar'}
+          component={'Diapasones'}
           onEditWood={selectWood}
           onButtonClick={deleteWood}
           buttonColor={`bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded`}

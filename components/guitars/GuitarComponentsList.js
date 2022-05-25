@@ -1,54 +1,29 @@
 import WoodsList from '../woods/woodsList';
 
-const getWoodsByType = (woodList, woodType) =>
-  woodList.filter((wood) => wood.component === woodType);
+const GuitarComponentsList = ({
+  woods,
+  label,
+  onButtonClick,
+  onEditWood,
+  buttonColor,
+  component,
+  woodType,
+}) => {
+  const getWoodsByType = (components, componentsType) =>
+    components.filter((wood) => wood.component === componentsType);
 
-const GuitarComponentsList = (props) => {
-  const tapas = getWoodsByType(props.woods, 'tapa');
-  const fondos = getWoodsByType(props.woods, 'fondo');
-  const aros = getWoodsByType(props.woods, 'aro');
-  const diapasones = getWoodsByType(props.woods, 'diapason');
+  const filteredWoods = getWoodsByType(woods, woodType);
 
   return (
     <div>
-      {tapas.length > 0 && (
+      {filteredWoods.length > 0 && (
         <WoodsList
-          woods={tapas}
-          component={'Tapas'}
-          label={props.label}
-          onButtonClick={props.onButtonClick}
-          onEditWood={props.onEditWood}
-          buttonColor={props.buttonColor}
-        />
-      )}
-      {aros.length > 0 && (
-        <WoodsList
-          woods={aros}
-          component={'Aros'}
-          label={props.label}
-          onButtonClick={props.onButtonClick}
-          onEditWood={props.onEditWood}
-          buttonColor={props.buttonColor}
-        />
-      )}
-      {fondos.length > 0 && (
-        <WoodsList
-          woods={fondos}
-          component={'Fondo'}
-          label={props.label}
-          onButtonClick={props.onButtonClick}
-          onEditWood={props.onEditWood}
-          buttonColor={props.buttonColor}
-        />
-      )}
-      {diapasones.length > 0 && (
-        <WoodsList
-          woods={diapasones}
-          component={'Diapason'}
-          label={props.label}
-          onButtonClick={props.onButtonClick}
-          onEditWood={props.onEditWood}
-          buttonColor={props.buttonColor}
+          woods={filteredWoods}
+          component={component}
+          label={label}
+          onButtonClick={onButtonClick}
+          onEditWood={onEditWood}
+          buttonColor={buttonColor}
         />
       )}
     </div>
