@@ -28,15 +28,17 @@ const Cart = ({ onClose }) => {
     <ul className="overflow-scroll max-h-80 ">
       {cartCtx.items.map((item) => (
         <CartItem
+          item={item}
           key={item.id}
-          id={item.id}
-          name={item.name}
-          tapa={item.tapa?.nameWood}
-          aro={item.aro?.nameWood}
-          fondo={item.fondo?.nameWood}
-          diapason={item.diapason?.nameWood}
-          amount={item.amount}
-          price={item.price}
+          // id={item.id}
+          // name={item.name}
+          // idTapa={item.tapa.id}
+          // tapa={item.tapa?.nameWood}
+          // aro={item.aro?.nameWood}
+          // fondo={item.fondo?.nameWood}
+          // diapason={item.diapason?.nameWood}
+          // amount={item.amount}
+          // price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
         />

@@ -17,24 +17,24 @@ const INITIAL_VALUES = {
   shippingCosts: 250,
   image: '',
   tapa: {
-    nameWood: '',
+    nameWood: ''
   },
   aro: {
-    nameWood: '',
+    nameWood: ''
   },
   fondo: {
-    nameWood: '',
+    nameWood: ''
   },
   diapason: {
-    nameWood: '',
+    nameWood: ''
   },
-  style: '',
+  style: ''
 };
 
 const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
   const [message, setMessage] = useState('');
   const [guitar, setGuitar] = useState({
-    ...INITIAL_VALUES,
+    ...INITIAL_VALUES
   });
 
   useEffect(() => {
@@ -47,8 +47,8 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
         guitarComponents.tapa?.price,
         guitarComponents.aro?.price,
         guitarComponents.fondo?.price,
-        guitarComponents.diapason?.price,
-      ),
+        guitarComponents.diapason?.price
+      )
     });
   }, [guitarComponents]);
 
@@ -64,8 +64,8 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
     try {
       await fetch('/api/upload', {
         method: 'POST',
-        body,
-      });
+        body
+      }).then((res) => res.json());
 
       const res = await fetch('/api/guitars', {
         method: 'POST',
@@ -76,15 +76,15 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
           fondo: guitar.fondo.id,
           diapason: guitar.diapason.id,
           price: Number(guitar.price),
-          image: `/uploads/${guitar.image.name}`,
+          image: `/uploads/${guitar.image.name}`
         }),
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }).then((res) => res.json());
       setGuitar({ ...INITIAL_VALUES });
-      onGuitarCreated({ ...res.data, ...guitar });
+      onGuitarCreated({ ...res.data, ...guitar, image: res.data.image });
       setMessage(`${guitar.name} fué añadida`);
     } catch (error) {
       setMessage(error);
