@@ -11,6 +11,7 @@ const GuitarComponentsInput = ({
   fondo,
   tapa,
   diapason,
+  onAdminGuitars,
 }) => {
   console.log(guitarComponents, 'guitarComponents');
 
@@ -78,20 +79,24 @@ const GuitarComponentsInput = ({
             value={guitarComponents?.diapason?.nameWood}
           />
         </div>
-        <div className="input-group m-2">
-          <Input
-            id="precio"
-            label="Precio"
-            value={price ? price : 200}
-            readOnly
-            type="number"
-            placeholder="Precio de la guitarra"
-            className="input input-bordered"
-          />
-        </div>
-      </div>
-      <div>
-        <GuitarCardForm onAddToCart={addToCartHandler} />
+        {!onAdminGuitars && (
+          <>
+            <div className="input-group m-2">
+              <Input
+                id="precio"
+                label="Precio"
+                value={price ? price : 200}
+                readOnly
+                type="number"
+                placeholder="Precio de la guitarra"
+                className="input input-bordered"
+              />
+            </div>
+            <div>
+              <GuitarCardForm onAddToCart={addToCartHandler} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
