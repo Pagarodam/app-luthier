@@ -25,25 +25,20 @@ export default function Profile() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { id, email, rol, image } = session.user;
-    try {
-      const user = await fetch(`/api/users/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          rol,
-          image,
-          ...address,
-        }),
-      });
-      const data = await user.json();
-      if (data.success) {
-        router.push('/profile');
-      }
-    } catch (error) {
-      console.log(`Error: ${error}`);
+
+    const response = await fetch(`/api/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        address,
+      }),
+    });
+    const data = await response.json();
+    console.log('🚀 ~ file: index.js ~ line 42 ~ handleSubmit ~ data', data);
+    if (data.success) {
+      console.log('do it');
     }
   };
 
@@ -62,7 +57,7 @@ export default function Profile() {
 
   return (
     <>
-      <h1>{JSON.stringify(session.user)}</h1>
+      <h1>{JSON.stringify(address)}</h1>
       <div className="mx-10">
         <Image
           src={session.user.image}
