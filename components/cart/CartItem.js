@@ -1,43 +1,40 @@
-import Button from 'components/UI/Button';
 import classes from './CartItem.module.css';
 import Link from 'next/link';
 
-const CartItem = (props) => {
-  //   const price = `$${props.price.toFixed(2)}`;
-
+const CartItem = ({ item, onAdd, onRemove }) => {
   return (
     <li className={classes['cart-item']}>
       <div>
-        <h2>{props.name}</h2>
-        {props.tapa && (
+        <h2>{item.name}</h2>
+        {item.tapa && (
           <h3>
-            <b>Tapa:</b> {props.tapa}
+            <b>Tapa:</b> {item.tapa.nameWood}
           </h3>
         )}
-        {props.aro && (
+        {item.aro && (
           <h3>
-            <b>Aro:</b> {props.aro}
+            <b>Aro:</b> {item.aro.nameWood}
           </h3>
         )}
-        {props.fondo && (
+        {item.fondo && (
           <h3>
-            <b>Fondo:</b> {props.fondo}
+            <b>Fondo:</b> {item.fondo.nameWood}
           </h3>
         )}
-        {props.diapason && (
+        {item.diapason && (
           <h3>
-            <b>Diapasón: </b> {props.diapason}
+            <b>Diapasón: </b> {item.diapason.nameWood}
           </h3>
         )}
 
         <div className={classes.summary}>
-          <span className={classes.price}>{props.price}</span>
-          <span className={classes.amount}>x {props.amount}</span>
+          <span className={classes.price}>{item.price}</span>
+          <span className={classes.amount}>x {item.amount}</span>
         </div>
       </div>
-      {props.id && (
+      {item.id && (
         <Link
-          href={`/singleView?id=${props.id}&status=${'props.tapa.namewood'}`}
+          href={`/singleView?id=${item.id}&price=${item.price}&style=${item.style}&tapa=${item.tapa?.id}&aro=${item.aro?.id}&fondo=${item.fondo?.id}&diapason=${item.diapason?.id}`}
         >
           <a
             className={
@@ -50,8 +47,8 @@ const CartItem = (props) => {
       )}
 
       <div className={classes.actions}>
-        <button onClick={props.onRemove}>−</button>
-        <button onClick={props.onAdd}>+</button>
+        <button onClick={onRemove}>−</button>
+        <button onClick={onAdd}>+</button>
       </div>
     </li>
   );

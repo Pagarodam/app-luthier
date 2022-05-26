@@ -7,17 +7,17 @@ import Titles from 'components/UI/Titles';
 
 const EMPTY_GUITAR_COMPONENTS = {
   tapa: {
-    nameWood: '',
+    nameWood: ''
   },
   aro: {
-    nameWood: '',
+    nameWood: ''
   },
   fondo: {
-    nameWood: '',
+    nameWood: ''
   },
   diapason: {
-    nameWood: '',
-  },
+    nameWood: ''
+  }
 };
 
 const Guitars = (props) => {
@@ -25,7 +25,7 @@ const Guitars = (props) => {
   const [woods, setWoods] = useState([]);
   const [guitars, setGuitars] = useState([]);
   const [guitarComponents, setGuitarComponents] = useState({
-    ...EMPTY_GUITAR_COMPONENTS,
+    ...EMPTY_GUITAR_COMPONENTS
   });
   const adminGuitars = true;
 
@@ -47,10 +47,10 @@ const Guitars = (props) => {
 
   const deleteGuitar = async (id) => {
     await fetch(`/api/guitars/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     }).catch(() => {
       setMessage(
-        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)',
+        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)'
       );
     });
 
@@ -63,7 +63,7 @@ const Guitars = (props) => {
 
     setGuitarComponents({
       ...guitarComponents,
-      [selectedComponent.component]: selectedComponent,
+      [selectedComponent.component]: selectedComponent
     });
   };
 
@@ -82,6 +82,7 @@ const Guitars = (props) => {
         guitarComponents={guitarComponents}
         onGuitarCreated={(newGuitar) => {
           setGuitarComponents({ ...EMPTY_GUITAR_COMPONENTS });
+          console.log('newGuitar', newGuitar);
           setGuitars([...guitars, newGuitar]);
         }}
       />

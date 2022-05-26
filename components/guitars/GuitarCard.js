@@ -18,6 +18,7 @@ export const GuitarCard = ({
   deleteGuitar,
   editGuitar,
   addToCart,
+  show
 }) => {
   const cartCtx = useContext(CartContext);
 
@@ -30,20 +31,22 @@ export const GuitarCard = ({
       tapa: tapa,
       aro: aro,
       fondo: fondo,
-      diapason: diapason,
+      diapason: diapason
     });
   };
 
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
       <figure>
-        <Image
-          src={image}
-          alt={name}
-          width={315}
-          height={490}
-          objectFit="contain"
-        />
+        {image && (
+          <Image
+            src={image}
+            alt={name}
+            width={315}
+            height={490}
+            objectFit="contain"
+          />
+        )}
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
@@ -54,30 +57,32 @@ export const GuitarCard = ({
         <p>Aro: {aro.nameWood}</p>
         <p>Fondo: {fondo.nameWood}</p>
         <p>Diapasón: {diapason.nameWood}</p>
-        <div className="card-actions justify-end">
-          {addToCart && (
-            <Button
-              onClick={() => addToCart(id)}
-              label={'Añadir al carro'}
-              className={'btn btn-primary'}
-            />
-          )}
-          {deleteGuitar && (
-            <Button
-              onClick={() => deleteGuitar(id)}
-              label={'Borrar'}
-              className={'btn btn-primary'}
-            />
-          )}
-          {editGuitar && (
-            <Button
-              onClick={() => editGuitar(id)}
-              label={'Editar'}
-              className={'btn btn-secondary'}
-            />
-          )}
-          {!deleteGuitar && <GuitarCardForm onAddToCart={addToCartHandler} />}
-        </div>
+        {!show && (
+          <div className="card-actions justify-end">
+            {addToCart && (
+              <Button
+                onClick={() => addToCart(id)}
+                label={'Añadir al carro'}
+                className={'btn btn-primary'}
+              />
+            )}
+            {deleteGuitar && (
+              <Button
+                onClick={() => deleteGuitar(id)}
+                label={'Borrar'}
+                className={'btn btn-primary'}
+              />
+            )}
+            {editGuitar && (
+              <Button
+                onClick={() => editGuitar(id)}
+                label={'Editar'}
+                className={'btn btn-secondary'}
+              />
+            )}
+            {!deleteGuitar && <GuitarCardForm onAddToCart={addToCartHandler} />}
+          </div>
+        )}
       </div>
     </div>
   );
