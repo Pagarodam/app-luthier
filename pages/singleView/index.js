@@ -10,13 +10,20 @@ const EMPTY_GUITAR = {
 };
 export default function Singleview({ guitars, woods }) {
   const router = useRouter();
-  const { id, style, tapa, aro, fondo, diapason } = router.query;
+  const { id, style, tapa, aro, fondo, diapason, price } = router.query;
   const [selectedGuitar, setSelectedGuitar] = useState(EMPTY_GUITAR);
   const [selectedCustomGuitarComponents, setSelectedCustomGuitarComponents] =
     useState({});
+  const customGuitarName = 'Custom';
+  const customGuitarStyle = 'Custom';
+  const customGuitarDescription =
+    'Las piezas de esta guitarra están escogidas una a una por ti.';
+  const customGuitarImage =
+    'https://maderasbarber.com/tonewood/5180-max_box/kit-guitarra-clasica-modelo-acorde-cites.jpg';
+  const show = true;
 
   console.log(tapa, 'Tapa');
-  console.log('selectedCustomCosa', selectedCustomGuitarComponents);
+  console.log('selectedCustomCosa', selectedCustomGuitarComponents.tapa);
   const components = (id, componentType) => {
     console.log(componentType, id);
     setSelectedCustomGuitarComponents((customComponents) => ({
@@ -34,7 +41,7 @@ export default function Singleview({ guitars, woods }) {
     components(fondo, 'fondo');
     components(diapason, 'diapason');
   }, [id]);
-  console.log(selectedGuitar, 'guitarra Seleccionada');
+  console.log(selectedGuitar.tapa, 'Tapa seleccionada a vacio');
   console.log(selectedGuitar.image, 'Imagen guitarra');
   console.log(selectedCustomGuitarComponents, 'SelectedCustomGuitarComponents');
 
@@ -54,48 +61,114 @@ export default function Singleview({ guitars, woods }) {
           </tr>
           <tr>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.name}
+              {selectedGuitar.name ? selectedGuitar.name : customGuitarName}
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.style}
+              {selectedGuitar.style ? selectedGuitar.style : customGuitarStyle}
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.description}
+              {selectedGuitar.description
+                ? selectedGuitar.description
+                : customGuitarDescription}
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.tapa.nameWood} {selectedGuitar.tapa.quality}{' '}
-              Precio: {selectedGuitar.tapa.price}€
+              {selectedGuitar.tapa.nameWood
+                ? selectedGuitar.tapa.nameWood
+                : selectedCustomGuitarComponents.tapa?.nameWood}{' '}
+              {selectedGuitar.tapa.quality
+                ? selectedGuitar.tapa.quality
+                : selectedCustomGuitarComponents.tapa?.quality}{' '}
+              Precio:{' '}
+              {selectedGuitar.tapa.price
+                ? selectedGuitar.tapa.price
+                : selectedCustomGuitarComponents.tapa?.price}
+              €
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.aro.nameWood} {selectedGuitar.aro.quality} Precio:{' '}
-              {selectedGuitar.aro.price}€
+              {selectedGuitar.aro.nameWood
+                ? selectedGuitar.aro.nameWood
+                : selectedCustomGuitarComponents.aro?.nameWood}{' '}
+              {selectedGuitar.aro.quality
+                ? selectedGuitar.aro.quality
+                : selectedCustomGuitarComponents.aro?.quality}{' '}
+              Precio:{' '}
+              {selectedGuitar.aro.price
+                ? selectedGuitar.aro.price
+                : selectedCustomGuitarComponents.aro?.price}
+              €
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.fondo.nameWood} {selectedGuitar.fondo.quality}{' '}
-              Precio: {selectedGuitar.fondo.price}€
+              {selectedGuitar.fondo.nameWood
+                ? selectedGuitar.fondo.nameWood
+                : selectedCustomGuitarComponents.fondo?.nameWood}{' '}
+              {selectedGuitar.fondo.quality
+                ? selectedGuitar.fondo.quality
+                : selectedCustomGuitarComponents.fondo?.quality}{' '}
+              Precio:{' '}
+              {selectedGuitar.fondo.price
+                ? selectedGuitar.fondo.price
+                : selectedCustomGuitarComponents.fondo?.price}
+              €
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.diapason.nameWood}{' '}
-              {selectedGuitar.diapason.quality} Precio:{' '}
-              {selectedGuitar.diapason.price}€
+              {selectedGuitar.diapason.nameWood
+                ? selectedGuitar.diapason.nameWood
+                : selectedCustomGuitarComponents.diapason?.nameWood}{' '}
+              {selectedGuitar.diapason.quality
+                ? selectedGuitar.diapason.quality
+                : selectedCustomGuitarComponents.diapason?.quality}{' '}
+              Precio:{' '}
+              {selectedGuitar.diapason.price
+                ? selectedGuitar.diapason.price
+                : selectedCustomGuitarComponents.diapason?.price}
+              €
             </td>
             <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.price}€
+              {price}€
             </td>
           </tr>
         </table>
         <GuitarCard
+          show={show}
           key={selectedGuitar.id}
           id={selectedGuitar.id}
-          name={selectedGuitar.name}
-          description={selectedGuitar.description}
-          price={selectedGuitar.price}
-          style={selectedGuitar.style}
-          image={selectedGuitar.image}
-          tapa={selectedGuitar.tapa}
-          aro={selectedGuitar.aro}
-          fondo={selectedGuitar.fondo}
-          diapason={selectedGuitar.diapason}
+          name={
+            selectedGuitar.name
+              ? selectedGuitar.name
+              : selectedCustomGuitarComponents.customGuitarName
+          }
+          description={
+            selectedGuitar.description
+              ? selectedGuitar.description
+              : customGuitarDescription
+          }
+          price={price}
+          style={
+            selectedGuitar.style ? selectedGuitar.style : customGuitarStyle
+          }
+          image={
+            selectedGuitar.image ? selectedGuitar.image : customGuitarImage
+          }
+          tapa={
+            selectedCustomGuitarComponents.tapa
+              ? selectedCustomGuitarComponents.tapa
+              : selectedGuitar.tapa
+          }
+          aro={
+            selectedCustomGuitarComponents.aro
+              ? selectedCustomGuitarComponents.aro
+              : selectedGuitar.aro
+          }
+          fondo={
+            selectedCustomGuitarComponents.fondo
+              ? selectedCustomGuitarComponents.fondo
+              : selectedGuitar.fondo
+          }
+          diapason={
+            selectedCustomGuitarComponents.diapason
+              ? selectedCustomGuitarComponents.diapason
+              : selectedGuitar.diapason
+          }
         />
       </div>
     </>

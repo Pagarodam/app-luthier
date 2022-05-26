@@ -34,7 +34,7 @@ const CartItem = ({ item, onAdd, onRemove }) => {
       </div>
       {item.id && (
         <Link
-          href={`/singleView?id=${item.id}&style=${item.style}&tapa=${item.tapa?.id}&aro=${item.aro?.id}&fondo=${item.fondo?.id}&diapason=${item.diapason?.id}`}
+          href={`/singleView?id=${item.id}&price=${item.price}&style=${item.style}&tapa=${item.tapa?.id}&aro=${item.aro?.id}&fondo=${item.fondo?.id}&diapason=${item.diapason?.id}`}
         >
           <a
             className={
