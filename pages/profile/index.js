@@ -35,7 +35,7 @@ export default function Profile() {
           email,
           rol,
           image,
-          address,
+          ...address,
         }),
       });
       const data = await user.json();
