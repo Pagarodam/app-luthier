@@ -1,3 +1,4 @@
+import { success } from 'daisyui/src/colors';
 import dbConnect from 'lib/dbConnect';
 import User from 'lib/models/Users';
 
@@ -23,16 +24,13 @@ export default async function handler(req, res) {
       break;
     case 'PUT':
       try {
-        const { email, rol, avatar, address = '' } = req.body;
+        const { address } = req.body;
         const user = await User.findByIdAndUpdate(id, {
-          email,
-          rol,
-          avatar,
           address,
         });
-        res.status(200).json(user);
+        res.status(200).json({ success: true, user });
       } catch (error) {
-        res.status(418).json({ message: "Yes I'm a teapot" });
+        res.status(418).json({ message: "Yes I'm a teapot", error });
       }
       break;
 
