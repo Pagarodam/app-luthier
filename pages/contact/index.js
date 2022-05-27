@@ -14,7 +14,7 @@ const YOUR_PUBLIC_KEY = "A2OVbYSw93fWdGMU5"
 const Contact = () => {
   const form = useRef();
   const{data: session, status} = useSession();
-  const {id = '', name = '', email = '' }=  session?.user || {};
+  const {id="", name="", email="" }=  session?.user || {};
   const [message, setMessage]= useState("");
 
  
@@ -53,7 +53,7 @@ const Contact = () => {
               label={'Nombre*: '}
               type="text"
               name="name"
-              value={name ? name : ''}
+              value={name !== "" ? name : null}
               id="nombre"
               required="required"
               placeholder="Escribe tu nombre"
@@ -67,7 +67,7 @@ const Contact = () => {
               type="email"
               name="email"
               id="email"
-              value={email ? email : ''}
+              value={email !== "" ? email : null}
               required="required"
               placeholder="Escribe tu Email"
             />
