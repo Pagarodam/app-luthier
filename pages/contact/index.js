@@ -1,50 +1,59 @@
 import Button from 'components/UI/Button';
 import Input from 'components/UI/Input';
 import Titles from 'components/UI/Titles';
-import { getSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
+import Modal from 'components/UI/Modal';
+import { useState } from 'react';
 
-// const USER = {
-//   id: '',
-//   email: '',
-//   name: '',
-//   rol: '',
-//   image: ''
-// };
+const YOUR_SERVICE_ID = "service_f8rxnni"; 
+const YOUR_TEMPLATE_ID = "template_rlpjg1g"; 
+const YOUR_PUBLIC_KEY = "A2OVbYSw93fWdGMU5"
 
 const Contact = () => {
-  // console.log(session.user);
-  const id = 'id';
-  const [sesion, setSesion] = useState({});
+  const form = useRef();
+  const{data: session, status} = useSession();
+  const {id = '', name = '', email = '' }=  session?.user || {};
+  const [message, setMessage]= useState("");
 
-  useEffect((session) => {
-    async function getUserSession() {
-      session = await getSession();
-    }
-    getUserSession();
-  }),
-    [];
-  setSesion(session);
-  console.log(sesion);
-
-  const onSubmit = (e) => {
+ 
+  const sendEmail = (e) => {
     e.preventDefault();
-    console.log('conforme');
+
+    emailjs.sendForm(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, form.current, YOUR_PUBLIC_KEY)
+      .then((result) => {
+          setMessage("Mensaje enviado correctamente");
+          e.target.reset();
+      }, (error) => {
+          setMessage(error.text);
+      });
   };
+  const closeMessageHandler=()=>{
+    setMessage("");
+  }
 
   return (
     <>
-      {/* <Titles label={'Formulario de contacto'} />
-      <div className={`p-4 border-4 rounded-xl m-3`}>
+    {message && (
+        <Modal onClose={closeMessageHandler}>
+          <div>{message}</div>
+          <button className="btn btn-primary" onClick={closeMessageHandler}>
+            Cerrar
+          </button>
+        </Modal>
+      )}
+      <Titles label={'Formulario de contacto'} />
+      <div className={`p-4 border-4 rounded-xl text-white m-3 bg-[url('/assets/lutier.jpg')]`}>
         <h3>Escríbenos y en breve nos pondremos en contacto contigo</h3>
-        <form onSubmit={onSubmit} className={'p-4'}>
+        <form ref={form} onSubmit={sendEmail} className={'p-4'}>
           <div className="input-group m-2">
             <Input
               className={'input input-bordered'}
               label={'Nombre*: '}
               type="text"
               name="name"
-              // value={name ? name : ''}
+              value={name ? name : ''}
               id="nombre"
               required="required"
               placeholder="Escribe tu nombre"
@@ -58,7 +67,7 @@ const Contact = () => {
               type="email"
               name="email"
               id="email"
-              // value={email ? email : ''}
+              value={email ? email : ''}
               required="required"
               placeholder="Escribe tu Email"
             />
@@ -69,7 +78,7 @@ const Contact = () => {
               className={'input input-bordered'}
               label={'Telefono: '}
               type="tel"
-              name="telefono"
+              name="phone"
               id="telefono"
               placeholder="Escribe tu teléfono"
             />
@@ -80,8 +89,8 @@ const Contact = () => {
               className={'input input-bordered'}
               label={'Asunto*: '}
               type="text"
-              name="asunto"
-              id="assunto"
+              name="subject"
+              id="asunto"
               required="required"
               placeholder="Escribe un asunto"
             />
@@ -91,7 +100,7 @@ const Contact = () => {
             <label className="p-3">Mensaje*:</label>
             <textarea
               className={' input input-bordered'}
-              name="mensaje"
+              name="message"
               id="mensaje"
               required="obligatorio"
               placeholder="Deja aquí tu comentario..."
@@ -110,7 +119,7 @@ const Contact = () => {
             <span> * </span>los campos son obligatorios.
           </div>
         </form>
-      </div> */}
+      </div>
     </>
   );
 };
