@@ -14,7 +14,7 @@ const Input = ({
 }) => {
   return (
     <>
-      {type != 'radio' && <span>{label}</span>}
+      {type != 'radio' && <span className={className}>{label}</span>}
 
       <input
         id={id}

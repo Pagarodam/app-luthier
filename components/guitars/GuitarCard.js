@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import CartContext from 'components/store/cart-context';
 import GuitarCardForm from './GuitarCardForm';
+import Link from 'next/link';
 
 export const GuitarCard = ({
   id,
@@ -35,18 +36,25 @@ export const GuitarCard = ({
     });
   };
 
+  const showImage = () => {
+    <Link href={image}></Link>;
+    console.log(image);
+  };
+
   return (
     <div className="card card-side bg-base-100 shadow-xl glass m-5">
-      <figure>
-        {image && (
-          <Image
-            src={image}
-            alt={name}
-            width={315}
-            height={490}
-            objectFit="contain"
-          />
-        )}
+      <figure className="hover:cursor-pointer">
+        <Link href={image}>
+          {image && (
+            <Image
+              src={image}
+              alt={name}
+              width={315}
+              height={490}
+              objectFit="contain"
+            />
+          )}
+        </Link>
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
