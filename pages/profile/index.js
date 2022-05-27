@@ -4,12 +4,13 @@ import { useState } from 'react';
 import Input from 'components/UI/Input';
 import Link from 'next/link';
 import Image from 'next/image';
+import Button from 'components/UI/Button';
 
 const INITIAL_STATE = {
   street: '',
   number: '',
   city: '',
-  cp: '',
+  cp: ''
 };
 
 export default function Profile() {
@@ -29,11 +30,11 @@ export default function Profile() {
     const response = await fetch(`/api/users/${id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        address,
-      }),
+        address
+      })
     });
     const data = await response.json();
     console.log('🚀 ~ file: index.js ~ line 42 ~ handleSubmit ~ data', data);
@@ -96,12 +97,11 @@ export default function Profile() {
               value={address.cp}
               onChange={handleChange}
             />
-            <button
+            <Button
+              label={'Guardar'}
               type="submit"
               className="bg-blue-500 text-white p-2 rounded-box my-5"
-            >
-              Guardar
-            </button>
+            />
           </div>
         </form>
       </div>

@@ -1,15 +1,12 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
-
 import Button from 'components/UI/Button';
 import Modal from 'components/UI/Modal';
 import CartContext from 'components/store/cart-context';
 import CartItem from './CartItem';
-// import { useSearchParams } from 'react-router-dom';
 
 const Cart = ({ onClose }) => {
   const cartCtx = useContext(CartContext);
-  // const [params, setParams] = useSearchParams();
   const router = useRouter();
 
   const totalAmount = cartCtx.totalAmount;
@@ -30,15 +27,6 @@ const Cart = ({ onClose }) => {
         <CartItem
           item={item}
           key={item.id}
-          // id={item.id}
-          // name={item.name}
-          // idTapa={item.tapa.id}
-          // tapa={item.tapa?.nameWood}
-          // aro={item.aro?.nameWood}
-          // fondo={item.fondo?.nameWood}
-          // diapason={item.diapason?.nameWood}
-          // amount={item.amount}
-          // price={item.price}
           onRemove={cartItemRemoveHandler.bind(null, item.id)}
           onAdd={cartItemAddHandler.bind(null, item)}
         />

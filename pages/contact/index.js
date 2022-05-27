@@ -1,91 +1,126 @@
-import styles from 'styles/Home.module.css';
+import Button from 'components/UI/Button';
+import Input from 'components/UI/Input';
+import Titles from 'components/UI/Titles';
+import { useSession } from 'next-auth/react';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
+import Modal from 'components/UI/Modal';
+import { useState } from 'react';
 
-export default function About() {
+const YOUR_SERVICE_ID = "service_f8rxnni"; 
+const YOUR_TEMPLATE_ID = "template_rlpjg1g"; 
+const YOUR_PUBLIC_KEY = "A2OVbYSw93fWdGMU5"
+
+const Contact = () => {
+  const form = useRef();
+  const{data: session, status} = useSession();
+  const {id="", name="", email="" }=  session?.user || {};
+  const [message, setMessage]= useState("");
+
+ 
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, form.current, YOUR_PUBLIC_KEY)
+      .then((result) => {
+          setMessage("Mensaje enviado correctamente");
+          e.target.reset();
+      }, (error) => {
+          setMessage(error.text);
+      });
+  };
+  const closeMessageHandler=()=>{
+    setMessage("");
+  }
+
   return (
-    <div className={styles.container}>
-      <div className="contact_form">
-        <div className="formulario">
-          <h1>Formulario de contacto</h1>
-          <h3>Escríbenos y en breve nos pondremos en contacto contigo</h3>
+    <>
+    {message && (
+        <Modal onClose={closeMessageHandler}>
+          <div>{message}</div>
+          <button className="btn btn-primary" onClick={closeMessageHandler}>
+            Cerrar
+          </button>
+        </Modal>
+      )}
+      <Titles label={'Formulario de contacto'} />
+      <div className={`p-4 border-4 rounded-xl text-white m-3 bg-[url('/assets/lutier.jpg')]`}>
+        <h3>Escríbenos y en breve nos pondremos en contacto contigo</h3>
+        <form ref={form} onSubmit={sendEmail} className={'p-4'}>
+          <div className="input-group m-2">
+            <Input
+              className={'input input-bordered'}
+              label={'Nombre*: '}
+              type="text"
+              name="name"
+              value={name !== "" ? name : null}
+              id="nombre"
+              required="required"
+              placeholder="Escribe tu nombre"
+            />
+          </div>
 
-          <form>
-            <p>
-              <label>
-                Nombre
-                <span>*</span>
-                <input
-                  type="text"
-                  name="name"
-                  id="nombre"
-                  required="obligatorio"
-                  placeholder="Escribe tu nombre"
-                />
-              </label>
-            </p>
+          <div className="input-group m-2">
+            <Input
+              className={'input input-bordered'}
+              label={'eMail*: '}
+              type="email"
+              name="email"
+              id="email"
+              value={email !== "" ? email : null}
+              required="required"
+              placeholder="Escribe tu Email"
+            />
+          </div>
 
-            <p>
-              <label>
-                Email
-                <span>*</span>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required="obligatorio"
-                  placeholder="Escribe tu Email"
-                />
-              </label>
-            </p>
+          <div className="input-group m-2">
+            <Input
+              className={'input input-bordered'}
+              label={'Telefono: '}
+              type="tel"
+              name="phone"
+              id="telefono"
+              placeholder="Escribe tu teléfono"
+            />
+          </div>
 
-            <p>
-              <label>
-                Teléfono
-                <input
-                  type="tel"
-                  name="telefono"
-                  id="telefono"
-                  placeholder="Escribe tu teléfono"
-                />
-              </label>
-            </p>
+          <div className="input-group m-2">
+            <Input
+              className={'input input-bordered'}
+              label={'Asunto*: '}
+              type="text"
+              name="subject"
+              id="asunto"
+              required="required"
+              placeholder="Escribe un asunto"
+            />
+          </div>
 
-            <p>
-              <label>
-                Asunto
-                <span>*</span>
-                <input
-                  type="text"
-                  name="asunto"
-                  id="assunto"
-                  required="obligatorio"
-                  placeholder="Escribe un asunto"
-                />
-              </label>
-            </p>
-
-            <p>
-              <label>
-                Mensaje
-                <span>*</span>
-                <textarea
-                  name="mensaje"
-                  id="mensaje"
-                  required="obligatorio"
-                  placeholder="Deja aquí tu comentario..."
-                ></textarea>
-              </label>
-            </p>
-
-            <button type="submit" name="enviar" id="enviar">
-              <p>Enviar</p>
-            </button>
-
-            <p>
-              <span> * </span>los campos son obligatorios.
-            </p>
-          </form>
-        </div>
+          <div className="input-group m-2">
+            <label className="p-3">Mensaje*:</label>
+            <textarea
+              className={' input input-bordered'}
+              name="message"
+              id="mensaje"
+              required="obligatorio"
+              placeholder="Deja aquí tu comentario..."
+            ></textarea>
+          </div>
+          <div>
+            <Button
+              label={'Enviar'}
+              className={
+                'bg-green-500 rounded-sm p-2 text-white hover:cursor-pointer hover:bg-green-700'
+              }
+              type="submit"
+              name="enviar"
+              id="enviar"
+            />
+            <span> * </span>los campos son obligatorios.
+          </div>
+        </form>
       </div>
-    </div>
+    </>
   );
-}
+};
+export default Contact;
