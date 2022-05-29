@@ -70,12 +70,12 @@ const Navbar = ({ onShowCart }) => {
 
           <Link href="/about">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded  hover:bg-gray-900">
-              About
+              Quienes somos
             </a>
           </Link>
           <Link href="/contact">
             <a className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900">
-              Contact Us
+              Contacto
             </a>
           </Link>
           {session ? (
