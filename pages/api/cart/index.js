@@ -14,7 +14,10 @@ export default async function handler(req, res) {
         const carts = await Cart.find({})
           .populate({
             path: 'products',
-            model: Guitar
+            populate: {
+              path: 'product',
+              model: Guitar
+            }
           })
           .populate({
             path: 'user',
