@@ -256,7 +256,7 @@ export default function GuitarsConfigurator({ guitars, woods }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
   try {
     const guitarRes = await fetch('http://localhost:3000/api/guitars');
     const guitars = await guitarRes.json();
