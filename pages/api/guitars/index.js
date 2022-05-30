@@ -13,19 +13,19 @@ export default async function handler(req, res) {
         const guitars = await Guitar.find({})
           .populate({
             path: 'tapa',
-            model: Wood,
+            model: Wood
           })
           .populate({
             path: 'aro',
-            model: Wood,
+            model: Wood
           })
           .populate({
             path: 'fondo',
-            model: Wood,
+            model: Wood
           })
           .populate({
             path: 'diapason',
-            model: Wood,
+            model: Wood
           });
         res.status(200).json({ success: true, data: guitars });
       } catch (error) {
