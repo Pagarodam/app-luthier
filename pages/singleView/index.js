@@ -24,6 +24,7 @@ export default function Singleview({ guitars, woods }) {
 
   console.log(tapa, 'Tapa');
   console.log('selectedCustomCosa', selectedCustomGuitarComponents.tapa);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const components = (id, componentType) => {
     console.log(componentType, id);
     setSelectedCustomGuitarComponents((customComponents) => ({
@@ -40,7 +41,7 @@ export default function Singleview({ guitars, woods }) {
     components(aro, 'aro');
     components(fondo, 'fondo');
     components(diapason, 'diapason');
-  }, [id]);
+  }, [aro, components, diapason, fondo, guitars, id, tapa]);
   console.log(selectedGuitar.tapa, 'Tapa seleccionada a vacio');
   console.log(selectedGuitar.image, 'Imagen guitarra');
   console.log(selectedCustomGuitarComponents, 'SelectedCustomGuitarComponents');

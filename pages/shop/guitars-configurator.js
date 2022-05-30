@@ -18,48 +18,48 @@ const INITIAL_VALUES = {
   image:
     'https://maderasbarber.com/tonewood/5204-large_default/kit-acabado-guitarra-flamenca.jpg',
   tapa: {
-    nameWood: '',
+    nameWood: ''
   },
   aro: {
-    nameWood: '',
+    nameWood: ''
   },
   fondo: {
-    nameWood: '',
+    nameWood: ''
   },
   diapason: {
-    nameWood: '',
+    nameWood: ''
   },
-  style: 'flamenco',
+  style: 'flamenco'
 };
 
 const EMPTY_GUITAR_COMPONENTS = {
   tapa: {
-    nameWood: '',
+    nameWood: ''
   },
   aro: {
-    nameWood: '',
+    nameWood: ''
   },
   fondo: {
-    nameWood: '',
+    nameWood: ''
   },
   diapason: {
-    nameWood: '',
-  },
+    nameWood: ''
+  }
 };
 
 const sumWithoutUndefineds = (...data) => {
   return data.reduce((prev, curr) => (curr ? prev + curr : prev), 0);
 };
 
-export default function GuitarsConfigurator({ guitars, woods, id }) {
+export default function GuitarsConfigurator({ guitars, woods }) {
   const [showComponents, setShowComponents] = useState(false);
   const [showClassicGuitars, setShowClassicGuitars] = useState(false);
   const [showFlamencoGuitars, setShowFlamencoGuitars] = useState(false);
   const [guitarComponents, setGuitarComponents] = useState({
-    ...EMPTY_GUITAR_COMPONENTS,
+    ...EMPTY_GUITAR_COMPONENTS
   });
   const [guitar, setGuitar] = useState({
-    ...INITIAL_VALUES,
+    ...INITIAL_VALUES
   });
 
   useEffect(() => {
@@ -72,10 +72,10 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
         guitarComponents.tapa?.price,
         guitarComponents.aro?.price,
         guitarComponents.fondo?.price,
-        guitarComponents.diapason?.price,
-      ),
+        guitarComponents.diapason?.price
+      )
     });
-  }, [guitarComponents]);
+  }, [guitar, guitarComponents]);
 
   const onAddWood = () => {
     console.log(' Added to somewhere');
@@ -109,7 +109,7 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
 
     setGuitarComponents({
       ...guitarComponents,
-      [selectedComponent.component]: selectedComponent,
+      [selectedComponent.component]: selectedComponent
     });
   };
 
@@ -255,6 +255,7 @@ export default function GuitarsConfigurator({ guitars, woods, id }) {
     </>
   );
 }
+
 export async function getStaticProps() {
   try {
     const guitarRes = await fetch('http://localhost:3000/api/guitars');
@@ -265,8 +266,8 @@ export async function getStaticProps() {
     return {
       props: {
         guitars: guitars.data,
-        woods: woods.data,
-      },
+        woods: woods.data
+      }
     };
   } catch (error) {
     console.log('error', error);
