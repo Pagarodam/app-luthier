@@ -9,6 +9,20 @@ const EMPTY_GUITAR = {
   fondo: {}
 };
 export default function Singleview({ guitars, woods }) {
+  const [showModal, setShowModal] = useState(false);
+  const [src, setSrc] = useState('');
+  const [alt, setAlt] = useState('');
+
+  const onClose = () => {
+    setShowModal(false);
+  };
+
+  const show = (url, alter) => {
+    setSrc(url);
+    setAlt(alter);
+    setShowModal(true);
+  };
+
   const router = useRouter();
   const { id, style, tapa, aro, fondo, diapason, price } = router.query;
   const [selectedGuitar, setSelectedGuitar] = useState(EMPTY_GUITAR);
@@ -20,7 +34,6 @@ export default function Singleview({ guitars, woods }) {
     'Las piezas de esta guitarra están escogidas una a una por ti.';
   const customGuitarImage =
     'https://maderasbarber.com/tonewood/5180-max_box/kit-guitarra-clasica-modelo-acorde-cites.jpg';
-  const show = true;
 
   console.log(tapa, 'Tapa');
   console.log('selectedCustomCosa', selectedCustomGuitarComponents.tapa);

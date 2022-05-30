@@ -1,25 +1,33 @@
 import Images from 'components/gallery';
+import Button from 'components/UI/Button';
+import Modal from 'components/UI/Modal';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Gallery() {
+  const [showModal, setShowModal] = useState(false);
+  const [src, setSrc] = useState('');
+  const [alt, setAlt] = useState('');
+
+  const onClose = () => {
+    setShowModal(false);
+  };
+
+  const show = (url, alter) => {
+    setSrc(url);
+    setAlt(alter);
+    setShowModal(true);
+  };
   return (
     <>
-      <div className="carousel w-full">
-        <Images />
-      </div>
-      <div className="flex justify-center w-full py-2 gap-2">
-        <a href="#item1" className="btn btn-xs">
-          1
-        </a>
-        <a href="#item2" className="btn btn-xs">
-          2
-        </a>
-        <a href="#item3" className="btn btn-xs">
-          3
-        </a>
-        <a href="#item4" className="btn btn-xs">
-          4
-        </a>
-      </div>
+      {showModal && (
+        <Modal onClose={onClose}>
+          <Button label={'X'} onClick={onClose} />
+          <Image alt={alt} src={src} width="800" height="600" />
+        </Modal>
+      )}
+
+      <Images onClick={show} />
     </>
   );
 }
