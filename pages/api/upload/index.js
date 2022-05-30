@@ -1,18 +1,18 @@
-import Formidable from 'Formidable';
+import formidable from 'formidable';
 const fs = require('fs');
 
 export const config = {
   api: {
-    bodyParser: false,
-  },
+    bodyParser: false
+  }
 };
 
 const uploadForm = (next) => (req, res) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const form = new Formidable.IncomingForm({
+      const form = new formidable.IncomingForm({
         multiples: true,
-        keepExtensions: true,
+        keepExtensions: true
       });
       form.once('error', console.error);
       form
@@ -31,11 +31,11 @@ const uploadForm = (next) => (req, res) => {
           'moving file: ',
           files.file.filepath,
           ' to ',
-          `public/uploads/${files.file.originalFilename}`,
+          `public/uploads/${files.file.originalFilename}`
         );
         fs.renameSync(
           files.file.filepath,
-          `public/uploads/${files.file.originalFilename}`,
+          `public/uploads/${files.file.originalFilename}`
         );
         req.form = { fields, files };
         return resolve(next(req, res));
