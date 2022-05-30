@@ -37,10 +37,6 @@ export default function Profile() {
       })
     });
     const data = await response.json();
-    console.log('🚀 ~ file: index.js ~ line 42 ~ handleSubmit ~ data', data);
-    if (data.success) {
-      console.log('do it');
-    }
   };
 
   if (!session) {

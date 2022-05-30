@@ -3,12 +3,16 @@ import WoodForm from 'components/woods/woodForm';
 import Modal from 'components/UI/Modal';
 import styles from 'styles/Home.module.css';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
+import Titles from 'components/UI/Titles';
+import { useSession } from 'next-auth/react';
+
 const Woods = () => {
   const [woods, setWoods] = useState([]);
   const [woodToEdit, setWoodToEdit] = useState({});
   const [refetch, setRefetch] = useState(true);
   const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState('');
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (refetch) {
@@ -25,10 +29,10 @@ const Woods = () => {
 
   const deleteWood = async (id) => {
     await fetch(`http://localhost:3000/api/woods/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     }).catch(() => {
       setMessage(
-        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)',
+        'Upps, vaya algo ha fallado. No se ha podido borrar la madera (Todo mal)'
       );
     });
 
@@ -46,6 +50,19 @@ const Woods = () => {
   const closeMessageHandler = () => {
     setMessage('');
   };
+
+  if (!session || session.user.role !== 'admin') {
+    return (
+      <div className="container">
+        <Titles title="Guitars" />
+        <p>
+          <strong>
+            Lo sentimos, pero no tienes permisos para acceder a esta página.
+          </strong>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>

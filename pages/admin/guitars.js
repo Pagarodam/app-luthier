@@ -4,6 +4,7 @@ import Modal from 'components/UI/Modal';
 import GuitarComponentsList from 'components/guitars/GuitarComponentsList';
 import GuitarList from 'components/guitars/GuitarList';
 import Titles from 'components/UI/Titles';
+import { useSession } from 'next-auth/react';
 
 const EMPTY_GUITAR_COMPONENTS = {
   tapa: {
@@ -28,6 +29,7 @@ const Guitars = (props) => {
     ...EMPTY_GUITAR_COMPONENTS
   });
   const adminGuitars = true;
+  const { data: session, status } = useSession();
 
   const closeMessageHandler = () => {
     setMessage('');
@@ -66,6 +68,19 @@ const Guitars = (props) => {
       [selectedComponent.component]: selectedComponent
     });
   };
+
+  if (!session || session.user.role !== 'admin') {
+    return (
+      <div className="container">
+        <Titles title="Guitars" />
+        <p>
+          <strong>
+            Lo sentimos, pero no tienes permisos para acceder a esta página.
+          </strong>
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
