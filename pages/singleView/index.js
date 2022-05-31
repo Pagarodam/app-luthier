@@ -13,9 +13,9 @@ export default function Singleview({ guitars, woods }) {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
 
-  const onClose = () => {
-    setShowModal(false);
-  };
+  // const onClose = () => {
+  //   setShowModal(false);
+  // };
 
   const show = (url, alter) => {
     setSrc(url);

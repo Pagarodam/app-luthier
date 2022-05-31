@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import CartContext from 'components/store/cart-context';
 import GuitarCardForm from './GuitarCardForm';
-import Link from 'next/link';
 import Modal from 'components/UI/Modal';
 import { useState } from 'react';
 
@@ -39,8 +38,6 @@ export const GuitarCard = ({
   };
 
   const [showModal, setShowModal] = useState(false);
-  // const [src, setSrc] = useState('');
-  // const [alt, setAlt] = useState('');
   const [modalImage, setModalImage] = useState({
     image: '',
     name: ''
@@ -54,21 +51,13 @@ export const GuitarCard = ({
     setModalImage(image, name);
     setShowModal(true);
   };
-  console.log(tapa.image, 'Imagen');
 
   return (
     <>
       {showModal && (
         <Modal onClose={onClose}>
           <Button label={'X'} onClick={onClose} />
-          <Image
-            alt={name}
-            src={image}
-            // layout="fill"
-            // objectFit={'contain'}
-            width={'1000'}
-            height={'1000'}
-          />
+          <Image alt={name} src={image} width={'1000'} height={'1000'} />
         </Modal>
       )}
       <div className="card card-side bg-base-100 shadow-xl glass m-5">
@@ -98,13 +87,13 @@ export const GuitarCard = ({
           <div className="flex flex-wrap">
             {show && (
               <>
-                <div className="border-4 rounded border-red-400">
+                <div className="border-4 bg-blue-600 rounded overflow-visible border-slate-400 hover:scale-125 hover:cursor-pointer">
                   {tapa.image && (
                     <Image
                       src={tapa?.image}
                       alt={tapa?.name}
-                      width={315}
-                      height={315}
+                      width={215}
+                      height={215}
                     />
                   )}
 
@@ -112,35 +101,47 @@ export const GuitarCard = ({
                     Tapa
                   </p>
                 </div>
-                <div className="border-4 rounded border-red-400">
+                <div className="border-4 bg-blue-600 rounded border-slate-400 hover:scale-125 hover:cursor-pointer">
                   {aro.image && (
                     <Image
                       src={aro?.image}
                       alt={aro?.name}
-                      width={315}
-                      height={315}
+                      width={215}
+                      height={215}
                     />
                   )}
+                  <p className="text-center text-xl text-white bg-blue-600">
+                    Aro
+                  </p>
                 </div>
-                <div className="border-4 rounded border-red-400">
+                <div
+                  className="border-4 bg-blue-600 rounded border-slate-400 hover:scale-125 hover:cursor-pointer"
+                  onClick={() => showImage(fondo.image, fondo.name)}
+                >
                   {fondo.image && (
                     <Image
                       src={fondo?.image}
                       alt={fondo?.name}
-                      width={315}
-                      height={315}
+                      width={215}
+                      height={215}
                     />
                   )}
+                  <p className="text-center text-xl text-white bg-blue-600">
+                    Fondo
+                  </p>
                 </div>
-                <div className="border-4 rounded border-red-400">
+                <div className="border-4 bg-blue-600 rounded border-slate-400 hover:scale-125 hover:cursor-pointer">
                   {diapason.image && (
                     <Image
                       src={diapason?.image}
                       alt={diapason?.name}
-                      width={315}
-                      height={315}
+                      width={215}
+                      height={215}
                     />
                   )}
+                  <p className="text-center text-xl text-white bg-blue-600">
+                    Diapasón
+                  </p>
                 </div>
               </>
             )}
