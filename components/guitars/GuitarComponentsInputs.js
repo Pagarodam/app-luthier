@@ -7,11 +7,13 @@ const GuitarComponentsInput = ({
   guitarComponents,
   price,
   name,
+  style,
+  description,
   aro,
   fondo,
   tapa,
   diapason,
-  onAdminGuitars,
+  onAdminGuitars
 }) => {
   console.log(guitarComponents, 'guitarComponents');
 
@@ -27,12 +29,14 @@ const GuitarComponentsInput = ({
     cartCtx.addItem({
       id: id,
       name: name,
+      style: style,
       amount: amount,
+      description: description,
       price: price,
       aro: aro,
       fondo: fondo,
       tapa: tapa,
-      diapason: diapason,
+      diapason: diapason
     });
   };
 

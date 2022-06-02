@@ -1,10 +1,12 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Input from 'components/UI/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from 'components/UI/Button';
+import SingleviewList from 'components/singleView/SingleViewList';
+import Titles from 'components/UI/Titles';
 
 const INITIAL_STATE = {
   street: '',
@@ -13,9 +15,13 @@ const INITIAL_STATE = {
   cp: ''
 };
 
-export default function Profile() {
+const Profile = () => {
+  const [orders, setOrders] = useState(['']);
+  const [products, setProducts] = useState(['']);
+  const [show, setShow] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
+  const n = 0;
   const [address, setAddress] = useState(INITIAL_STATE);
 
   const handleChange = (event) => {
@@ -37,6 +43,38 @@ export default function Profile() {
       })
     });
     const data = await response.json();
+  };
+
+  const getOrders = async () => {
+    await fetch('/api/cart')
+      .then((res) => res.json())
+      .then((res) => setOrders(res.data));
+    // setProducts(getGuitars());
+    show ? setShow(false) : setShow(true);
+  };
+  console.log(orders, 'orders');
+  console.log(show);
+
+  // const getGuitars = () => {
+  //   orders.map(async (order) => {
+  //     console.log(order.products);
+  //     console.log('cosas');
+  //   });
+  // };
+  // console.log(products);
+
+  const showOrders = (
+    <div>
+      <p>holas</p>
+    </div>
+  );
+
+  const getSingleOrder = (products) => {
+    console.log(products);
+    const productsList = products.map((product) => {
+      <p>{product.id}</p>;
+      console.log(product.product.name);
+    });
   };
 
   if (!session) {
@@ -98,9 +136,26 @@ export default function Profile() {
               type="submit"
               className="bg-blue-500 text-white p-2 rounded-box my-5"
             />
+            <Button
+              label={'Pedidos'}
+              onClick={getOrders}
+              className="bg-blue-500 text-white p-2 rounded-box my-5"
+            />
           </div>
         </form>
       </div>
+      {show && <Titles label={`Pedidos de ${session.user.name}`} />}
+      {show &&
+        orders.map((order) => {
+          n = n + 1;
+          return (
+            <>
+              <SingleviewList n={n} onClick={getSingleOrder} order={order} />
+            </>
+          );
+        })}
     </>
   );
-}
+};
+
+export default Profile;
