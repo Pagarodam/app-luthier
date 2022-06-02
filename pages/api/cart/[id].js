@@ -48,7 +48,7 @@ export default async function handler(req, res) {
         });
         res.status(200).json({ success: true, data: guitar });
       } catch (error) {
-        res.status(418).json({ message: "Yes I'm a teapot" });
+        res.status(418).json({ message: "Yes I'm a teapot", error });
       }
       break;
 

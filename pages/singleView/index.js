@@ -13,10 +13,6 @@ export default function Singleview({ guitars, woods }) {
   const [src, setSrc] = useState('');
   const [alt, setAlt] = useState('');
 
-  // const onClose = () => {
-  //   setShowModal(false);
-  // };
-
   const show = (url, alter) => {
     setSrc(url);
     setAlt(alter);
@@ -35,11 +31,8 @@ export default function Singleview({ guitars, woods }) {
   const customGuitarImage =
     'https://maderasbarber.com/tonewood/5180-max_box/kit-guitarra-clasica-modelo-acorde-cites.jpg';
 
-  console.log(tapa, 'Tapa');
-  console.log('selectedCustomCosa', selectedCustomGuitarComponents.tapa);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const components = (id, componentType) => {
-    console.log(componentType, id);
     setSelectedCustomGuitarComponents((customComponents) => ({
       [componentType]: woods.find((wood) => wood.id === id),
       ...customComponents
@@ -54,10 +47,7 @@ export default function Singleview({ guitars, woods }) {
     components(aro, 'aro');
     components(fondo, 'fondo');
     components(diapason, 'diapason');
-  }, [aro, components, diapason, fondo, guitars, id, tapa]);
-  console.log(selectedGuitar.tapa, 'Tapa seleccionada a vacio');
-  console.log(selectedGuitar.image, 'Imagen guitarra');
-  console.log(selectedCustomGuitarComponents, 'SelectedCustomGuitarComponents');
+  }, []);
 
   return (
     <>

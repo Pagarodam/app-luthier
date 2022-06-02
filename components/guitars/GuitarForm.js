@@ -50,7 +50,7 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
         guitarComponents.diapason?.price
       )
     });
-  }, [guitar, guitarComponents]);
+  }, [guitarComponents]);
 
   const fileInput = useRef(null);
 

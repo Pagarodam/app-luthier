@@ -29,7 +29,7 @@ const INITIAL_VALUES = {
   diapason: {
     nameWood: ''
   },
-  style: 'flamenco'
+  style: 'custom'
 };
 
 const EMPTY_GUITAR_COMPONENTS = {
@@ -75,7 +75,7 @@ export default function GuitarsConfigurator({ guitars, woods }) {
         guitarComponents.diapason?.price
       )
     });
-  }, [guitar, guitarComponents]);
+  }, [guitarComponents]);
 
   const onAddWood = () => {
     console.log(' Added to somewhere');
@@ -185,6 +185,8 @@ export default function GuitarsConfigurator({ guitars, woods }) {
             fondo={guitar.fondo}
             diapason={guitar.diapason}
             name={guitar.name}
+            description={guitar.description}
+            style={guitar.style}
             guitarComponents={guitarComponents}
             price={guitar.price}
             label={'Añadir'}
