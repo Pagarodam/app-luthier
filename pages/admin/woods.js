@@ -16,7 +16,7 @@ const Woods = () => {
 
   useEffect(() => {
     if (refetch) {
-      fetch('http://localhost:3000/api/woods')
+      fetch('/api/woods')
         .then((res) => res.json())
         .then((res) => setWoods(res.data))
         .finally(() => setRefetch(false));
@@ -28,7 +28,7 @@ const Woods = () => {
   };
 
   const deleteWood = async (id) => {
-    await fetch(`http://localhost:3000/api/woods/${id}`, {
+    await fetch(`/api/woods/${id}`, {
       method: 'DELETE'
     }).catch(() => {
       setMessage(
