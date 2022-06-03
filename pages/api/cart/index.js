@@ -2,6 +2,7 @@ import dbConnect from 'lib/dbConnect';
 import Guitar from 'lib/models/Guitars';
 import Cart from 'lib/models/Cart';
 import User from 'lib/models/Users';
+import Wood from 'lib/models/Woods';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -16,7 +17,11 @@ export default async function handler(req, res) {
             path: 'products',
             populate: {
               path: 'product',
-              model: Guitar
+              model: Guitar,
+              populate: {
+                path: 'tapa aro fondo diapason',
+                model: Wood
+              }
             }
           })
           .populate({
