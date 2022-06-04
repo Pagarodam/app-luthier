@@ -32,7 +32,11 @@ const INITIAL_GUITAR_VALUES = {
 const Cart = ({ onClose }) => {
   const { data: session, status } = useSession();
   const { id = '', name = '', email = '' } = session?.user || {};
-  const cartCtx = useContext(CartContext);
+  // const cart = useContext(CartContext);
+  const cart = useContext(CartContext);
+
+  const cartCtx = cart;
+
   const { guitar, setGuitar } = useState(INITIAL_GUITAR_VALUES);
   const router = useRouter();
   const [order, setOrder] = useState(INITIAL_CART_VALUES);
@@ -44,11 +48,15 @@ const Cart = ({ onClose }) => {
 
   const cartItemRemoveHandler = (id) => {
     cartCtx.removeItem(id);
+    window.localStorage.setItem('Cart', JSON.stringify(cartCtx));
   };
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
+    window.localStorage.setItem('Cart', JSON.stringify(cartCtx));
   };
+
+  console.log('carrito', window.localStorage.getItem('Cart'));
 
   const addCustomGuitar = () => {};
 
