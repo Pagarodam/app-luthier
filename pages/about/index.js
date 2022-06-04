@@ -26,7 +26,7 @@ export default function About() {
                 <Image
                   className="rounded-full"
                   alt={'Lijado a mano'}
-                  src="/assets/Llamas-perfil2.jpg"
+                  src="/assets/llamas-perfil2.jpg"
                   width={280}
                   height={150}
                 />
