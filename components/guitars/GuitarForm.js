@@ -61,33 +61,44 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
 
     const body = new FormData();
     body.append('file', guitar.image);
-    try {
-      await fetch('/api/upload', {
-        method: 'POST',
-        body
-      }).then((res) => res.json());
 
-      const res = await fetch('/api/guitars', {
-        method: 'POST',
-        body: JSON.stringify({
-          ...guitar,
-          tapa: guitar.tapa.id,
-          aro: guitar.aro.id,
-          fondo: guitar.fondo.id,
-          diapason: guitar.diapason.id,
-          price: Number(guitar.price),
-          image: `/uploads/${guitar.image.name}`
-        }),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then((res) => res.json());
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body
+    });
+
+    const dataImage = await response.json();
+    if (!dataImage.files) {
+      setMessage(dataImage.message);
+      return;
+    }
+
+    const res = await fetch('/api/guitars', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...guitar,
+        tapa: guitar.tapa.id,
+        aro: guitar.aro.id,
+        fondo: guitar.fondo.id,
+        diapason: guitar.diapason.id,
+        price: Number(guitar.price),
+        image: `/uploads/${guitar.image.name}`
+      }),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await res.json();
+    if (data.success) {
       setGuitar({ ...INITIAL_VALUES });
       onGuitarCreated({ ...res.data, ...guitar, image: res.data.image });
       setMessage(`${guitar.name} fué añadida`);
-    } catch (error) {
-      setMessage(error);
+    }
+
+    if (!data.success) {
+      setMessage(data.error.message);
     }
   };
 

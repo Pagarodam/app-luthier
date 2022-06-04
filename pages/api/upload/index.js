@@ -22,7 +22,11 @@ const uploadForm = (next) => (req, res) => {
           throw String(JSON.stringify(err, null, 2));
         }
         if (!files.file) {
-          return resolve(res.status(400).json({ message: 'No file' }));
+          return resolve(
+            res
+              .status(400)
+              .json({ message: 'No se ha encontrado ninguna imagen' })
+          );
         }
         fs.renameSync(
           files.file.filepath,
