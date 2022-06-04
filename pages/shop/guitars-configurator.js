@@ -7,7 +7,6 @@ import clasica from 'public/assets/Guitarras/Clasica.png';
 import flamenca from 'public/assets/Guitarras/Flamenca.jpg';
 import custom from 'public/assets/Guitarras/Custom.jpg';
 import GuitarComponentsInput from 'components/guitars/GuitarComponentsInputs';
-import { MongoClient } from 'mongodb';
 
 const INITIAL_VALUES = {
   name: 'Custom',
@@ -261,9 +260,9 @@ export default function GuitarsConfigurator({ guitars, woods }) {
 
 export async function getServerSideProps(context) {
   try {
-    const guitarRes = await fetch('https://app-luthier.vercel.app/api/guitars');
+    const guitarRes = await fetch('http://localhost:3000/api/guitars');
     const guitars = await guitarRes.json();
-    const woodsRes = await fetch('https://app-luthier.vercel.app/api/woods');
+    const woodsRes = await fetch('http://localhost:3000/api/woods');
     const woods = await woodsRes.json();
 
     return {
