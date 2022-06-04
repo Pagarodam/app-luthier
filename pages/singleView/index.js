@@ -181,9 +181,9 @@ export default function Singleview({ guitars, woods }) {
 
 export async function getServerSideProps(context) {
   try {
-    const guitarRes = await fetch('http://localhost:3000/api/guitars');
+    const guitarRes = await fetch('https://app-luthier.vercel.app/api/guitars');
     const guitars = await guitarRes.json();
-    const woodsRes = await fetch('http://localhost:3000/api/woods');
+    const woodsRes = await fetch('https://app-luthier.vercel.app/api/woods');
     const woods = await woodsRes.json();
 
     return {
