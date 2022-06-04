@@ -53,84 +53,90 @@ export default function Singleview({ guitars, woods }) {
     <>
       <div className="p-20">
         <table>
-          <tr>
-            <th className="border-2 border-black m-4 p-4">Nombre</th>
-            <th className="border-2 border-black m-4 p-4">Estilo</th>
-            <th className="border-2 border-black m-4 p-4">Descripción</th>
-            <th className="border-2 border-black m-4 p-4">Tapa</th>
-            <th className="border-2 border-black m-4 p-4">Aro</th>
-            <th className="border-2 border-black m-4 p-4">Fondo</th>
-            <th className="border-2 border-black m-4 p-4">Diapasón</th>
-            <th className="border-2 border-black m-4 p-4">Precio</th>
-          </tr>
-          <tr>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.name ? selectedGuitar.name : customGuitarName}
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.style ? selectedGuitar.style : customGuitarStyle}
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.description
-                ? selectedGuitar.description
-                : customGuitarDescription}
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.tapa.nameWood
-                ? selectedGuitar.tapa.nameWood
-                : selectedCustomGuitarComponents.tapa?.nameWood}{' '}
-              {selectedGuitar.tapa.quality
-                ? selectedGuitar.tapa.quality
-                : selectedCustomGuitarComponents.tapa?.quality}{' '}
-              Precio:{' '}
-              {selectedGuitar.tapa.price
-                ? selectedGuitar.tapa.price
-                : selectedCustomGuitarComponents.tapa?.price}
-              €
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.aro.nameWood
-                ? selectedGuitar.aro.nameWood
-                : selectedCustomGuitarComponents.aro?.nameWood}{' '}
-              {selectedGuitar.aro.quality
-                ? selectedGuitar.aro.quality
-                : selectedCustomGuitarComponents.aro?.quality}{' '}
-              Precio:{' '}
-              {selectedGuitar.aro.price
-                ? selectedGuitar.aro.price
-                : selectedCustomGuitarComponents.aro?.price}
-              €
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.fondo.nameWood
-                ? selectedGuitar.fondo.nameWood
-                : selectedCustomGuitarComponents.fondo?.nameWood}{' '}
-              {selectedGuitar.fondo.quality
-                ? selectedGuitar.fondo.quality
-                : selectedCustomGuitarComponents.fondo?.quality}{' '}
-              Precio:{' '}
-              {selectedGuitar.fondo.price
-                ? selectedGuitar.fondo.price
-                : selectedCustomGuitarComponents.fondo?.price}
-              €
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {selectedGuitar.diapason.nameWood
-                ? selectedGuitar.diapason.nameWood
-                : selectedCustomGuitarComponents.diapason?.nameWood}{' '}
-              {selectedGuitar.diapason.quality
-                ? selectedGuitar.diapason.quality
-                : selectedCustomGuitarComponents.diapason?.quality}{' '}
-              Precio:{' '}
-              {selectedGuitar.diapason.price
-                ? selectedGuitar.diapason.price
-                : selectedCustomGuitarComponents.diapason?.price}
-              €
-            </td>
-            <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
-              {price}€
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th className="border-2 border-black m-4 p-4">Nombre</th>
+              <th className="border-2 border-black m-4 p-4">Estilo</th>
+              <th className="border-2 border-black m-4 p-4">Descripción</th>
+              <th className="border-2 border-black m-4 p-4">Tapa</th>
+              <th className="border-2 border-black m-4 p-4">Aro</th>
+              <th className="border-2 border-black m-4 p-4">Fondo</th>
+              <th className="border-2 border-black m-4 p-4">Diapasón</th>
+              <th className="border-2 border-black m-4 p-4">Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.name ? selectedGuitar.name : customGuitarName}
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.style
+                  ? selectedGuitar.style
+                  : customGuitarStyle}
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.description
+                  ? selectedGuitar.description
+                  : customGuitarDescription}
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.tapa.nameWood
+                  ? selectedGuitar.tapa.nameWood
+                  : selectedCustomGuitarComponents.tapa?.nameWood}{' '}
+                {selectedGuitar.tapa.quality
+                  ? selectedGuitar.tapa.quality
+                  : selectedCustomGuitarComponents.tapa?.quality}{' '}
+                Precio:{' '}
+                {selectedGuitar.tapa.price
+                  ? selectedGuitar.tapa.price
+                  : selectedCustomGuitarComponents.tapa?.price}
+                €
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.aro.nameWood
+                  ? selectedGuitar.aro.nameWood
+                  : selectedCustomGuitarComponents.aro?.nameWood}{' '}
+                {selectedGuitar.aro.quality
+                  ? selectedGuitar.aro.quality
+                  : selectedCustomGuitarComponents.aro?.quality}{' '}
+                Precio:{' '}
+                {selectedGuitar.aro.price
+                  ? selectedGuitar.aro.price
+                  : selectedCustomGuitarComponents.aro?.price}
+                €
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.fondo.nameWood
+                  ? selectedGuitar.fondo.nameWood
+                  : selectedCustomGuitarComponents.fondo?.nameWood}{' '}
+                {selectedGuitar.fondo.quality
+                  ? selectedGuitar.fondo.quality
+                  : selectedCustomGuitarComponents.fondo?.quality}{' '}
+                Precio:{' '}
+                {selectedGuitar.fondo.price
+                  ? selectedGuitar.fondo.price
+                  : selectedCustomGuitarComponents.fondo?.price}
+                €
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {selectedGuitar.diapason.nameWood
+                  ? selectedGuitar.diapason.nameWood
+                  : selectedCustomGuitarComponents.diapason?.nameWood}{' '}
+                {selectedGuitar.diapason.quality
+                  ? selectedGuitar.diapason.quality
+                  : selectedCustomGuitarComponents.diapason?.quality}{' '}
+                Precio:{' '}
+                {selectedGuitar.diapason.price
+                  ? selectedGuitar.diapason.price
+                  : selectedCustomGuitarComponents.diapason?.price}
+                €
+              </td>
+              <td className="border-2 border-black m-4 p-4 hover:cursor-pointer hover:bg-blue-900">
+                {price}€
+              </td>
+            </tr>
+          </tbody>
         </table>
         <GuitarCard
           show={show}
