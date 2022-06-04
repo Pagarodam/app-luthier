@@ -15,24 +15,15 @@ const uploadForm = (next) => (req, res) => {
         keepExtensions: true
       });
       form.once('error', console.error);
-      form
-        .on('fileBegin', (name, file) => {
-          console.log('start uploading: ', file.filename);
-        })
-        .on('aborted', () => console.log('Aborted...'));
-      form.once('end', () => {
-        console.log('Done!');
-      });
+      form.on('fileBegin', (name, file) => {});
+      form.once('end', () => {});
       await form.parse(req, async (err, fields, files) => {
         if (err) {
           throw String(JSON.stringify(err, null, 2));
         }
-        console.log(
-          'moving file: ',
-          files.file.filepath,
-          ' to ',
-          `public/uploads/${files.file.originalFilename}`
-        );
+        if (!files.file) {
+          return resolve(res.status(400).json({ message: 'No file' }));
+        }
         fs.renameSync(
           files.file.filepath,
           `public/uploads/${files.file.originalFilename}`

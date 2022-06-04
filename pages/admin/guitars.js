@@ -97,7 +97,6 @@ const Guitars = (props) => {
         guitarComponents={guitarComponents}
         onGuitarCreated={(newGuitar) => {
           setGuitarComponents({ ...EMPTY_GUITAR_COMPONENTS });
-          console.log('newGuitar', newGuitar);
           setGuitars([...guitars, newGuitar]);
         }}
       />

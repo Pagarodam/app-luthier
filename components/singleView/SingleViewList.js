@@ -1,5 +1,4 @@
 const SingleviewList = ({ order, onClick, n }) => {
-  console.log(order, 'List');
   return (
     <>
       <div

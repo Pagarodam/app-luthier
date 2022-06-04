@@ -18,7 +18,6 @@ export default async function handler(req, res) {
 
     case 'POST':
       try {
-        console.log('req.body', req.body);
         const { nameWood, quality, price, image, style, component } = req.body;
         const wood = await Wood.create({
           nameWood,
@@ -30,7 +29,6 @@ export default async function handler(req, res) {
         });
         res.status(200).json({ success: true, data: wood });
       } catch (error) {
-        console.log('error', error);
         res.status(418).json({ success: false, data: error.message });
       }
       break;

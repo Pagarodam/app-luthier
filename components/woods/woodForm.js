@@ -30,11 +30,19 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
     setFetching(true);
 
     const body = new FormData();
+
     body.append('file', wood.image);
     const response = await fetch('/api/upload', {
       method: 'POST',
       body
     });
+
+    const dataImage = await response.json();
+    if (!dataImage.files) {
+      setMessage(dataImage.message);
+      setFetching(false);
+      return;
+    }
 
     const responsePost = await fetch(
       `/api/woods${props.edit ? '/' + wood.id : ''}`,
@@ -56,37 +64,20 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
     );
 
     const data = await responsePost.json();
-    console.log('🚀 ~ file: woodForm.js ~ line 59 ~ onSubmit ~ data', data);
-    if (responsePost.status === 200) {
+
+    if (data.success) {
+      props.onEdit();
+      fileInput.current.value = '';
+      setWood({ ...EMPTY_WOOD });
+
       setFetching(false);
-      setMessage('Añadido correctamente');
+      setMessage('Añadida correctamente');
       onWoodAdded();
     }
-    if (responsePost.status === 418) {
+    if (!data.success) {
       setFetching(false);
-      setMessage(data.message);
+      setMessage(data.data);
     }
-
-    if (responsePost.status === 500) {
-      setFetching(false);
-      setMessage('Error del servidor');
-    }
-
-    // .then((res) => {
-    //   props.onEdit();
-    //   fileInput.current.value = '';
-    //   setWood({ ...EMPTY_WOOD });
-
-    //   setFetching(false);
-    //   setMessage('Añadida correctamente');
-    //   onWoodAdded();
-    // })
-    // .catch((err) =>
-    //   setMessage(
-    //     'Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)',
-    //     err,
-    //   ),
-    // );
   };
 
   const closeMessageHandler = () => {

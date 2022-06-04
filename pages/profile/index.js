@@ -49,19 +49,8 @@ const Profile = () => {
     await fetch('/api/cart')
       .then((res) => res.json())
       .then((res) => setOrders(res.data));
-    // setProducts(getGuitars());
     show ? setShow(false) : setShow(true);
   };
-  console.log(orders, 'orders');
-  console.log(show);
-
-  // const getGuitars = () => {
-  //   orders.map(async (order) => {
-  //     console.log(order.products);
-  //     console.log('cosas');
-  //   });
-  // };
-  // console.log(products);
 
   const showOrders = (
     <div>
@@ -70,10 +59,8 @@ const Profile = () => {
   );
 
   const getSingleOrder = (products) => {
-    console.log(products);
     const productsList = products.map((product) => {
       <p>{product.id}</p>;
-      console.log(product.product.name);
     });
   };
 

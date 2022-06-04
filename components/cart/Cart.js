@@ -54,7 +54,6 @@ const Cart = ({ onClose }) => {
 
   const handlerOnBuy = async (event) => {
     event.preventDefault();
-    console.log('cartCtx', cartCtx);
     const guitarsToBuy = [];
     cartCtx.items.map(async (item) => {
       if (item.style === 'custom') {
@@ -79,7 +78,6 @@ const Cart = ({ onClose }) => {
             'Content-Type': 'application/json'
           }
         }).then((res) => res.json());
-        console.log('res loca', res);
         guitarsToBuy.push({ product: res.data.id, quantity: item.amount });
       } else {
         guitarsToBuy.push({ product: item.id, quantity: item.amount });
@@ -95,9 +93,7 @@ const Cart = ({ onClose }) => {
         user: id,
         products: guitarsToBuy
       })
-    })
-      .then((res) => res.json())
-      .then((res) => console.log('han pasado cosas', res));
+    }).then((res) => res.json());
     cartCtx.cleanCart();
   };
 

@@ -11,7 +11,6 @@ export function LoginGoogle() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(authentication, provider)
       .then((res) => {
-        console.log(res);
         push('/about');
       })
       .catch((err) => {
@@ -47,9 +46,8 @@ export function LoginMail() {
       const user = await signInWithEmailAndPassword(
         authentication,
         loginEmail,
-        loginPassword,
+        loginPassword
       );
-      console.log(user);
       push('/about');
     } catch (error) {
       console.log(error.message);
@@ -98,7 +96,6 @@ export function LoginFacebook() {
     const auth = getAuth();
     signInWithPopup(authentication, provider)
       .then((res) => {
-        console.log(res);
         push('/about');
         const user = res.user;
 

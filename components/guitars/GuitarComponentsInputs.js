@@ -15,8 +15,6 @@ const GuitarComponentsInput = ({
   diapason,
   onAdminGuitars
 }) => {
-  console.log(guitarComponents, 'guitarComponents');
-
   const cartCtx = useContext(CartContext);
 
   function aleatorio(minimo, maximo) {
