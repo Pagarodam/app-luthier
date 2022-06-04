@@ -26,12 +26,12 @@ export default async function handler(req, res) {
           price,
           image,
           style,
-          component,
+          component
         });
         res.status(200).json({ success: true, data: wood });
       } catch (error) {
         console.log('error', error);
-        res.status(418).json({ success: false });
+        res.status(418).json({ success: false, data: error.message });
       }
       break;
 

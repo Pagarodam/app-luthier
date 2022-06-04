@@ -9,7 +9,7 @@ const EMPTY_WOOD = {
   price: '',
   component: '',
   style: '',
-  image: '',
+  image: ''
 };
 
 const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
@@ -20,7 +20,7 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
   useEffect(() => {
     setWood({
       ...EMPTY_WOOD,
-      ...woodToEdit,
+      ...woodToEdit
     });
   }, [woodToEdit]);
 
@@ -33,39 +33,60 @@ const WoodForm = ({ onWoodAdded, woodToEdit, ...props }) => {
     body.append('file', wood.image);
     const response = await fetch('/api/upload', {
       method: 'POST',
-      body,
+      body
     });
 
-    fetch(`/api/woods${props.edit ? '/' + wood.id : ''}`, {
-      method: props.edit ? 'PUT' : 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...wood,
-        nameWood: capilalize.words(wood.nameWood),
-        quality: capilalize.words(wood.quality),
-        style: capilalize.words(wood.style),
-        price: Number(wood.price),
-        component: wood.component,
-        image: `/uploads/${wood.image.name}`,
-      }),
-    })
-      .then((res) => {
-        props.onEdit();
-        fileInput.current.value = '';
-        setWood({ ...EMPTY_WOOD });
+    const responsePost = await fetch(
+      `/api/woods${props.edit ? '/' + wood.id : ''}`,
+      {
+        method: props.edit ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...wood,
+          nameWood: capilalize.words(wood.nameWood),
+          quality: capilalize.words(wood.quality),
+          style: capilalize.words(wood.style),
+          price: Number(wood.price),
+          component: wood.component,
+          image: `/uploads/${wood.image.name}`
+        })
+      }
+    );
 
-        setFetching(false);
-        setMessage('Añadida correctamente');
-        onWoodAdded();
-      })
-      .catch((err) =>
-        setMessage(
-          'Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)',
-          err,
-        ),
-      );
+    const data = await responsePost.json();
+    console.log('🚀 ~ file: woodForm.js ~ line 59 ~ onSubmit ~ data', data);
+    if (responsePost.status === 200) {
+      setFetching(false);
+      setMessage('Añadido correctamente');
+      onWoodAdded();
+    }
+    if (responsePost.status === 418) {
+      setFetching(false);
+      setMessage(data.message);
+    }
+
+    if (responsePost.status === 500) {
+      setFetching(false);
+      setMessage('Error del servidor');
+    }
+
+    // .then((res) => {
+    //   props.onEdit();
+    //   fileInput.current.value = '';
+    //   setWood({ ...EMPTY_WOOD });
+
+    //   setFetching(false);
+    //   setMessage('Añadida correctamente');
+    //   onWoodAdded();
+    // })
+    // .catch((err) =>
+    //   setMessage(
+    //     'Upps, vaya algo ha fallado. No se ha podido añadir la madera (Todo mal)',
+    //     err,
+    //   ),
+    // );
   };
 
   const closeMessageHandler = () => {
