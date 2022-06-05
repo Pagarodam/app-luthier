@@ -90,15 +90,16 @@ const GuitarForm = ({ guitarComponents, onGuitarCreated, onAdminGuitars }) => {
       }
     });
 
-    const data = await res.json();
-    if (data.success) {
+    const { data, success, error } = await res.json();
+
+    if (success) {
       setGuitar({ ...INITIAL_VALUES });
-      onGuitarCreated({ ...res.data, ...guitar, image: res.data.image });
+      onGuitarCreated({ ...data, ...guitar, image: data.image });
       setMessage(`${guitar.name} fué añadida`);
     }
 
-    if (!data.success) {
-      setMessage(data.error.message);
+    if (!success) {
+      setMessage(error.message);
     }
   };
 
