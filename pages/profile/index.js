@@ -52,13 +52,6 @@ const Profile = () => {
       .then((res) => res.json())
       .then((res) => setOrders(res.data));
     show ? setShow(false) : setShow(true);
-
-    console.log(id, 'id');
-    console.log(role, 'rol');
-  };
-
-  const handleOrderClick = (order) => {
-    console.log('Has hecho click en', order);
   };
 
   if (!session) {
@@ -172,11 +165,7 @@ const Profile = () => {
           n = n + 1;
           return (
             <>
-              <SingleviewList
-                n={n}
-                onClick={() => handleOrderClick(order)}
-                order={order}
-              />
+              <SingleviewList order={order} />
             </>
           );
         })}
