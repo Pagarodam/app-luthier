@@ -52,12 +52,6 @@ const Profile = () => {
     show ? setShow(false) : setShow(true);
   };
 
-  const showOrders = (
-    <div>
-      <p>holas</p>
-    </div>
-  );
-
   const getSingleOrder = (products) => {
     const productsList = products.map((product) => {
       <p>{product.id}</p>;
