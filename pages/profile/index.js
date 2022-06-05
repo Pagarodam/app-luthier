@@ -31,7 +31,7 @@ const Profile = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { id, email, rol, image } = session.user;
+    const { id } = session.user;
 
     const response = await fetch(`/api/users/${id}`, {
       method: 'PUT',
@@ -46,16 +46,19 @@ const Profile = () => {
   };
 
   const getOrders = async () => {
-    await fetch('/api/cart')
+    const { id, role } = session.user;
+
+    await fetch(`/api/cart/${role === 'admin' ? '' : id}`)
       .then((res) => res.json())
       .then((res) => setOrders(res.data));
     show ? setShow(false) : setShow(true);
+
+    console.log(id, 'id');
+    console.log(role, 'rol');
   };
 
-  const getSingleOrder = (products) => {
-    const productsList = products.map((product) => {
-      <p>{product.id}</p>;
-    });
+  const handleOrderClick = (order) => {
+    console.log('Has hecho click en', order);
   };
 
   if (!session) {
@@ -154,13 +157,26 @@ const Profile = () => {
           </div>
         </form>
       </div>
-      {show && <Titles label={`Pedidos de ${session.user.name}`} />}
+      {show && (
+        <Titles
+          label={
+            session?.user?.role === 'admin'
+              ? 'Todos los pedidos'
+              : ` Pedidos de ${session.user.name}`
+          }
+        />
+      )}
+
       {show &&
         orders.map((order) => {
           n = n + 1;
           return (
             <>
-              <SingleviewList n={n} onClick={getSingleOrder} order={order} />
+              <SingleviewList
+                n={n}
+                onClick={() => handleOrderClick(order)}
+                order={order}
+              />
             </>
           );
         })}
