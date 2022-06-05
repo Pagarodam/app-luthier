@@ -2,6 +2,7 @@ import dbConnect from 'lib/dbConnect';
 import Cart from 'lib/models/Cart';
 import User from 'lib/models/Users';
 import Guitar from 'lib/models/Guitars';
+import Wood from 'lib/models/Woods';
 
 export default async function handler(req, res) {
   const {
@@ -14,18 +15,15 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const cart = await Cart.find({ user: id });
-        res
-          .status(200)
-          .json({ success: true, data: cart })
-          .populate({
-            path: 'products',
-            model: Guitar
-          })
-          .populate({
-            path: 'user',
-            model: User
-          });
+        const cart = await Cart.find({ user: id }).populate({
+          path: 'products.product',
+          model: Guitar,
+          populate: {
+            path: 'tapa aro fondo diapason',
+            model: Wood
+          }
+        });
+        res.status(200).json({ success: true, data: cart });
       } catch (error) {
         res.status(400).json({ success: false, error });
       }

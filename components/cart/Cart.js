@@ -55,34 +55,41 @@ const Cart = ({ onClose }) => {
   const handlerOnBuy = async (event) => {
     event.preventDefault();
     const guitarsToBuy = [];
-    cartCtx.items.map(async (item) => {
-      if (item.style === 'custom') {
-        const res = await fetch('/api/guitars', {
-          method: 'POST',
-          body: JSON.stringify({
-            ...guitar,
-            ...item,
-            id: null,
-            name: item.name,
-            style: item.style,
-            description: item.description || 'default description',
-            tapa: item.tapa.id,
-            aro: item.aro.id,
-            fondo: item.fondo.id,
-            diapason: item.diapason.id,
-            price: Number(item.price),
-            image: `https://maderasbarber.com/tonewood/5204-large_default/kit-acabado-guitarra-flamenca.jpg}`
-          }),
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          }
-        }).then((res) => res.json());
-        guitarsToBuy.push({ product: res.data.id, quantity: item.amount });
-      } else {
-        guitarsToBuy.push({ product: item.id, quantity: item.amount });
-      }
-    });
+    await Promise.all(
+      cartCtx.items.map(async (item) => {
+        if (item.style === 'custom') {
+          const res = await fetch('/api/guitars', {
+            method: 'POST',
+            body: JSON.stringify({
+              ...guitar,
+              ...item,
+              id: null,
+              name: item.name,
+              style: item.style,
+              description: item.description || 'default description',
+              tapa: item.tapa.id,
+              aro: item.aro.id,
+              fondo: item.fondo.id,
+              diapason: item.diapason.id,
+              price: Number(item.price),
+              image: `https://maderasbarber.com/tonewood/5204-large_default/kit-acabado-guitarra-flamenca.jpg}`
+            }),
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+          guitarsToBuy.push({
+            product: (await res.json()).data.id,
+            quantity: item.amount
+          });
+        } else {
+          guitarsToBuy.push({ product: item.id, quantity: item.amount });
+        }
+        return Promise.resolve();
+      })
+    );
+
     await fetch('/api/cart', {
       method: 'POST',
       headers: {
@@ -91,7 +98,8 @@ const Cart = ({ onClose }) => {
       },
       body: JSON.stringify({
         user: id,
-        products: guitarsToBuy
+        products: guitarsToBuy,
+        price: totalAmount
       })
     }).then((res) => res.json());
     cartCtx.cleanCart();
