@@ -14,10 +14,7 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const cart = await Cart.findById(id);
-        if (!cart) {
-          return res.status(400).json({ success: false });
-        }
+        const cart = await Cart.find({ user: id });
         res
           .status(200)
           .json({ success: true, data: cart })
@@ -30,7 +27,7 @@ export default async function handler(req, res) {
             model: User
           });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(400).json({ success: false, error });
       }
       break;
     case 'PUT':
