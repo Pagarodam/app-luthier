@@ -1,8 +1,6 @@
 export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(e.target.password.value);
   };
 
   return (

@@ -77,11 +77,6 @@ export default function GuitarsConfigurator({ guitars, woods }) {
     });
   }, [guitarComponents]);
 
-  const onAddWood = () => {
-    console.log(' Added to somewhere');
-    // TODO Add to cart or a guitar
-  };
-
   const showClassicGuitarsHandler = () => {
     showClassicGuitars
       ? setShowClassicGuitars(false)
@@ -196,7 +191,6 @@ export default function GuitarsConfigurator({ guitars, woods }) {
             woodType={'tapa'}
             label={'Añadir'}
             component={'Tapas'}
-            onWoodDeleted={onAddWood}
             onButtonClick={addToGuitar}
             buttonColor={
               'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
@@ -207,7 +201,6 @@ export default function GuitarsConfigurator({ guitars, woods }) {
             woodType={'aro'}
             label={'Añadir'}
             component={'Aros'}
-            onWoodDeleted={onAddWood}
             onButtonClick={addToGuitar}
             buttonColor={
               'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
@@ -218,7 +211,6 @@ export default function GuitarsConfigurator({ guitars, woods }) {
             woodType={'fondo'}
             label={'Añadir'}
             component={'Fondos'}
-            onWoodDeleted={onAddWood}
             onButtonClick={addToGuitar}
             buttonColor={
               'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
@@ -229,7 +221,6 @@ export default function GuitarsConfigurator({ guitars, woods }) {
             woodType={'diapason'}
             label={'Añadir'}
             component={'Diapasón'}
-            onWoodDeleted={onAddWood}
             onButtonClick={addToGuitar}
             buttonColor={
               'bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded'
