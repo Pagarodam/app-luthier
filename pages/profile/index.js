@@ -155,7 +155,7 @@ const Profile = () => {
           label={
             session?.user?.role === 'admin'
               ? 'Todos los pedidos'
-              : ` Pedidos de ${session.user.name}`
+              : ` Pedidos de ${session.user?.name}`
           }
         />
       )}
