@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Link from 'next/link';
 import { useSession, signOut, signIn } from 'next-auth/react';
 import HeaderCartButton from 'components/layout/HeaderCartButton';
+import CartContext from 'components/store/cart-context';
 
 const Navbar = ({ onShowCart }) => {
   const [showNav, setShowNav] = useState(false);
   const { data: session, status } = useSession();
+  const { cleanCart } = useContext(CartContext);
+
+  const handleSignOut = () => {
+    signOut();
+    cleanCart();
+  };
 
   return (
     <header className="flex items-center p-3 flex-wrap text-white bg-blue-900 sticky top-0 z-10">
@@ -96,7 +103,7 @@ const Navbar = ({ onShowCart }) => {
                   <button
                     type="button"
                     className="lg:inline-flex lg:w-auto px-3 py-2 rounded hover:bg-gray-900"
-                    onClick={() => signOut()}
+                    onClick={handleSignOut}
                   >
                     Logout
                   </button>
