@@ -162,10 +162,9 @@ const Profile = () => {
 
       {show &&
         orders.map((order) => {
-          n = n + 1;
           return (
             <>
-              <SingleviewList order={order} />
+              <SingleviewList key={order.id} order={order} />
             </>
           );
         })}
